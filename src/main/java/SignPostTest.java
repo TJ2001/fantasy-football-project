@@ -14,9 +14,9 @@ public class SignPostTest {
   //protected static String yahooServer = "https://fantasysports.yahooapis.com/fantasy/";
   //protected static String yahooServer = "https://fantasysports.yahooapis.com/fantasy/v2/game/nfl?format=json";
   // protected static String yahooServer = "https://fantasysports.yahooapis.com/fantasy/v2/player/223.p.5479/stats?format=json";
-  protected static String yahooServer = "https://fantasysports.yahooapis.com/fantasy/v2/league/223.l.431/players/stats?format=json";
+  //protected static String yahooServer = "https://fantasysports.yahooapis.com/fantasy/v2/league/223.l.431/players/stats?format=json";
   //protected static String yahooServer = "https://query.yahooapis.com/v2/public/yql?q=select%20*%20from%20fantasysports.players.stats%20where%20league_key%3D'238.l.627060'%20and%20player_key%3D'238.p.6619'&format=json&diagnostics=true&callback=";
-  //protected static String yahooServer = "https://query.yahooapis.com/v2/public/yql?q=";
+  // protected static String yahooServer = "https://query.yahooapis.com/v2/yql?q=";
 
   // Please provide your consumer key here
   private static String consumer_key = "dj0yJmk9dk84RVRaSktqYWtrJmQ9WVdrOVkyOTVkR1ZCTnpnbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD05Ng--";
@@ -50,13 +50,14 @@ public int returnHttpData()
       // Encode Query string before concatenating
       // params = params.concat(URLEncoder.encode(this.getSearchString(), "UTF-8"));
 
-       String query = "select * from fantasysports.players.stats where league_key='238.l.627060' and player_key='238.p.6619'&format=json&diagnostics=true&callback=";
-      //String query = "select * from fantasysports.players.stats where league_key='238.l.627060' and player_key='238.p.6619'";
+      //  String query = "select * from fantasysports.players.stats where league_key='238.l.627060' and player_key='238.p.6619'&format=json&diagnostics=true&callback=";
+      // String query = "select * from fantasysports.players.stats where league_key='238.l.627060' and player_key='238.p.6619'";
       //String query = "select * from fantasysports.games where game_key='nfl'";
 
       String format = "&format=json";
       // Create final URL
-      String url = yahooServer; // + query.replace(" ", "%20").replace("=", "%3D") + format;
+      // String url = yahooServer + query.replace(" ", "%20").replace("=", "%3D") + format;
+      String url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20fantasysports.players.stats%20where%20league_key%3D'238.l.627060'%20and%20player_key%3D'238.p.6619'&format=json&diagnostics=true&callback=";
 
       // Create oAuth Consumer
       OAuthConsumer consumer = new DefaultOAuthConsumer(consumer_key, consumer_secret);
@@ -65,7 +66,7 @@ public int returnHttpData()
       httpsRequest.setOAuthConsumer(consumer);
 
       try {
-        System.out.println("sending get request to" + url); //URLDecoder.decode(url, ENCODE_FORMAT));
+        System.out.println("sending get request to " + url); //URLDecoder.decode(url, ENCODE_FORMAT));
         int responseCode = httpsRequest.sendGetRequest(url);
 
         // Send the request

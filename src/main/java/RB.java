@@ -103,7 +103,7 @@ public class RB extends Player{
           "+ 5*(recaverage/(SELECT max(recaverage) FROM stats WHERE games_played > 10)) " +
           "+ 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) " +
           "+ 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) " +
-          "- 15*(rushfumbles/(SELECT max(rushfumbles) FROM stats WHERE games_played > 10)) " +
+          "- 10*(rushfumbles/(SELECT max(rushfumbles) FROM stats WHERE games_played > 10)) " +
           "- 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10)) DESC " +
         "LIMIT 1;";
       return con.createQuery(sql)

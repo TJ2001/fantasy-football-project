@@ -13,8 +13,6 @@ public class App {
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
 
-    System.out.println(TE.getBestTe().getFirstName());
-    System.out.println(TE.getBestTe().getLastName());
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
@@ -25,6 +23,8 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("qbs", QB.all());
       model.put("rbs", RB.all());
+      model.put("tes", TE.all());
+      model.put("wrs", WR.all());
       model.put("template", "templates/stats.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -33,6 +33,8 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("qbs", QB.all());
       model.put("rbs", RB.all());
+      model.put("wrs", WR.all());
+      model.put("tes", TE.all());
       model.put("template", "templates/calculator.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

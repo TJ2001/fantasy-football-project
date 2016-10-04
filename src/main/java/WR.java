@@ -8,7 +8,7 @@ public class WR extends Player{
   private int targets;
   private int rectd;
 
-private static final String columns = " player_id, first_name, last_name, team_name,  games_played, receptions, recyards, recyardspergame, targets, rectd ";
+private static final String columns = Player.PLAYER_COLUMNS + "receptions, recyards, recyardspergame, targets, rectd ";
 
 public int getReceptions(){
   return receptions;
@@ -39,6 +39,8 @@ public static List<WR> all() {
       .addColumnMapping("last_name", "lastName")
       .addColumnMapping("team_name", "team")
       .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
       .executeAndFetch(WR.class);
   }
 }
@@ -62,6 +64,8 @@ public static List<WR> all() {
         .addColumnMapping("last_name", "lastName")
         .addColumnMapping("team_name", "team")
         .addColumnMapping("games_played", "gamesplayed")
+        .addColumnMapping("birth_date", "birthDate")
+        .addColumnMapping("birth_city", "birthCity")
         .executeAndFetchFirst(WR.class);
     }
   }

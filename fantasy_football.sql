@@ -34,7 +34,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: stats; Type: TABLE; Schema: public; Owner: Guest
+-- Name: stats; Type: TABLE; Schema: public; Owner: tim
 --
 
 CREATE TABLE stats (
@@ -65,8 +65,8 @@ CREATE TABLE stats (
     passyardspergame numeric,
     passtd numeric,
     passtdpct numeric,
-    passnumeric numeric,
-    passnumericpct numeric,
+    passint numeric,
+    passintpct numeric,
     passlng numeric,
     pass20plus numeric,
     pass40plus numeric,
@@ -100,11 +100,11 @@ CREATE TABLE stats (
     tackleast numeric,
     sacks numeric,
     sackyds numeric,
-    numericerceptions numeric,
-    numerictd numeric,
-    numericyds numeric,
-    numericaverage numeric,
-    numericlng numeric,
+    interceptions numeric,
+    inttd numeric,
+    intyds numeric,
+    intaverage numeric,
+    intlng numeric,
     passesdefended numeric,
     stuffs numeric,
     stuffyds numeric,
@@ -196,13 +196,13 @@ CREATE TABLE stats (
 );
 
 
-ALTER TABLE stats OWNER TO "Guest";
+ALTER TABLE stats OWNER TO tim;
 
 --
--- Data for Name: stats; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: stats; Type: TABLE DATA; Schema: public; Owner: tim
 --
 
-COPY stats (lastupdate, player_id, first_name, last_name, jersey, "position", height, weight, birth_date, age, birth_city, birth_country, rookie, team_id, team_abbr, team_city, team_name, games_played, passattempts, passcompletions, passpct, passattemptspergame, passyards, passyardsperatt, passyardspergame, passtd, passtdpct, passnumeric, passnumericpct, passlng, pass20plus, pass40plus, passsacks, passsacky, qbrating, rushattempts, rushattemptspergame, rushyards, rushaverage, rushyardspergame, rushtd, rushlng, rush1stdowns, rush1stdownspct, rush20plus, rush40plus, rushfumbles, receptions, recyards, recaverage, recyardspergame, rectd, reclng, rec1stdowns, rec20plus, rec40plus, recfumbles, tacklesolo, tackletotal, tackleast, sacks, sackyds, numericerceptions, numerictd, numericyds, numericaverage, numericlng, passesdefended, stuffs, stuffyds, kb, fumbles, fumlost, fumforced, fumownrec, fumopprec, fumrecyds, fumtotalrec, fumtd, krret, kryds, kravg, krlng, krtd, kr20plus, kr40plus, krfc, krfum, prret, pryds, pravg, prlng, prtd, pr20plus, pr40plus, prfc, prfum, fgblk, fgmade, fgatt, fgpct, fgmade1_19, fgatt1_19, fg1_19pct, fgmade20_29, fgatt20_29, fg20_29pct, fgmade30_39, fgatt30_39, fg30_39pct, fgmade40_49, fgatt40_49, fg40_49pct, fgmade50plus, fgatt50plus, fg50pluspct, fglng, xpblk, xpmade, xpatt, xppct, fgandxppts, kickoffs, koyds, kooob, koavg, kotb, kopct, koret, koretyds, koretavgyds, kotd, koos, koosr, punts, puntyds, puntnetyds, puntlng, puntavg, puntnetavg, puntblk, puntoob, puntdown, puntin20, puntin20pct, punttb, punttbpct, puntfc, puntret, puntretyds, puntretavg, gamesstarted, safeties, passavg, targets) FROM stdin;
+COPY stats (lastupdate, player_id, first_name, last_name, jersey, "position", height, weight, birth_date, age, birth_city, birth_country, rookie, team_id, team_abbr, team_city, team_name, games_played, passattempts, passcompletions, passpct, passattemptspergame, passyards, passyardsperatt, passyardspergame, passtd, passtdpct, passint, passintpct, passlng, pass20plus, pass40plus, passsacks, passsacky, qbrating, rushattempts, rushattemptspergame, rushyards, rushaverage, rushyardspergame, rushtd, rushlng, rush1stdowns, rush1stdownspct, rush20plus, rush40plus, rushfumbles, receptions, recyards, recaverage, recyardspergame, rectd, reclng, rec1stdowns, rec20plus, rec40plus, recfumbles, tacklesolo, tackletotal, tackleast, sacks, sackyds, interceptions, inttd, intyds, intaverage, intlng, passesdefended, stuffs, stuffyds, kb, fumbles, fumlost, fumforced, fumownrec, fumopprec, fumrecyds, fumtotalrec, fumtd, krret, kryds, kravg, krlng, krtd, kr20plus, kr40plus, krfc, krfum, prret, pryds, pravg, prlng, prtd, pr20plus, pr40plus, prfc, prfum, fgblk, fgmade, fgatt, fgpct, fgmade1_19, fgatt1_19, fg1_19pct, fgmade20_29, fgatt20_29, fg20_29pct, fgmade30_39, fgatt30_39, fg30_39pct, fgmade40_49, fgatt40_49, fg40_49pct, fgmade50plus, fgatt50plus, fg50pluspct, fglng, xpblk, xpmade, xpatt, xppct, fgandxppts, kickoffs, koyds, kooob, koavg, kotb, kopct, koret, koretyds, koretavgyds, kotd, koos, koosr, punts, puntyds, puntnetyds, puntlng, puntavg, puntnetavg, puntblk, puntoob, puntdown, puntin20, puntin20pct, punttb, punttbpct, puntfc, puntret, puntretyds, puntretavg, gamesstarted, safeties, passavg, targets) FROM stdin;
 \N	6923	Abbrederis	Jared	84	WR	6'1"	195	1990-12-17	25	West Allis, WI	USA	Y	62	GB	Green Bay	Packers	8	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0.0	0	0.0	0.0	0	0	0	0.0	0	0	0	9	111	12.3	13.9	0	32	5	1	0	0	0	0	0	0.0	0	0	0	0	0.0	0	0	0	0	0	0	0	0	0	0	0	0	0	2	52	26.0	30	0	2	0	0	0	0	0	0.0	0	0	0	0	1	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	\N	16
 \N	6826	Abdullah	Ameer	21	RB	5'9"	205	1993-06-13	23	Mobile, AL	USA	Y	61	DET	Detroit	Lions	16	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	143	8.9	607	4.2	37.9	2	36	28	19.6	4	0	4	25	183	7.3	11.4	1	36	11	1	0	0	4	4	0	0.0	0	0	0	0	0.0	0	0	0	0	0	5	2	0	2	0	5	2	0	36	1050	29.2	104	0	32	4	0	0	0	0	0.0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	\N	38
 \N	7350	Abdullah	Husain	39	DB	6'0"	204	\N	\N	\N	\N	N	73	KC	Kansas City	Chiefs	9	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	23	28	5	0.0	0	0	0	0	0.0	0	1	3	0	0	0	0	0	0	0	0	0	0	0	0	0.0	0	0	0	0	0	0	0	0	0.0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	\N	\N
@@ -2200,12 +2200,12 @@ COPY stats (lastupdate, player_id, first_name, last_name, jersey, "position", he
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: epicodus
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM epicodus;
-GRANT ALL ON SCHEMA public TO epicodus;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 

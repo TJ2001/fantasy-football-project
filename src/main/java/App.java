@@ -12,8 +12,11 @@ public class App {
   public static void main(String[] args) {
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
+
+    System.out.println( QB.getBestQb().getFirstName());
+
     int i = 1;
-    for(WR player : WR.getTopWr(20) ){
+    for(QB player : QB.getTopQb(10)){
       System.out.print(i + ": " + player.getFirstName() + ", ");
       System.out.println(player.getLastName());
       i++;

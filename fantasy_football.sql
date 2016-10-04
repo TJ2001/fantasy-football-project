@@ -2,11 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.1
--- Dumped by pg_dump version 9.5.1
+-- Dumped from database version 9.6rc1
+-- Dumped by pg_dump version 9.6rc1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -34,7 +35,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: stats; Type: TABLE; Schema: public; Owner: Guest
+-- Name: stats; Type: TABLE; Schema: public; Owner: Yusuf
 --
 
 CREATE TABLE stats (
@@ -196,10 +197,187 @@ CREATE TABLE stats (
 );
 
 
-ALTER TABLE stats OWNER TO "Guest";
+ALTER TABLE stats OWNER TO "Yusuf";
 
 --
--- Data for Name: stats; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Name: team_stats; Type: TABLE; Schema: public; Owner: Yusuf
+--
+
+CREATE TABLE team_stats (
+    date character varying,
+    teamid character varying,
+    teamabbr character varying,
+    teamcity character varying,
+    teamname character varying,
+    rank numeric,
+    gamesplayed numeric,
+    passattempts numeric,
+    passcompletions numeric,
+    passpct numeric,
+    passattemptspergame numeric,
+    passgrossyards numeric,
+    passavg numeric,
+    passnetyards numeric,
+    passyardsperatt numeric,
+    passyardspergame numeric,
+    passtd numeric,
+    passtdpct numeric,
+    passint numeric,
+    passintpct numeric,
+    passlng numeric,
+    pass20plus numeric,
+    pass40plus numeric,
+    passsacks numeric,
+    passsacky numeric,
+    qbrating numeric,
+    rushattempts numeric,
+    rushattemptspergame numeric,
+    rushyards numeric,
+    rushaverage numeric,
+    rushyardspergame numeric,
+    rushtd numeric,
+    rushlng numeric,
+    rush1stdowns numeric,
+    rush1stdownspct numeric,
+    rush20plus numeric,
+    rush40plus numeric,
+    rushfumbles numeric,
+    receptions numeric,
+    recyards numeric,
+    recaverage numeric,
+    recyardspergame numeric,
+    rectd numeric,
+    reclng numeric,
+    rec1stdowns numeric,
+    rec20plus numeric,
+    rec40plus numeric,
+    recfumbles numeric,
+    tacklesolo numeric,
+    tackletotal numeric,
+    tackleast numeric,
+    sacks numeric,
+    sackyds numeric,
+    interceptions numeric,
+    inttd numeric,
+    intyds numeric,
+    intaverage numeric,
+    intlng numeric,
+    passesdefended numeric,
+    stuffs numeric,
+    stuffyds numeric,
+    kb numeric,
+    safeties numeric,
+    fumbles numeric,
+    fumlost numeric,
+    fumforced numeric,
+    fumownrec numeric,
+    fumopprec numeric,
+    fumrecyds numeric,
+    fumtotalrec numeric,
+    fumtd numeric,
+    krret numeric,
+    kryds numeric,
+    kravg numeric,
+    krlng numeric,
+    krtd numeric,
+    kr20plus numeric,
+    kr40plus numeric,
+    krfc numeric,
+    krfum numeric,
+    prret numeric,
+    pryds numeric,
+    pravg numeric,
+    prlng numeric,
+    prtd numeric,
+    pr20plus numeric,
+    pr40plus numeric,
+    prfc numeric,
+    prfum numeric,
+    fgblk numeric,
+    fgmade numeric,
+    fgatt numeric,
+    fgpct numeric,
+    fgmade1_19 numeric,
+    fgatt1_19 numeric,
+    fg1_19pct numeric,
+    fgmade20_29 numeric,
+    fgatt20_29 numeric,
+    fg20_29pct numeric,
+    fgmade30_39 numeric,
+    fgatt30_39 numeric,
+    fg30_39pct numeric,
+    fgmade40_49 numeric,
+    fgatt40_49 numeric,
+    fg40_49pct numeric,
+    fgmade50plus numeric,
+    fgatt50plus numeric,
+    fg50pluspct numeric,
+    fglng numeric,
+    xpblk numeric,
+    xpmade numeric,
+    xpatt numeric,
+    xppct numeric,
+    fgandxppts numeric,
+    kopct numeric,
+    kickoffs numeric,
+    koyds numeric,
+    kooob numeric,
+    koavg numeric,
+    kotb numeric,
+    koret numeric,
+    koretyds numeric,
+    koretavgyds numeric,
+    kotd numeric,
+    koos numeric,
+    koosr numeric,
+    punts numeric,
+    puntyds numeric,
+    puntnetyds numeric,
+    puntlng numeric,
+    puntavg numeric,
+    puntnetavg numeric,
+    puntblk numeric,
+    puntoob numeric,
+    puntdown numeric,
+    puntin20 numeric,
+    puntin20pct numeric,
+    punttb numeric,
+    punttbpct numeric,
+    puntfc numeric,
+    puntret numeric,
+    puntretyds numeric,
+    puntretavg numeric,
+    firstdownstotal numeric,
+    firstdownspass numeric,
+    firstdownsrush numeric,
+    firstdownspenalty numeric,
+    thirddowns numeric,
+    thirddownsatt numeric,
+    thirddownspct numeric,
+    fourthdowns numeric,
+    fourthdownsatt numeric,
+    fourthdownspct numeric,
+    penalties numeric,
+    penaltyyds numeric,
+    offenseplays numeric,
+    offenseyds numeric,
+    offenseavgyds numeric,
+    totaltd numeric,
+    wins numeric,
+    losses numeric,
+    otwins numeric,
+    otlosses numeric,
+    winpct numeric,
+    pointsfor numeric,
+    pointsagainst numeric,
+    pointdifferential numeric
+);
+
+
+ALTER TABLE team_stats OWNER TO "Yusuf";
+
+--
+-- Data for Name: stats; Type: TABLE DATA; Schema: public; Owner: Yusuf
 --
 
 COPY stats (lastupdate, player_id, last_name, first_name, jersey, "position", height, weight, birth_date, age, birth_city, birth_country, rookie, team_id, team_abbr, team_city, team_name, games_played, passattempts, passcompletions, passpct, passattemptspergame, passyards, passyardsperatt, passyardspergame, passtd, passtdpct, passint, passintpct, passlng, pass20plus, pass40plus, passsacks, passsacky, qbrating, rushattempts, rushattemptspergame, rushyards, rushaverage, rushyardspergame, rushtd, rushlng, rush1stdowns, rush1stdownspct, rush20plus, rush40plus, rushfumbles, receptions, recyards, recaverage, recyardspergame, rectd, reclng, rec1stdowns, rec20plus, rec40plus, recfumbles, tacklesolo, tackletotal, tackleast, sacks, sackyds, interceptions, inttd, intyds, intaverage, intlng, passesdefended, stuffs, stuffyds, kb, fumbles, fumlost, fumforced, fumownrec, fumopprec, fumrecyds, fumtotalrec, fumtd, krret, kryds, kravg, krlng, krtd, kr20plus, kr40plus, krfc, krfum, prret, pryds, pravg, prlng, prtd, pr20plus, pr40plus, prfc, prfum, fgblk, fgmade, fgatt, fgpct, fgmade1_19, fgatt1_19, fg1_19pct, fgmade20_29, fgatt20_29, fg20_29pct, fgmade30_39, fgatt30_39, fg30_39pct, fgmade40_49, fgatt40_49, fg40_49pct, fgmade50plus, fgatt50plus, fg50pluspct, fglng, xpblk, xpmade, xpatt, xppct, fgandxppts, kickoffs, koyds, kooob, koavg, kotb, kopct, koret, koretyds, koretavgyds, kotd, koos, koosr, punts, puntyds, puntnetyds, puntlng, puntavg, puntnetavg, puntblk, puntoob, puntdown, puntin20, puntin20pct, punttb, punttbpct, puntfc, puntret, puntretyds, puntretavg, gamesstarted, safeties, passavg, targets) FROM stdin;
@@ -2200,13 +2378,43 @@ COPY stats (lastupdate, player_id, last_name, first_name, jersey, "position", he
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: epicodus
+-- Data for Name: team_stats; Type: TABLE DATA; Schema: public; Owner: Yusuf
 --
 
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM epicodus;
-GRANT ALL ON SCHEMA public TO epicodus;
-GRANT ALL ON SCHEMA public TO PUBLIC;
+COPY team_stats (date, teamid, teamabbr, teamcity, teamname, rank, gamesplayed, passattempts, passcompletions, passpct, passattemptspergame, passgrossyards, passavg, passnetyards, passyardsperatt, passyardspergame, passtd, passtdpct, passint, passintpct, passlng, pass20plus, pass40plus, passsacks, passsacky, qbrating, rushattempts, rushattemptspergame, rushyards, rushaverage, rushyardspergame, rushtd, rushlng, rush1stdowns, rush1stdownspct, rush20plus, rush40plus, rushfumbles, receptions, recyards, recaverage, recyardspergame, rectd, reclng, rec1stdowns, rec20plus, rec40plus, recfumbles, tacklesolo, tackletotal, tackleast, sacks, sackyds, interceptions, inttd, intyds, intaverage, intlng, passesdefended, stuffs, stuffyds, kb, safeties, fumbles, fumlost, fumforced, fumownrec, fumopprec, fumrecyds, fumtotalrec, fumtd, krret, kryds, kravg, krlng, krtd, kr20plus, kr40plus, krfc, krfum, prret, pryds, pravg, prlng, prtd, pr20plus, pr40plus, prfc, prfum, fgblk, fgmade, fgatt, fgpct, fgmade1_19, fgatt1_19, fg1_19pct, fgmade20_29, fgatt20_29, fg20_29pct, fgmade30_39, fgatt30_39, fg30_39pct, fgmade40_49, fgatt40_49, fg40_49pct, fgmade50plus, fgatt50plus, fg50pluspct, fglng, xpblk, xpmade, xpatt, xppct, fgandxppts, kopct, kickoffs, koyds, kooob, koavg, kotb, koret, koretyds, koretavgyds, kotd, koos, koosr, punts, puntyds, puntnetyds, puntlng, puntavg, puntnetavg, puntblk, puntoob, puntdown, puntin20, puntin20pct, punttb, punttbpct, puntfc, puntret, puntretyds, puntretavg, firstdownstotal, firstdownspass, firstdownsrush, firstdownspenalty, thirddowns, thirddownsatt, thirddownspct, fourthdowns, fourthdownsatt, fourthdownspct, penalties, penaltyyds, offenseplays, offenseyds, offenseavgyds, totaltd, wins, losses, otwins, otlosses, winpct, pointsfor, pointsagainst, pointdifferential) FROM stdin;
+\N	69	CAR	Carolina	Panthers	1	16	501	300	59.9	31.3	3888	7.8	3607	6.8	225.4	35	7.0	10	2.0	74	54	10	33	281	99.3	526	32.9	2383	4.5	148.9	20	47	138	26.2	8	3	8	300	3888	13.0	243.0	35	74	197	45	10	0	690	1025	335	44	303	24	4	157	6.5	34	82	392	475	0	0	16	11	21	3	15	-103	18	1	19	403	21.2	38	0	13	0	0	0	30	400	13.3	87	0	5	1	25	0	4	30	36	83.3	1	1	100.0	10	10	100.0	4	5	80.0	13	16	81.2	2	4	50.0	52	1	56	59	94.9	146	0.0	102	6684	0	65.5	69	33	875	26.5	0	0	0	64	2936	2614	65	45.9	40.8	0	0	3	19	29.7	5	7.8	19	37	322	8.7	365	197	138	30	86	203	42.4	6	10	60.0	99	856	1060	5990	5.6	56	15	1	0	0	0.000	502	307	195
+\N	76	ARI	Arizona	Cardinals	2	16	562	353	62.8	35.1	4778	8.5	4598	7.8	287.4	35	6.2	13	2.3	68	72	15	27	180	101.0	448	28.0	1976	4.4	123.5	16	63	93	20.8	7	5	5	353	4778	13.5	298.6	35	68	237	56	15	0	729	878	149	36	308	19	4	144	7.6	40	67	366	495	0	2	19	11	18	6	13	-44	19	2	31	784	25.3	43	1	21	2	0	0	35	289	8.3	38	0	2	0	22	0	0	28	31	90.3	1	1	100.0	12	12	100.0	9	9	100.0	6	7	85.7	0	2	0.0	47	0	53	58	91.4	137	0.0	96	6301	0	65.6	50	46	1262	27.4	0	0	0	55	2381	1933	58	43.3	35.2	1	0	7	18	32.7	6	10.9	19	22	448	20.4	372	237	93	42	93	198	47.0	3	8	37.5	87	710	1037	6626	6.4	53	13	3	0	0	0.000	481	316	165
+\N	72	DEN	Denver	Broncos	3	16	606	368	60.7	37.9	4225	7.0	3979	6.2	248.7	19	3.1	23	3.8	75	43	11	39	246	76.4	412	25.8	1725	4.2	107.8	13	72	87	21.1	9	2	6	368	4225	11.5	264.1	19	75	200	31	11	0	725	948	223	51	354	14	4	108	7.7	20	87	396	470	2	1	14	7	21	7	13	7	20	1	25	551	22.0	41	0	15	1	0	0	26	350	13.5	83	1	3	2	26	0	0	30	35	85.7	0	0	0.0	12	12	100.0	8	8	100.0	5	8	62.5	5	7	71.4	57	0	35	36	97.2	125	0.0	78	5033	0	64.5	55	23	494	21.5	0	0	0	72	3194	2933	62	44.4	40.7	0	0	16	21	29.2	5	6.9	15	34	261	7.7	324	200	87	37	78	224	34.8	7	13	53.8	107	1025	1057	5704	5.4	33	12	4	0	0	0.000	349	296	53
+\N	50	NE	New England	Patriots	4	16	629	404	64.2	39.3	4843	7.7	4617	6.9	288.6	36	5.7	7	1.1	76	61	13	38	226	102.1	381	23.8	1408	3.7	88.0	14	38	87	22.8	4	0	2	404	4843	12.0	302.7	36	76	230	52	12	0	701	1001	300	49	250	12	0	176	14.7	51	78	367	514	1	0	13	7	18	6	9	0	15	2	21	464	22.1	75	0	11	1	0	0	47	553	11.8	82	0	7	1	18	0	0	33	36	91.7	0	0	0.0	6	6	100.0	11	11	100.0	12	14	85.7	4	5	80.0	57	0	52	52	100.0	151	0.0	92	5930	0	64.5	67	25	501	20.0	0	0	0	62	2965	2584	67	47.8	41.7	1	0	6	23	37.1	3	4.8	14	36	381	10.6	358	230	87	41	88	215	40.9	9	15	60.0	91	826	1048	6039	5.8	52	12	4	0	2	0.000	463	314	149
+\N	57	CIN	Cincinnati	Bengals	5	16	505	334	66.1	31.6	4116	8.2	3891	7.2	243.2	31	6.1	9	1.8	80	66	15	32	225	104.2	461	28.8	1837	4.0	114.8	18	38	102	22.1	5	0	9	334	4116	12.3	257.2	31	80	192	52	13	0	715	1022	307	42	291	21	1	208	9.9	38	85	347	403	2	0	16	9	9	6	7	-57	13	0	31	705	22.7	58	0	19	2	0	0	42	438	10.4	41	0	4	1	12	0	1	23	28	82.1	0	0	0.0	6	6	100.0	5	6	83.3	10	13	76.9	2	3	66.7	52	1	48	49	98.0	117	0.0	88	5777	0	65.6	42	46	1111	24.2	0	0	0	63	2921	2712	62	46.4	43.0	1	0	10	21	33.3	6	9.5	15	32	209	6.5	359	192	102	65	82	201	40.8	7	12	58.3	109	902	998	5810	5.8	49	12	4	0	1	0.000	419	279	140
+\N	73	KC	Kansas City	Chiefs	6	16	473	310	65.5	29.6	3562	7.5	3327	6.4	207.9	20	4.2	7	1.5	80	43	10	45	235	96.0	436	27.2	2074	4.8	129.6	19	52	118	27.1	11	2	4	310	3562	11.5	222.6	20	80	155	34	10	0	740	903	163	47	190	22	4	277	12.6	66	91	389	454	1	1	16	8	12	7	8	-27	15	2	33	855	25.9	70	0	21	3	0	0	43	402	9.4	58	0	4	1	8	0	1	30	37	81.1	0	0	0.0	7	8	87.5	10	10	100.0	9	11	81.8	4	8	50.0	53	0	40	42	95.2	130	0.0	84	5549	0	66.1	40	44	1131	25.7	0	0	0	66	2952	2760	62	44.7	41.8	0	0	14	31	47.0	5	7.6	21	25	192	7.7	308	155	118	35	76	197	38.6	6	9	66.7	100	868	954	5401	5.7	41	11	5	0	0	0.000	402	287	115
+\N	63	MIN	Minnesota	Vikings	7	16	454	294	64.8	28.4	3246	7.2	2926	5.9	182.9	14	3.1	9	2.0	52	42	6	45	320	87.9	473	29.6	2217	4.7	138.6	18	80	114	24.1	8	6	8	294	3246	11.0	202.9	14	52	153	38	6	0	792	979	187	43	343	13	2	89	6.8	32	63	340	446	1	0	19	8	10	9	9	0	18	1	41	1163	28.4	93	2	29	6	0	0	32	362	11.3	65	1	6	1	15	0	1	34	39	87.2	0	0	0.0	9	9	100.0	13	15	86.7	6	7	85.7	6	8	75.0	54	0	35	38	92.1	137	0.0	86	5615	0	65.3	47	39	1032	26.5	0	0	0	62	2626	2461	61	42.4	39.7	0	0	7	24	38.7	5	8.1	21	24	165	6.9	302	153	114	35	76	199	38.2	5	11	45.4	84	776	972	5143	5.3	33	11	5	0	0	0.000	351	300	51
+\N	51	NYJ	New York	Jets	8	16	604	362	59.9	37.8	4190	6.9	4063	6.5	253.9	33	5.5	16	2.6	69	62	9	22	127	88.1	446	27.9	1871	4.2	116.9	11	58	98	22.0	11	2	6	362	4190	11.6	261.9	33	69	211	48	9	0	654	978	324	39	285	18	0	191	10.6	29	74	409	458	0	0	14	8	14	5	11	-19	16	0	36	771	21.4	54	0	21	1	0	0	48	448	9.3	58	0	2	1	22	0	0	27	33	81.8	0	0	0.0	6	6	100.0	10	10	100.0	9	14	64.3	2	3	66.7	55	0	42	43	97.7	123	0.0	82	5431	0	66.2	34	48	1161	24.2	0	0	0	64	2865	2360	68	44.8	36.9	1	0	9	21	32.8	4	6.2	14	37	505	13.6	342	211	98	33	92	229	40.2	6	14	42.9	89	727	1072	5962	5.6	44	10	6	0	0	0.000	387	315	72
+\N	79	SEA	Seattle	Seahawks	9	16	489	333	68.1	30.6	4072	8.3	3777	7.1	236.1	34	7.0	8	1.6	80	61	10	46	295	109.9	499	31.2	2374	4.8	148.4	10	69	132	26.4	10	3	6	333	4072	12.2	254.5	34	80	193	52	9	0	617	952	335	37	280	14	0	241	17.2	68	76	339	483	0	0	14	9	16	4	8	-59	12	3	33	868	26.3	105	1	23	3	0	0	42	567	13.5	66	1	8	5	22	0	1	29	31	93.6	0	0	0.0	9	9	100.0	7	7	100.0	7	9	77.8	6	6	100.0	54	2	41	45	91.1	128	0.0	88	5824	0	66.2	46	42	1073	25.6	0	0	0	63	2888	2512	77	45.8	39.9	0	0	8	25	39.7	7	11.1	20	26	376	14.5	344	193	132	19	99	213	46.5	8	9	88.9	110	975	1034	6205	6.0	47	10	6	0	2	0.000	412	277	135
+\N	59	PIT	Pittsburgh	Steelers	10	16	590	391	66.3	36.9	4826	8.2	4608	7.4	288.0	26	4.4	21	3.6	88	63	23	33	218	91.2	385	24.1	1719	4.5	107.4	16	55	91	23.6	12	3	5	391	4826	12.3	301.6	26	88	207	42	21	0	758	1043	285	48	312	17	2	199	11.7	42	75	369	543	2	0	14	6	14	8	14	-2	22	0	29	708	24.4	38	0	21	0	0	0	25	221	8.8	71	1	1	1	17	0	0	35	42	83.3	1	1	100.0	11	11	100.0	9	9	100.0	12	19	63.2	2	2	100.0	51	0	32	34	94.1	137	0.0	90	5810	0	64.6	38	52	1262	24.3	0	0	0	54	2311	2053	79	42.8	38.0	0	0	12	26	48.2	2	3.7	21	19	258	13.6	361	207	91	63	75	193	38.9	4	12	33.3	92	858	1008	6325	6.3	42	10	6	0	1	0.000	417	319	98
+\N	62	GB	Green Bay	Packers	11	16	573	348	60.7	35.8	3853	6.7	3423	5.5	213.9	31	5.4	8	1.4	65	56	6	47	430	92.9	435	27.2	1779	4.1	111.2	9	65	103	23.7	8	1	8	348	3853	11.1	240.8	31	65	177	52	6	0	739	961	222	43	256	16	2	114	7.1	48	70	366	423	1	0	25	11	10	12	6	119	18	1	33	897	27.2	70	0	23	5	0	0	29	181	6.2	16	0	0	0	23	0	1	24	28	85.7	1	1	100.0	7	7	100.0	4	4	100.0	8	11	72.7	4	5	80.0	56	0	36	36	100.0	108	0.0	77	4983	0	64.7	40	37	980	26.5	0	0	0	67	3093	2872	62	46.2	42.9	0	0	6	16	23.9	6	9.0	14	38	221	5.8	328	177	103	48	71	207	34.3	11	21	52.4	101	881	1055	5398	5.1	41	10	6	0	0	0.000	368	323	45
+\N	64	HOU	Houston	Texans	12	16	619	358	57.8	38.7	4184	6.8	3941	6.0	246.3	29	4.7	12	1.9	61	51	9	36	243	86.0	473	29.6	1773	3.8	110.8	7	65	91	19.2	6	1	4	358	4184	11.7	261.5	29	61	212	41	8	0	685	993	308	45	322	14	2	105	7.5	50	90	365	440	1	0	22	9	12	13	11	-31	24	1	18	430	23.9	41	0	15	1	0	0	51	415	8.1	36	0	2	0	23	0	0	23	27	85.2	1	1	100.0	6	6	100.0	8	8	100.0	6	7	85.7	2	5	40.0	51	0	32	36	88.9	101	0.0	72	4756	0	66.1	33	39	972	24.9	0	0	0	94	4489	3814	72	47.8	40.6	0	0	8	22	23.4	11	11.7	15	56	675	12.0	350	212	91	47	97	250	38.8	6	19	31.6	99	866	1128	5698	5.0	37	9	7	0	0	0.000	339	313	26
+\N	55	WAS	Washington	Redskins	13	16	555	386	69.6	34.7	4326	7.8	4086	7.0	255.4	30	5.4	11	2.0	78	55	10	27	240	102.3	428	26.8	1572	3.7	98.2	9	48	83	19.4	8	2	7	386	4326	11.2	270.4	30	78	210	48	9	0	669	1041	372	38	237	11	1	146	13.3	44	54	339	502	0	1	21	10	21	8	15	1	23	3	39	1004	25.7	101	2	26	3	0	0	31	196	6.3	27	0	1	0	17	0	1	26	30	86.7	0	0	0.0	7	7	100.0	9	9	100.0	8	10	80.0	2	4	50.0	54	0	40	41	97.6	118	0.0	79	5117	0	64.8	53	26	614	23.6	0	0	0	65	3053	2778	64	47.0	42.7	1	0	14	23	35.4	7	10.8	14	27	275	10.2	332	210	83	39	95	217	43.8	8	12	66.7	92	779	1010	5744	5.7	42	9	7	0	1	0.000	376	377	-1
+\N	48	BUF	Buffalo	Bills	14	16	465	295	63.4	29.1	3615	7.8	3365	6.6	210.3	23	5.0	9	1.9	63	54	12	42	250	95.8	505	31.6	2465	4.9	154.1	19	60	123	24.4	15	4	8	295	3615	12.2	225.9	23	63	156	42	12	0	700	945	245	21	113	17	2	166	9.8	37	92	360	247	0	0	24	9	9	14	9	-39	23	1	39	781	20.0	32	0	22	0	0	0	28	334	11.9	42	0	4	1	22	0	0	23	27	85.2	0	0	0.0	5	5	100.0	8	9	88.9	7	8	87.5	3	5	60.0	52	0	35	40	87.5	104	0.0	79	5090	0	64.4	42	37	756	20.4	0	0	0	73	3394	3014	65	46.5	41.3	0	0	10	18	24.7	3	4.1	20	39	380	9.7	310	156	123	31	85	226	37.6	7	16	43.8	128	1141	1012	5810	5.7	43	8	8	0	0	0.000	378	359	19
+\N	68	ATL	Atlanta	Falcons	15	16	621	410	66.0	38.8	4618	7.4	4391	6.7	274.4	21	3.4	17	2.7	70	52	10	32	227	88.0	422	26.4	1576	3.7	98.5	14	47	99	23.5	7	2	13	410	4618	11.3	288.6	21	70	230	45	9	0	716	957	241	19	110	15	1	234	15.6	84	61	298	328	0	0	27	14	11	12	8	52	20	3	26	667	25.6	50	0	20	2	0	0	27	259	9.6	41	0	2	1	20	0	1	25	31	80.6	1	1	100.0	6	6	100.0	7	8	87.5	8	13	61.5	3	3	100.0	54	0	34	34	100.0	109	0.0	70	4596	0	65.7	48	22	609	27.7	0	0	0	55	2578	2229	69	46.9	40.5	1	0	4	22	40.0	4	7.3	19	28	349	12.5	372	230	99	43	107	227	47.1	11	21	52.4	97	958	1075	5967	5.6	38	8	8	0	1	0.000	339	345	-6
+\N	65	IND	Indianapolis	Colts	16	16	619	355	57.4	38.7	3965	6.4	3701	5.6	231.3	26	4.2	19	3.1	87	46	7	37	264	77.8	393	24.6	1485	3.8	92.8	6	37	83	21.1	8	0	7	355	3965	11.2	247.8	26	87	195	40	7	0	684	1010	326	35	280	17	4	84	4.9	26	72	365	527	0	1	21	13	12	7	8	11	15	1	41	1012	24.7	50	0	30	3	0	0	37	359	9.7	42	0	4	1	28	0	0	25	27	92.6	0	0	0.0	7	8	87.5	6	6	100.0	8	8	100.0	4	5	80.0	55	1	32	35	91.4	107	0.0	72	4674	0	64.9	67	5	135	27.0	0	0	0	78	3737	3245	63	47.9	41.6	0	0	12	28	35.9	6	7.7	23	33	492	14.9	316	195	83	38	96	234	41.0	7	13	53.8	105	901	1049	5284	5.0	33	8	8	0	1	0.000	333	409	-76
+\N	77	STL	St. Louis	Rams	17	16	473	273	57.7	29.6	2986	6.3	2851	5.8	178.2	11	2.3	11	2.3	68	39	10	18	135	74.6	430	26.9	1956	4.6	122.2	16	71	92	21.4	13	7	11	273	2986	10.9	186.6	11	68	128	35	10	0	763	1098	335	41	250	13	1	124	9.5	42	70	365	437	0	1	23	12	19	9	13	-13	22	2	33	853	25.8	102	0	23	4	0	0	34	445	13.1	83	1	5	3	15	0	2	21	30	70.0	1	1	100.0	2	2	100.0	10	11	90.9	5	7	71.4	3	9	33.3	61	1	27	29	93.1	90	0.0	66	4323	0	65.5	41	25	600	24.0	0	0	0	87	4219	3871	68	48.5	44.5	0	0	16	35	40.2	6	6.9	25	40	348	8.7	246	128	92	26	53	203	26.1	4	13	30.8	117	1017	921	4815	5.2	29	7	9	0	2	0.000	272	332	-60
+\N	70	NO	New Orleans	Saints	18	16	667	460	69.0	41.7	5233	7.8	5010	7.2	313.1	32	4.8	12	1.8	80	74	13	32	223	100.7	396	24.8	1487	3.8	92.9	16	70	99	25.0	4	2	4	460	5233	11.4	327.1	32	80	247	68	13	0	691	991	300	31	211	9	0	90	10.0	27	67	279	278	2	0	20	9	18	9	15	-4	24	2	26	613	23.6	38	0	18	0	0	0	31	318	10.3	74	1	3	1	13	0	2	18	26	69.2	0	0	0.0	5	6	83.3	7	9	77.8	3	6	50.0	3	5	60.0	57	1	45	47	95.7	99	0.0	80	5231	0	65.4	44	36	967	26.9	0	0	0	52	2450	2210	58	47.1	42.5	0	0	4	18	34.6	6	11.5	16	23	240	10.4	388	247	99	42	102	216	47.2	10	16	62.5	124	1082	1095	6497	5.9	50	7	9	0	1	0.000	403	476	-73
+\N	61	DET	Detroit	Lions	19	16	632	420	66.5	39.5	4498	7.1	4247	6.3	265.4	33	5.2	14	2.2	57	52	8	44	251	95.3	353	22.1	1337	3.8	83.6	7	36	73	20.7	7	0	8	420	4498	10.7	281.1	33	57	237	45	8	0	766	982	216	42	299	9	1	72	8.0	24	59	337	576	0	1	16	9	13	6	9	-6	15	1	43	1236	28.7	104	0	37	5	0	0	28	272	9.7	28	0	5	0	22	0	0	22	24	91.7	0	0	0.0	3	3	100.0	8	9	88.9	6	6	100.0	5	6	83.3	59	1	36	39	92.3	102	0.0	72	4724	0	65.6	40	32	822	25.7	0	0	0	75	3474	3085	66	46.3	41.1	0	0	10	22	29.3	3	4.0	20	41	389	9.5	360	237	73	50	76	203	37.4	7	15	46.7	99	900	1029	5584	5.4	41	7	9	0	0	0.000	354	403	-49
+\N	74	OAK	Oakland	Raiders	20	16	606	373	61.6	37.9	4155	6.9	3906	6.1	244.1	34	5.6	14	2.3	68	55	10	33	249	91.0	367	22.9	1433	3.9	89.6	7	60	75	20.4	8	2	8	373	4155	11.1	259.7	34	68	194	44	10	0	791	988	197	38	211	14	1	49	3.5	11	89	369	289	5	3	23	10	13	11	10	-38	21	0	53	1305	24.6	41	0	39	2	0	0	41	305	7.4	25	0	4	0	13	0	1	21	26	80.8	0	0	0.0	7	7	100.0	5	6	83.3	5	8	62.5	4	5	80.0	56	0	38	39	97.4	101	0.0	78	5011	0	64.2	44	34	829	24.4	0	0	0	72	3265	3064	70	45.4	42.6	1	0	19	34	47.2	4	5.6	19	26	201	7.7	312	195	75	42	86	219	39.3	5	14	35.7	127	1039	1006	5339	5.3	41	7	9	0	0	0.000	359	394	-35
+\N	54	PHI	Philadelphia	Eagles	21	16	623	405	65.0	38.9	4392	7.0	4140	6.3	258.8	23	3.7	18	2.9	78	55	14	37	252	85.9	446	27.9	1718	3.8	107.4	15	63	111	24.9	10	2	13	405	4392	10.8	274.5	23	78	194	41	14	0	806	1074	268	37	340	15	3	97	6.5	44	79	381	410	0	1	23	12	16	11	10	-33	21	2	26	579	22.3	49	0	14	2	0	0	38	472	12.4	89	2	5	3	18	0	0	21	26	80.8	0	0	0.0	5	5	100.0	9	11	81.8	5	6	83.3	2	4	50.0	53	0	41	43	95.4	104	0.0	70	4502	0	64.3	38	32	714	22.3	0	0	0	84	3941	3677	64	46.9	43.8	1	0	11	30	35.7	8	9.5	23	41	264	6.4	362	194	111	57	92	232	39.7	8	16	50.0	100	789	1106	5842	5.3	40	7	9	0	0	0.000	364	430	-66
+\N	49	MIA	Miami	Dolphins	22	16	588	365	62.1	36.8	4230	7.2	3831	6.0	239.4	24	4.1	12	2.0	54	57	13	45	399	88.9	346	21.6	1510	4.4	94.4	11	85	75	21.7	12	1	9	365	4230	11.6	264.4	24	54	194	46	13	0	781	1050	269	31	259	13	3	109	8.4	38	68	356	465	0	0	23	8	8	12	3	-19	15	0	38	950	25.0	57	0	27	2	0	0	39	495	12.7	69	1	7	2	17	0	0	13	16	81.2	1	1	100.0	3	3	100.0	4	4	100.0	4	6	66.7	1	2	50.0	53	0	34	37	91.9	73	0.0	66	4267	0	64.6	44	22	508	23.1	0	0	0	82	3983	3431	70	48.6	41.8	0	0	8	24	29.3	9	11.0	15	50	552	11.0	324	194	75	55	64	208	30.8	8	22	36.4	121	1017	979	5345	5.5	35	6	10	0	0	0.000	303	385	-82
+\N	71	TB	Tampa Bay	Buccaneers	23	16	535	312	58.3	33.4	4088	7.6	3898	6.9	243.6	22	4.1	15	2.8	68	59	9	27	190	84.5	454	28.4	2156	4.8	134.8	12	84	101	22.2	15	5	12	312	4088	13.1	255.5	22	68	202	52	9	0	780	1115	335	38	263	11	1	45	4.1	16	63	324	350	1	0	22	13	19	9	14	-29	23	2	21	545	26.0	46	0	17	1	0	0	23	314	13.6	58	0	6	1	14	0	0	29	40	72.5	0	0	0.0	10	11	90.9	10	11	90.9	4	9	44.4	5	9	55.6	58	0	32	35	91.4	119	0.0	76	5025	0	66.1	44	32	873	27.3	0	0	0	53	2225	2085	60	42.0	39.3	0	0	7	14	26.4	4	7.6	15	26	140	5.4	348	202	101	45	86	204	42.2	7	13	53.8	136	1145	1016	6054	6.0	36	6	10	0	0	0.000	341	418	-77
+\N	60	CHI	Chicago	Bears	24	16	523	334	63.9	32.7	3887	7.4	3805	6.8	237.8	21	4.0	12	2.3	87	57	10	33	82	90.1	467	29.2	1894	4.1	118.4	13	27	109	23.3	6	0	5	334	3887	11.6	242.9	21	87	181	49	10	0	715	891	176	35	237	8	0	103	12.9	39	54	310	389	2	0	15	9	6	5	9	-54	14	0	33	923	28.0	74	0	25	4	0	0	29	312	10.8	20	0	2	1	22	0	0	33	39	84.6	1	1	100.0	8	8	100.0	10	12	83.3	7	9	77.8	7	9	77.8	55	1	28	29	96.6	127	0.0	76	4857	0	63.9	39	37	991	26.8	0	0	0	67	2962	2682	72	44.2	40.0	1	0	11	29	43.3	4	6.0	22	26	280	10.8	315	181	109	25	95	221	43.0	6	10	60.0	97	894	1023	5491	5.4	34	6	10	0	2	0.000	335	398	-63
+\N	53	NYG	New York	Giants	25	16	623	392	62.9	38.9	4503	7.2	4257	6.6	266.1	36	5.8	14	2.2	87	54	16	27	246	94.5	405	25.3	1624	4.0	101.5	5	39	77	19.0	8	0	6	392	4503	11.5	281.4	36	87	209	44	16	0	856	1179	323	23	149	15	2	85	5.7	26	84	332	220	2	0	20	8	16	11	13	-38	24	2	38	971	25.6	100	1	30	4	0	0	33	379	11.5	80	1	5	1	9	0	0	30	32	93.8	1	1	100.0	6	6	100.0	12	12	100.0	8	10	80.0	3	3	100.0	53	0	45	46	97.8	135	0.0	89	5575	0	62.6	37	52	1067	20.5	0	0	0	73	3251	2939	64	44.5	40.3	0	0	16	29	39.7	6	8.2	21	27	312	11.6	370	209	77	84	81	217	37.3	9	17	52.9	97	750	1055	6047	5.7	43	6	10	0	1	0.000	407	443	-36
+\N	56	BAL	Baltimore	Ravens	26	16	676	426	63.0	42.2	4449	6.6	4273	6.1	267.1	21	3.1	21	3.1	52	55	8	24	176	79.4	380	23.8	1569	4.1	98.1	8	44	91	24.0	7	1	6	426	4449	10.4	278.1	21	52	210	47	8	0	657	951	294	37	269	6	1	27	4.5	25	66	330	365	3	0	12	6	6	5	8	-99	13	2	34	865	25.4	50	0	25	3	0	0	39	495	12.7	82	1	5	2	15	0	0	33	40	82.5	0	0	0.0	10	10	100.0	9	9	100.0	10	11	90.9	4	10	40.0	52	0	30	30	100.0	129	0.0	71	4633	0	65.2	63	8	217	27.1	0	0	0	59	2823	2652	75	47.8	45.0	0	0	7	22	37.3	5	8.5	12	32	171	5.3	329	210	91	28	86	229	37.6	11	23	47.8	116	1132	1080	5842	5.4	31	5	11	0	1	0.000	323	400	-77
+\N	66	JAC	Jacksonville	Jaguars	27	16	607	355	58.5	37.9	4428	7.3	4091	6.2	255.7	35	5.8	18	3.0	90	74	11	51	337	88.1	352	22.0	1347	3.8	84.2	5	45	68	19.3	7	1	10	355	4428	12.5	276.8	35	90	215	62	11	0	767	1016	249	36	275	9	1	94	10.4	48	69	370	454	2	0	21	10	14	11	8	43	19	2	28	713	25.5	42	0	22	2	0	0	29	379	13.1	73	1	6	2	16	0	0	26	30	86.7	0	0	0.0	9	10	90.0	8	8	100.0	6	8	75.0	3	4	75.0	58	0	33	39	84.6	111	0.0	78	5129	0	65.8	55	23	557	24.2	0	0	0	77	3594	3085	63	46.7	40.1	0	0	6	27	35.1	4	5.2	22	44	509	11.6	325	215	68	42	70	203	34.5	8	15	53.3	99	844	1010	5504	5.4	42	5	11	0	1	0.000	371	447	-76
+\N	78	SF	San Francisco	49ers	28	16	526	322	61.2	32.9	3675	7.0	3347	5.8	209.2	16	3.0	12	2.3	76	49	13	53	328	82.8	389	24.3	1553	4.0	97.1	7	47	84	21.6	4	2	7	322	3675	11.4	229.7	16	76	155	34	12	0	831	1084	253	28	196	9	1	96	10.7	45	58	311	334	3	0	17	4	6	11	5	-24	16	0	41	995	24.3	40	0	32	1	0	0	26	267	10.3	37	0	4	0	23	0	2	24	27	88.9	0	0	0.0	9	10	90.0	6	6	100.0	6	8	75.0	3	3	100.0	54	1	20	21	95.2	92	0.0	61	3956	0	64.8	38	23	596	25.9	0	0	0	79	3515	3165	62	44.5	40.1	0	0	8	22	27.8	5	6.3	22	42	350	8.3	263	155	84	24	65	213	30.5	9	19	47.4	103	777	968	4900	5.1	23	5	11	0	0	0.000	242	383	-141
+\N	75	SD	San Diego	Chargers	29	16	667	442	66.3	41.7	4895	7.3	4629	6.6	289.3	30	4.5	13	2.0	80	54	8	40	266	94.8	388	24.2	1364	3.5	85.2	4	53	80	20.6	8	1	6	442	4895	11.1	305.9	30	80	230	46	8	0	750	956	206	32	222	11	1	84	7.6	39	61	303	408	0	0	17	11	10	3	9	4	12	0	26	594	22.8	52	0	19	1	0	0	19	84	4.4	18	0	0	0	26	0	0	26	32	81.2	0	0	0.0	4	4	100.0	7	7	100.0	11	16	68.8	4	5	80.0	54	1	29	32	90.6	107	0.0	72	4768	0	66.2	41	31	888	28.6	0	0	0	68	3134	2621	68	46.1	38.5	1	0	8	11	16.2	2	2.9	15	43	513	11.9	357	230	80	47	98	230	42.6	5	15	33.3	115	937	1095	5993	5.5	34	4	12	0	1	0.000	321	398	-77
+\N	52	DAL	Dallas	Cowboys	30	16	528	334	63.3	33.0	3777	7.2	3569	6.4	223.1	16	3.0	22	4.2	67	43	6	33	208	77.3	409	25.6	1898	4.6	118.6	8	50	96	23.5	14	3	7	334	3777	11.3	236.1	16	67	175	37	4	0	688	1021	333	31	227	8	1	50	6.2	24	53	326	426	2	1	16	10	5	6	6	-9	12	1	27	695	25.7	79	0	22	2	0	0	32	197	6.2	28	0	3	0	21	0	0	30	32	93.8	0	0	0.0	9	9	100.0	10	10	100.0	6	7	85.7	5	6	83.3	54	0	25	25	100.0	115	0.0	56	3627	0	64.8	35	21	552	26.3	0	0	0	52	2330	2112	61	44.8	40.6	0	0	5	20	38.5	1	1.9	22	22	218	9.9	317	175	96	46	67	192	34.9	8	16	50.0	105	841	970	5467	5.6	25	4	12	0	2	0.000	273	376	-103
+\N	58	CLE	Cleveland	Browns	31	16	609	371	60.9	38.1	4175	6.9	3775	5.7	235.9	20	3.3	12	2.0	61	52	12	53	400	84.2	379	23.7	1530	4.0	95.6	5	54	82	21.6	8	2	3	371	4175	11.2	260.9	20	61	192	38	12	0	682	1007	325	29	160	11	2	131	11.9	46	52	311	298	0	0	30	17	13	9	10	-27	19	0	40	1063	26.6	53	0	34	3	0	0	27	346	12.8	78	1	5	1	10	0	4	28	32	87.5	0	0	0.0	11	11	100.0	10	10	100.0	7	9	77.8	0	2	0.0	47	0	22	24	91.7	106	0.0	68	4329	0	63.7	27	41	875	21.3	0	0	0	63	3015	2580	67	47.9	41.0	0	0	7	24	38.1	4	6.4	15	35	435	12.4	317	192	82	43	95	227	41.8	10	24	41.7	113	1053	1041	5345	5.1	25	3	13	0	1	0.000	272	433	-161
+\N	67	TEN	Tennessee	Titans	32	16	551	342	62.1	34.4	3896	7.1	3571	5.9	223.2	25	4.5	17	3.1	61	52	6	54	325	85.5	370	23.1	1545	4.2	96.6	10	87	68	18.4	9	2	8	342	3896	11.4	243.5	25	61	196	44	6	0	676	971	295	39	272	11	1	138	12.6	45	55	323	471	1	0	23	16	11	7	8	-39	15	1	31	665	21.4	34	0	18	0	0	0	37	311	8.4	37	0	2	0	17	0	0	14	16	87.5	0	0	0.0	3	3	100.0	3	3	100.0	7	7	100.0	1	3	33.3	51	1	29	31	93.6	71	0.0	62	4094	0	66.0	42	20	604	30.2	0	0	0	77	3673	2939	62	47.7	38.2	0	0	6	29	37.7	1	1.3	23	47	734	15.6	308	196	68	44	64	201	31.8	7	15	46.7	92	788	975	4968	5.1	36	3	13	0	0	0.000	299	423	-124
+\.
 
 
 --

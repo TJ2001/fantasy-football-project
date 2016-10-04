@@ -13,14 +13,16 @@ public class App {
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
 
-    System.out.println( QB.getBestQb().getFirstName());
-
+    // System.out.println(K.getBestK().getFirstName());
+    // System.out.println(K.getBestK().getLastName());
+    //
     int i = 1;
-    for(QB player : QB.getTopQb(10)){
-      System.out.print(i + ": " + player.getFirstName() + ", ");
-      System.out.println(player.getLastName());
+    for(Team team : Team.getBestTeams(10)){
+      System.out.println(i + ": " + team.teamname);
       i++;
     }
+
+    System.out.println(Team.getBestTeam().teamname);
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();

@@ -2,7 +2,7 @@ import java.util.List;
 import org.sql2o.*;
 
 public class Team {
-
+  public String teamname;
   private int totaltackles;
   private int sacks;
   private int ydsl;
@@ -14,32 +14,63 @@ public class Team {
   private int recoveredfumble;
   private int tdfromfumble;
 
-  private static final String columns = "";
-
+  private static final String columns = "teamname, tackletotal, sacks, passesdefended, interceptions, intyds, inttd, fumforced, fumopprec, fumtd ";
 
   public static Team getBestTeam() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns +
-        "FROM team " +
-         "ORDER BY 10*(totaltackles/ (SELECT max(totaltackles)) " + "+ 10*(sacks/(SELECT max(sacks) FROM stats WHERE games_played > 10)) " + "+ 10*(ydsl/(SELECT max(ydsl) FROM stats WHERE games_played > 10)) " + "+ 10*(pd/(SELECT max(pd) FROM stats WHERE games_played > 10)) " + "+ 10*(incterceptions/(SELECT max(incterceptions) FROM stats WHERE games_played > 10)) " + "+ 10*(interceptionyards/(SELECT max(interceptionyards) FROM stats WHERE games_played > 10)) " + "+ 10*(interceptiontds)/(SELECT max(interceptiontds) FROM stats WHERE games_played > 10)) " + "+ 10*(forcedfumble/(SELECT max(forcedfumble) FROM stats WHERE games_played > 10)) " + "+ 10*(recoveredfumble/(SELECT max(recoveredfumble) FROM stats WHERE games_played > 10)) " + "+ 10*(recoveredfumble/(SELECT max(recoveredfumble) FROM stats WHERE games_played > 10)) " + "+ 10*(tdfromfumble/(SELECT max(tdfromfumble) FROM stats WHERE games_played > 10)) DESC " + "LIMIT 1;";
+        "FROM team_stats " +
+        "GROUP BY " + columns +
+         "ORDER BY 10*(tackletotal/ (SELECT max(tackletotal)) " +
+        "+ 10*(sacks/(SELECT max(sacks) FROM team_stats )) " +
+        //"+ 10*(ydsl/(SELECT max(ydsl) FROM team_stats  )) " +
+        "+ 10*(passesdefended/(SELECT max(passesdefended) FROM team_stats  )) " +
+        "+ 10*(interceptions/(SELECT max(interceptions) FROM team_stats  )) " +
+        "+ 10*(intyds/(SELECT max(intyds) FROM team_stats  )) " +
+        "+ 10*(inttd)/(SELECT max(inttd) FROM team_stats  )) " +
+        "+ 10*(fumforced/(SELECT max(fumforced) FROM team_stats  )) " +
+        "+ 10*(fumopprec/(SELECT max(fumopprec) FROM team_stats  )) " +
+        "+ 10*(fumtd/(SELECT max(fumtd) FROM team_stats  )) DESC " +
+        "LIMIT 1;";
          return con.createQuery(sql)
-           .addColumnMapping("player_id", "playerId")
-           .addColumnMapping("first_name", "firstName")
-           .addColumnMapping("last_name", "lastName")
-           .addColumnMapping("team_name", "team")
-           .addColumnMapping("totaltackles", "")
-           .addColumnMapping("sacks", "")
-           .addColumnMapping("pd", "")
-           .addColumnMapping("incterceptions", "")
-           .addColumnMapping("incterceptionsyards", "")
-           .addColumnMapping("incterceptionstds", "")
-           .addColumnMapping("forcedfumble", "")
-           .addColumnMapping("recoveredfumble", "")
-           .addColumnMapping("tdfromfumble", "")
-           .addColumnMapping("games_played", "gamesplayed")
-           .addColumnMapping("birth_date", "")
-           .addColumnMapping("birth_city", "")
-           .executeAndFetchFirst(QB.class);
+           .addColumnMapping("tackletotal", "totaltackles")
+           .addColumnMapping("sacks", "sacks")
+           .addColumnMapping("passesdefended", "pd")
+           .addColumnMapping("intyds", "interceptionyards")
+           .addColumnMapping("inttd", "interceptiontds")
+           .addColumnMapping("fumforced", "forcedfumble")
+           .addColumnMapping("fumopprec", "recoveredfumble")
+           .addColumnMapping("fumtd", "tdfromfumble")
+           .executeAndFetchFirst(Team.class);
+    }
+  }
+
+  public static List<Team> getBestTeams(int n) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT " + columns +
+        "FROM team_stats " +
+        "GROUP BY " + columns +
+         "ORDER BY 10*(tackletotal/ (SELECT max(tackletotal)) " +
+        "+ 10*(sacks/(SELECT max(sacks) FROM team_stats )) " +
+        //"+ 10*(ydsl/(SELECT max(ydsl) FROM team_stats  )) " +
+        "+ 10*(passesdefended/(SELECT max(passesdefended) FROM team_stats  )) " +
+        "+ 10*(interceptions/(SELECT max(interceptions) FROM team_stats  )) " +
+        "+ 10*(intyds/(SELECT max(intyds) FROM team_stats  )) " +
+        "+ 10*(inttd)/(SELECT max(inttd) FROM team_stats  )) " +
+        "+ 10*(fumforced/(SELECT max(fumforced) FROM team_stats  )) " +
+        "+ 10*(fumopprec/(SELECT max(fumopprec) FROM team_stats  )) " +
+        "+ 10*(fumtd/(SELECT max(fumtd) FROM team_stats  )) DESC " +
+        "LIMIT " + n + ";";
+         return con.createQuery(sql)
+           .addColumnMapping("tackletotal", "totaltackles")
+           .addColumnMapping("sacks", "sacks")
+           .addColumnMapping("passesdefended", "pd")
+           .addColumnMapping("intyds", "interceptionyards")
+           .addColumnMapping("inttd", "interceptiontds")
+           .addColumnMapping("fumforced", "forcedfumble")
+           .addColumnMapping("fumopprec", "recoveredfumble")
+           .addColumnMapping("fumtd", "tdfromfumble")
+           .executeAndFetch(Team.class);
     }
   }
 }

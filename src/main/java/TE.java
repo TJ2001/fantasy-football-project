@@ -78,7 +78,7 @@ public static TE find(int id) {
     }
   }
 
-  public static List<WR> getTopTe(int n) {
+  public static List<TE> getTopTe(int n) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns + teMath + n + ";";
       return con.createQuery(sql)
@@ -89,7 +89,7 @@ public static TE find(int id) {
       .addColumnMapping("games_played", "gamesplayed")
       .addColumnMapping("birth_date", "birthDate")
       .addColumnMapping("birth_city", "birthCity")
-      .executeAndFetch(WR.class);
+      .executeAndFetch(TE.class);
     }
   }
 

@@ -50,7 +50,7 @@ public class WR extends Player{
 
   public static WR getBestWr() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT " + columns + wrMath + " 1;";
+      String sql = "SELECT " + columns + wrMath + "1;";
       return con.createQuery(sql)
       .addColumnMapping("player_id", "playerId")
       .addColumnMapping("first_name", "firstName")

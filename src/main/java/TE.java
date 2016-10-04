@@ -10,6 +10,8 @@ public class TE extends Player{
 
 private static final String columns = Player.PLAYER_COLUMNS + "receptions, recyards, recyardspergame, targets, rectd ";
 
+private static final String teMath = "FROM stats WHERE position = 'TE' AND games_played > 10 ORDER BY 15*(receptions/(SELECT max(receptions) FROM stats WHERE games_played > 10)) + 12.5*(recyards/(SELECT max(recyards) FROM stats WHERE games_played > 10)) + 12.5*(recyardspergame/(SELECT max(recyardspergame) FROM stats WHERE games_played > 10)) + 10*(targets/(SELECT max(targets) FROM stats WHERE games_played > 10)) + 20*(rectd/(SELECT max(rectd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) DESC LIMIT ";
+
 public int getReceptions(){
   return receptions;
 }
@@ -47,17 +49,7 @@ public static List<TE> all() {
 
   public static TE getBestTe() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT " + columns +
-        "FROM stats " +
-        "WHERE position = 'TE' " +
-          "AND games_played > 10 " +
-        "ORDER BY 15*(receptions/(SELECT max(receptions) FROM stats WHERE games_played > 10)) " +
-          "+ 12.5*(recyards/(SELECT max(recyards) FROM stats WHERE games_played > 10)) " +
-          "+ 12.5*(recyardspergame/(SELECT max(recyardspergame) FROM stats WHERE games_played > 10)) " +
-          "+ 10*(targets/(SELECT max(targets) FROM stats WHERE games_played > 10)) " +
-          "+ 20*(rectd/(SELECT max(rectd) FROM stats WHERE games_played > 10)) " +
-          "+ 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) DESC " +
-        "LIMIT 1;";
+      String sql = "SELECT " + columns + teMath + "1;";
       return con.createQuery(sql)
         .addColumnMapping("player_id", "playerId")
         .addColumnMapping("first_name", "firstName")
@@ -70,5 +62,19 @@ public static List<TE> all() {
     }
   }
 
-  
+  public static List<WR> getTopTe(int n) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT " + columns + teMath + n + ";";
+      return con.createQuery(sql)
+      .addColumnMapping("player_id", "playerId")
+      .addColumnMapping("first_name", "firstName")
+      .addColumnMapping("last_name", "lastName")
+      .addColumnMapping("team_name", "team")
+      .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
+      .executeAndFetch(WR.class);
+    }
+  }
+
 }

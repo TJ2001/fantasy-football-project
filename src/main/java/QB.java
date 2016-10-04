@@ -23,6 +23,8 @@ public class QB extends Player{
 
   private static final String columns = Player.PLAYER_COLUMNS + "passcompletions, passattempts, passpct, passyards, passyardspergame, passtd, passint, passsacks, sackYds, qbrating, rushattempts, rushyards, rushyardspergame, rushtd, fumbles, fumlost, games_played, position ";
 
+  private static final String qbMath = "FROM stats WHERE position = 'QB' AND games_played > 10 ORDER BY 10*(passpct/(SELECT max(passpct) FROM stats WHERE games_played > 10)) + 10*(passyards/(SELECT max(passyards) FROM stats WHERE games_played > 10)) + 10*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10)) + 20*(passtd/(SELECT max(passtd) FROM stats WHERE games_played > 10)) + 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) - 20*(interceptions/(SELECT max(interceptions) FROM stats WHERE games_played > 10)) - 10*(fumbles/(SELECT max(fumbles) FROM stats WHERE games_played > 10)) - 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10)) - 10*(passsacks/(SELECT max(passsacks) FROM stats WHERE games_played > 10)) - 10*(passsacky/(SELECT max(passsacky) FROM stats WHERE games_played > 10)) DESC LIMIT ";
+
   public int getPassCompletions() {
     return passcompletions;
   }
@@ -125,22 +127,7 @@ public class QB extends Player{
 
   public static QB getBestQb() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT " + columns +
-        "FROM stats " +
-        "WHERE position = 'QB' " +
-          "AND games_played > 10" +
-          "ORDER BY 10*(passpct/(SELECT max(passpct) FROM stats WHERE games_played > 10)) " +
-            "+ 10*(passyards/(SELECT max(passyards) FROM stats WHERE games_played > 10)) " +
-            "+ 10*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10)) " +
-            "+ 20*(passtd/(SELECT max(passtd) FROM stats WHERE games_played > 10)) " +
-            "+ 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) " +
-            "+ 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) " +
-            "- 20*(interceptions/(SELECT max(interceptions) FROM stats WHERE games_played > 10)) " +
-            "- 10*(fumbles/(SELECT max(fumbles) FROM stats WHERE games_played > 10)) " +
-            "- 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10)) " +
-            "- 10*(passsacks/(SELECT max(passsacks) FROM stats WHERE games_played > 10)) " +
-            "- 10*(passsacky/(SELECT max(passsacky) FROM stats WHERE games_played > 10)) DESC " +
-          "LIMIT 1;";
+      String sql = "SELECT " + columns + qbMath + "1;";
       return con.createQuery(sql)
         .addColumnMapping("player_id", "playerId")
         .addColumnMapping("first_name", "firstName")
@@ -152,6 +139,23 @@ public class QB extends Player{
         .addColumnMapping("birth_date", "birthDate")
         .addColumnMapping("birth_city", "birthCity")
         .executeAndFetchFirst(QB.class);
+    }
+  }
+
+  public static List<QB> getTopQb(int n) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT " + columns + qbMath + n + ";";
+      return con.createQuery(sql)
+      .addColumnMapping("player_id", "playerId")
+      .addColumnMapping("first_name", "firstName")
+      .addColumnMapping("last_name", "lastName")
+      .addColumnMapping("team_name", "team")
+      .addColumnMapping("passnumeric", "passint")
+      .addColumnMapping("passsacks", "sackYds")
+      .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
+      .executeAndFetch(QB.class);
     }
   }
 }

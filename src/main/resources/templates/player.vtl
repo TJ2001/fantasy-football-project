@@ -1,4 +1,5 @@
 <div class="container">
+  #if($player.getType() == "QB")
   <div class="row">
     <div class="col-md-1">
       image?
@@ -10,16 +11,20 @@
     <div class="col-md-9">
       <div class="row">
         <div class="col-md-3">
-          <h5>REC</h5>
+          <h5>TD</h5>
+          <p>$player.getPassTd()</p>
+        </div>
+        <div class="col-md-3">
+          <h5>INT</h5>
+          <p>$player.getPassInt()</p>
         </div>
         <div class="col-md-3">
           <h5>YDS</h5>
+          <p>$player.getPassYards()</p>
         </div>
         <div class="col-md-3">
-          <h5>AVG</h5>
-        </div>
-        <div class="col-md-3">
-          <h5>TDS</h5>
+          <h5>RTG</h5>
+          <p>$player.getQbrating()</p>
         </div>
       </div>
     </div>
@@ -53,23 +58,23 @@
       <td>Rank</td>
       <a href="/players/$player.getPlayerId()"><td>$player.getFirstName() $player.getLastName()</td></a>
       <td>$player.getTeam()</td>
-      <td>$player.getPasscompletions()</td>
-      <td>$player.getPassattempts()</td>
-      <td>$player.getPasspct()</td>
-      <td>$player.getPassyards()</td>
-      <td>$player.getPassyardspergame()</td>
-      <td>$player.getPasstd()</td>
-      <td>$player.getPassint()</td>
+      <td>$player.getPassCompletions()</td>
+      <td>$player.getPassAttempts()</td>
+      <td>$player.getPassPct()</td>
+      <td>$player.getPassYards()</td>
+      <td>$player.getPassYardsPerGame()</td>
+      <td>$player.getPassTd()</td>
+      <td>$player.getPassInt()</td>
       <td>$player.getSacks()</td>
       <td>$player.getSackYds()</td>
       <td>$player.getQbrating()</td>
-      <td>$player.getRushattempts()</td>
-      <td>$player.getRushyards()</td>
-      <td>$player.getRushyardspergame()</td>
-      <td>$player.getRushtd()</td>
+      <td>$player.getRushAttempts()</td>
+      <td>$player.getRushYards()</td>
+      <td>$player.getRushYardsPerGame()</td>
+      <td>$player.getRushTd()</td>
       <td>$player.getFumbles()</td>
-      <td>$player.getFumlost()</td>
-      <td>$player.getGamesplayed()</td>
+      <td>$player.getFumLost()</td>
+      <td>$player.getGamesPlayed()</td>
     </tr>
   </table>
 </div>

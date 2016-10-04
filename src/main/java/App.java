@@ -13,14 +13,6 @@ public class App {
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
 
-    System.out.println(RB.getBestRb().getFirstName());
-    System.out.println(RB.getBestRb().getLastName());
-
-    // for (int i = 0 ; i<5 ; i++ ) {
-    //   System.out.println(RB.getBestRb().get(i).getFirstName());
-    //   System.out.println(RB.getBestRb().get(i).getLastName());
-    // }
-
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
@@ -45,7 +37,7 @@ public class App {
 
     get("/players/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      //model.put("player", Player.find(Integer.parseInt(request.params(":id"))));
+      model.put("player", Player.find(Integer.parseInt(request.params(":id"))));
       model.put("template", "templates/player.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

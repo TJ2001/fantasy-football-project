@@ -91,44 +91,61 @@ public class QB extends Player{
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT" + columns + "FROM stats WHERE position = 'QB';";
       return con.createQuery(sql)
-      .addColumnMapping("player_id", "playerId")
-      .addColumnMapping("first_name", "firstName")
-      .addColumnMapping("last_name", "lastName")
-      .addColumnMapping("team_name", "team")
-      .addColumnMapping("passnumeric", "passint")
-      .addColumnMapping("passsacks", "sacks")
-      .addColumnMapping("games_played", "gamesplayed")
-      .executeAndFetch(QB.class);
+        .addColumnMapping("player_id", "playerId")
+        .addColumnMapping("first_name", "firstName")
+        .addColumnMapping("last_name", "lastName")
+        .addColumnMapping("team_name", "team")
+        .addColumnMapping("passnumeric", "passint")
+        .addColumnMapping("passsacks", "sacks")
+        .addColumnMapping("games_played", "gamesplayed")
+        .executeAndFetch(QB.class);
+    }
+  }
+
+
+  public static QB find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT " + columns + " FROM stats WHERE player_id = :id;";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .addColumnMapping("player_id", "playerId")
+        .addColumnMapping("first_name", "firstName")
+        .addColumnMapping("last_name", "lastName")
+        .addColumnMapping("team_name", "team")
+        .addColumnMapping("passnumeric", "passint")
+        .addColumnMapping("passsacks", "sacks")
+        .addColumnMapping("games_played", "gamesplayed")
+        .executeAndFetchFirst(QB.class);
     }
   }
 
   public static QB getBestQb() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns +
-      "FROM stats " +
-      "WHERE position = 'QB' " +
-      "AND games_played > 10" +
-      "ORDER BY 10*(passpct/(SELECT max(passpct) FROM stats WHERE games_played > 10)) " +
-      "+ 10*(passyards/(SELECT max(passyards) FROM stats WHERE games_played > 10)) " +
-      "+ 10*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10)) " +
-      "+ 20*(passtd/(SELECT max(passtd) FROM stats WHERE games_played > 10)) " +
-      "+ 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) " +
-      "+ 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) " +
-      "- 20*(interceptions/(SELECT max(interceptions) FROM stats WHERE games_played > 10)) " +
-      "- 10*(fumbles/(SELECT max(fumbles) FROM stats WHERE games_played > 10)) " +
-      "- 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10)) " +
-      "- 10*(passsacks/(SELECT max(passsacks) FROM stats WHERE games_played > 10)) " +
-      "- 10*(passsacky/(SELECT max(passsacky) FROM stats WHERE games_played > 10)) DESC " +
-      "LIMIT 1;";
+        "FROM stats " +
+        "WHERE position = 'QB' " +
+          "AND games_played > 10" +
+          "ORDER BY 10*(passpct/(SELECT max(passpct) FROM stats WHERE games_played > 10)) " +
+            "+ 10*(passyards/(SELECT max(passyards) FROM stats WHERE games_played > 10)) " +
+            "+ 10*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10)) " +
+            "+ 20*(passtd/(SELECT max(passtd) FROM stats WHERE games_played > 10)) " +
+            "+ 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) " +
+            "+ 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) " +
+            "- 20*(interceptions/(SELECT max(interceptions) FROM stats WHERE games_played > 10)) " +
+            "- 10*(fumbles/(SELECT max(fumbles) FROM stats WHERE games_played > 10)) " +
+            "- 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10)) " +
+            "- 10*(passsacks/(SELECT max(passsacks) FROM stats WHERE games_played > 10)) " +
+            "- 10*(passsacky/(SELECT max(passsacky) FROM stats WHERE games_played > 10)) DESC " +
+          "LIMIT 1;";
       return con.createQuery(sql)
-                .addColumnMapping("player_id", "playerId")
-                .addColumnMapping("first_name", "firstName")
-                .addColumnMapping("last_name", "lastName")
-                .addColumnMapping("team_name", "team")
-                .addColumnMapping("passnumeric", "passint")
-                .addColumnMapping("passsacks", "sackYds")
-                .addColumnMapping("games_played", "gamesplayed")
-                .executeAndFetchFirst(QB.class);
+        .addColumnMapping("player_id", "playerId")
+        .addColumnMapping("first_name", "firstName")
+        .addColumnMapping("last_name", "lastName")
+        .addColumnMapping("team_name", "team")
+        .addColumnMapping("passnumeric", "passint")
+        .addColumnMapping("passsacks", "sackYds")
+        .addColumnMapping("games_played", "gamesplayed")
+        .executeAndFetchFirst(QB.class);
     }
   }
 }

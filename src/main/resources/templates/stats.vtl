@@ -47,25 +47,25 @@
       #foreach($qb in $qbs)
         <tr>
           <td>Rank</td>
-          <a href="/players/$player.getPlayerId()"><td>$player.getFirstName() $player.getLastName()</td></a>
-          <td>$player.getTeam()</td>
-          <td>$player.getPasscompletions()</td>
-          <td>$player.getPassattempts()</td>
-          <td>$player.getPasspct()</td>
-          <td>$player.getPassyards()</td>
-          <td>$player.getPassyardspergame()</td>
-          <td>$player.getPasstd()</td>
-          <td>$player.getPassint()</td>
-          <td>$player.getSacks()</td>
-          <td>$player.getSackYds()</td>
-          <td>$player.getQbrating()</td>
-          <td>$player.getRushattempts()</td>
-          <td>$player.getRushyards()</td>
-          <td>$player.getRushyardspergame()</td>
-          <td>$player.getRushtd()</td>
-          <td>$player.getFumbles()</td>
-          <td>$player.getFumlost()</td>
-          <td>$player.getGamesplayed()</td>
+          <a href="/players/$player.getPlayerId()"><td>$qb.getFirstName() $qb.getLastName()</td></a>
+          <td>$qb.getTeam()</td>
+          <td>$qb.getPasscompletions()</td>
+          <td>$qb.getPassattempts()</td>
+          <td>$qb.getPasspct()</td>
+          <td>$qb.getPassyards()</td>
+          <td>$qb.getPassyardspergame()</td>
+          <td>$qb.getPasstd()</td>
+          <td>$qb.getPassint()</td>
+          <td>$qb.getSacks()</td>
+          <td>$qb.getSackYds()</td>
+          <td>$qb.getQbrating()</td>
+          <td>$qb.getRushattempts()</td>
+          <td>$qb.getRushyards()</td>
+          <td>$qb.getRushyardspergame()</td>
+          <td>$qb.getRushtd()</td>
+          <td>$qb.getFumbles()</td>
+          <td>$qb.getFumlost()</td>
+          <td>$qb.getGamesplayed()</td>
         </tr>
       #end
     </table>

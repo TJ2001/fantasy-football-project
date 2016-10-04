@@ -8,17 +8,6 @@ import spark.template.velocity.VelocityTemplateEngine;
 
 import static spark.Spark.*;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-
-// import org.apache.log4j.BasicConfigurator;
-// import org.apache.log4j.Logger;
-
-import oauth.signpost.OAuthConsumer;
-import oauth.signpost.basic.DefaultOAuthConsumer;
-
 public class App {
   public static void main(String[] args) {
     String layout = "templates/layout.vtl";
@@ -28,6 +17,20 @@ public class App {
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/stats", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("qbs", QB.all());
+      model.put("template", "templates/stats.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/players/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("player", Player.find(Integer.parseInt(request.params(":id"))));
+      model.put("template", "templates/player.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }

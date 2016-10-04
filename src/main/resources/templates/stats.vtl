@@ -27,45 +27,31 @@
           <th>Team</th>
           <th>Comp</th>
           <th>Att</th>
-          <th>Comp%</th>
           <th>Yards</th>
-          <th>Yards/gm</th>
           <th>PassTD</th>
           <th>Int</th>
           <th>Sacks</th>
-          <th>SackYds</th>
           <th>QBR</th>
           <th>Rush</th>
           <th>Yards</th>
-          <th>Yards/gm</th>
           <th>RushTD</th>
-          <th>Fumbles</th>
-          <th>FumLost</th>
-          <th>Games</th>
         </tr>
       </thead>
       #foreach($qb in $qbs)
         <tr>
           <td>Rank</td>
-          <a href="/players/$player.getPlayerId()"><td>$qb.getFirstName() $qb.getLastName()</td></a>
+          <td><a href="/players/$qb.getPlayerId()">$qb.getFirstName() $qb.getLastName()</a></td>
           <td>$qb.getTeam()</td>
-          <td>$qb.getPasscompletions()</td>
-          <td>$qb.getPassattempts()</td>
-          <td>$qb.getPasspct()</td>
-          <td>$qb.getPassyards()</td>
-          <td>$qb.getPassyardspergame()</td>
-          <td>$qb.getPasstd()</td>
-          <td>$qb.getPassint()</td>
+          <td>$qb.getPassCompletions()</td>
+          <td>$qb.getPassAttempts()</td>
+          <td>$qb.getPassYards()</td>
+          <td>$qb.getPassTd()</td>
+          <td>$qb.getPassInt()</td>
           <td>$qb.getSacks()</td>
-          <td>$qb.getSackYds()</td>
           <td>$qb.getQbrating()</td>
-          <td>$qb.getRushattempts()</td>
-          <td>$qb.getRushyards()</td>
-          <td>$qb.getRushyardspergame()</td>
-          <td>$qb.getRushtd()</td>
-          <td>$qb.getFumbles()</td>
-          <td>$qb.getFumlost()</td>
-          <td>$qb.getGamesplayed()</td>
+          <td>$qb.getRushAttempts()</td>
+          <td>$qb.getRushYards()</td>
+          <td>$qb.getRushTd()</td>
         </tr>
       #end
     </table>
@@ -79,36 +65,34 @@
           <th>Name</th>
           <th>Team</th>
           <th>Att</th>
-          <th>Att/G</th>
-          <th>Yds</th>
+          <th>Yards</th>
+          <th>Yards/Gm</th>
           <th>Avg</th>
-          <th>Yds/G</th>
-          <th>TD</th>
-          <th>1st</th>
-          <th>1st%</th>
-          <th>Lng</th>
-          <th>20+</th>
-          <th>40+</th>
-          <th>FUM</th>
+          <th>RushTD</th>
+          <th>RecTD</th>
+          <th>AvgRecYds</th>
+          <th>Rec</th>
+          <th>Fumbles</th>
+          <th>FumLost</th>
+          <th>Games</th>
         </tr>
       </thead>
       #foreach($rb in $rbs)
         <tr>
           <td>Rank</td>
-          <td>Name</td>
-          <td>Team</td>
-          <td>Att</td>
-          <td>Att/G</td>
-          <td>Yds</td>
-          <td>Avg</td>
-          <td>Yds/G</td>
-          <td>TD</td>
-          <td>1st</td>
-          <td>1st%</td>
-          <td>Lng</td>
-          <td>20+</td>
-          <td>40+</td>
-          <td>FUM</td>
+          <td>rb.getFirstName() rb.getLastName()</td>
+          <td>rb.getTeam()</td>
+          <td>rb.getRushAttempts()</td>
+          <td>rb.getRushYards()</td>
+          <td>rb.getRushYardsPerGame()</td>
+          <td>rb.getRushAverage()</td>
+          <td>rb.getRushTd()</td>
+          <td>rb.getReceptionTd()</td>
+          <td>rb.getAverageReceptionYardage()</td>
+          <td>rb.getReceptions()</td>
+          <td>rb.getRushFumbles()</td>
+          <td>rb.getFumLost()</td>
+          <td>rb.getGamesPlayed()</td>
         </tr>
       #end
     </table>
@@ -196,26 +180,4 @@
     </table>
   </div>
 </div>
-<script type="text/javascript">
-
-  $('.table').DataTable();
-  $('#qb-table-box').show();
-
-  $('#qb').click(function() {
-    $('.table-box').hide();
-    $('#qb-table-box').show();
-  });
-  $('#rb').click(function() {
-    $('.table-box').hide();
-    $('#rb-table-box').show();
-  });
-  $('#wr').click(function() {
-    $('.table-box').hide();
-    $('#wr-table-box').show();
-  });
-  $('#te').click(function() {
-    $('.table-box').hide();
-    $('#te-table-box').show();
-  });
-
-</script>
+<script src="/datatables.js"></script>

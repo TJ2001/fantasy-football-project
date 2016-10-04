@@ -17,8 +17,6 @@ public class RB extends Player{
 
   private static final String columns = " player_id, first_name, last_name, team_name, rushattempts, rushyards, rushyardspergame, rushaverage, rushtd, rectd, recaverage, receptions, fumbles, fumlost, games_played ";
 
-
-
   public static List<RB> all() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT" + columns + "FROM stats WHERE position = 'RB';";

@@ -21,7 +21,7 @@ public class QB extends Player{
   private int fumlost;
 
 
-  private static final String columns = " player_id, first_name, last_name, team_name, passcompletions, passattempts, passpct, passyards, passyardspergame, passtd, passint, passsacks, sackYds, qbrating, rushattempts, rushyards, rushyardspergame, rushtd, fumbles, fumlost, games_played, position ";
+  private static final String columns = Player.PLAYER_COLUMNS + "passcompletions, passattempts, passpct, passyards, passyardspergame, passtd, passint, passsacks, sackYds, qbrating, rushattempts, rushyards, rushyardspergame, rushtd, fumbles, fumlost, games_played, position ";
 
   public int getPassCompletions() {
     return passcompletions;
@@ -98,6 +98,8 @@ public class QB extends Player{
         .addColumnMapping("passnumeric", "passint")
         .addColumnMapping("passsacks", "sacks")
         .addColumnMapping("games_played", "gamesplayed")
+        .addColumnMapping("birth_date", "birthDate")
+        .addColumnMapping("birth_city", "birthCity")
         .executeAndFetch(QB.class);
     }
   }
@@ -115,6 +117,8 @@ public class QB extends Player{
         .addColumnMapping("passnumeric", "passint")
         .addColumnMapping("passsacks", "sacks")
         .addColumnMapping("games_played", "gamesplayed")
+        .addColumnMapping("birth_date", "birthDate")
+        .addColumnMapping("birth_city", "birthCity")
         .executeAndFetchFirst(QB.class);
     }
   }
@@ -145,6 +149,8 @@ public class QB extends Player{
         .addColumnMapping("passnumeric", "passint")
         .addColumnMapping("passsacks", "sackYds")
         .addColumnMapping("games_played", "gamesplayed")
+        .addColumnMapping("birth_date", "birthDate")
+        .addColumnMapping("birth_city", "birthCity")
         .executeAndFetchFirst(QB.class);
     }
   }

@@ -1,4 +1,5 @@
 import java.util.List;
+import java.sql.Date;
 import org.sql2o.*;
 
 public abstract class Player {
@@ -8,6 +9,14 @@ public abstract class Player {
   public String team;
   public int gamesplayed;
   public String position;
+  public int jersey;
+  public String height;
+  public int weight;
+  public Date birthDate;
+  public int age;
+  public String birthCity;
+
+  public static final String PLAYER_COLUMNS = " player_id, first_name, last_name, team_name, jersey, height, weight, birth_date, age, birth_city, ";
 
   public int getPlayerId(){
     return playerId;
@@ -35,6 +44,30 @@ public abstract class Player {
 
   public String getPosition() {
     return position;
+  }
+
+  public int getJersey() {
+    return jersey;
+  };
+
+  public String getHeight() {
+    return height;
+  };
+
+  public int getWeight() {
+    return weight;
+  };
+
+  public Date getBirthDate() {
+    return birthDate;
+  };
+
+  public int getAge() {
+    return age;
+  };
+
+  public String getBirthCity() {
+    return birthCity;
   }
 
   public static Player find(int id) {

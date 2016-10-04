@@ -1,5 +1,5 @@
 <div class="container">
-  #if($player.getType() == "QB")
+  #if($player.getPosition() == "QB")
   <div class="row">
     <div class="col-md-1">
       image?
@@ -77,4 +77,5 @@
       <td>$player.getGamesPlayed()</td>
     </tr>
   </table>
+  #end
 </div>

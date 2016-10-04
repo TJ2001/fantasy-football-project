@@ -7,6 +7,7 @@ public abstract class Player {
   public String lastName;
   public String team;
   public int gamesplayed;
+  public String position;
 
   public int getPlayerId(){
     return playerId;
@@ -30,6 +31,10 @@ public abstract class Player {
 
   public String getTeamImg() {
     return "/images/" + this.team + ".gif";
+  }
+
+  public String getPosition() {
+    return position;
   }
 
   public static Player find(int id) {

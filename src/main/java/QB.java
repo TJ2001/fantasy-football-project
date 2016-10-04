@@ -42,7 +42,7 @@ public class QB {
     return team;
   }
 
-public int getPassComplettions() {
+public int getPassCompletions() {
   return passcompletions;
 }
 

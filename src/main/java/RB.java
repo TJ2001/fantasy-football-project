@@ -15,10 +15,10 @@ public class RB {
   double averagereceptionyardage;
   int receptions;
   int rushfumbles;
-  int fubmlelost;
+  int fumblelost;
   int gamesplayed;
 
-  private static final String columns = " player_id, first_name, last_name, team_name, rushattempts, rushyards, rushyardspergame, rushaverage, rushtd, redtd, recaverage, receptions, fumbles, fumlost, games_played ";
+  private static final String columns = " player_id, first_name, last_name, team_name, rushattempts, rushyards, rushyardspergame, rushaverage, rushtd, rectd, recaverage, receptions, fumbles, fumlost, games_played ";
 
   public static List<RB> all() {
     try(Connection con = DB.sql2o.open()) {
@@ -28,10 +28,10 @@ public class RB {
         .addColumnMapping("first_name", "firstName")
         .addColumnMapping("last_name", "lastName")
         .addColumnMapping("team_name", "team")
-        .addColumnMapping("redtd", "receptiontd")
+        .addColumnMapping("rectd", "receptiontd")
         .addColumnMapping("recaverage", "averagereceptionyardage")
         .addColumnMapping("fumbles", "rushfumbles")
-        .addColumnMapping("fumlost", "fubmlelost")
+        .addColumnMapping("fumlost", "fumblelost")
         .addColumnMapping("games_played", "gamesplayed")
         .executeAndFetch(RB.class);
     }

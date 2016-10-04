@@ -12,8 +12,7 @@ public class App {
   public static void main(String[] args) {
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
-    // System.out.println(QB.getBestQb().firstName);
-    // System.out.println(QB.getBestQb().lastName);
+
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
@@ -23,13 +22,22 @@ public class App {
     get("/stats", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("qbs", QB.all());
+      model.put("rbs", RB.all());
       model.put("template", "templates/stats.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/calculator", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("qbs", QB.all());
+      model.put("rbs", RB.all());
+      model.put("template", "templates/calculator.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
     get("/players/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("player", Player.find(Integer.parseInt(request.params(":id"))));
+      //model.put("player", Player.find(Integer.parseInt(request.params(":id"))));
       model.put("template", "templates/player.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

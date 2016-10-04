@@ -29,6 +29,8 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("qbs", QB.all());
       model.put("rbs", RB.all());
+      model.put("tes", TE.all());
+      model.put("wrs", WR.all());
       model.put("template", "templates/stats.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -37,6 +39,8 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("qbs", QB.all());
       model.put("rbs", RB.all());
+      model.put("wrs", WR.all());
+      model.put("tes", TE.all());
       model.put("template", "templates/calculator.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

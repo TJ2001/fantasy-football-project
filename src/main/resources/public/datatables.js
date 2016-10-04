@@ -1,4 +1,4 @@
-var table =$('.table').DataTable({
+var tableqb = $('#qb-table').DataTable({
     "columnDefs": [ {
         "searchable": false,
         "orderable": false,
@@ -7,8 +7,53 @@ var table =$('.table').DataTable({
     "order": [[ 1, 'asc' ]]
 } );
 
-table.on( 'order.dt search.dt', function () {
-    table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+tableqb.on( 'order.dt search.dt', function () {
+    tableqb.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+    } );
+} ).draw();
+
+var tablerb = $('#rb-table').DataTable({
+    "columnDefs": [ {
+        "searchable": false,
+        "orderable": false,
+        "targets": 0
+    } ],
+    "order": [[ 1, 'asc' ]]
+} );
+
+tablerb.on( 'order.dt search.dt', function () {
+    tablerb.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+    } );
+} ).draw();
+
+var tablewr = $('#wr-table').DataTable({
+    "columnDefs": [ {
+        "searchable": false,
+        "orderable": false,
+        "targets": 0
+    } ],
+    "order": [[ 1, 'asc' ]]
+} );
+
+tablewr.on( 'order.dt search.dt', function () {
+    tablewr.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+    } );
+} ).draw();
+
+var tablete = $('#te-table').DataTable({
+    "columnDefs": [ {
+        "searchable": false,
+        "orderable": false,
+        "targets": 0
+    } ],
+    "order": [[ 1, 'asc' ]]
+} );
+
+tablete.on( 'order.dt search.dt', function () {
+    tablete.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
         cell.innerHTML = i+1;
     } );
 } ).draw();

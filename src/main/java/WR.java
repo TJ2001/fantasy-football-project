@@ -8,7 +8,8 @@ public class WR extends Player{
   private int targets;
   private int rectd;
 
-  private static final String columns = " player_id, first_name, last_name, team_name,  games_played, receptions, recyards, recyardspergame, targets, rectd ";
+
+  private static final String columns = Player.PLAYER_COLUMNS + "receptions, recyards, recyardspergame, targets, rectd ";
 
   private static final String wrMath = "FROM stats WHERE position = 'WR' AND games_played > 10 ORDER BY 15*(receptions/(SELECT max(receptions) FROM stats WHERE games_played > 10)) + 12.5*(recyards/(SELECT max(recyards) FROM stats WHERE games_played > 10)) + 12.5*(recyardspergame/(SELECT max(recyardspergame) FROM stats WHERE games_played > 10)) + 10*(targets/(SELECT max(targets) FROM stats WHERE games_played > 10)) + 20*(rectd/(SELECT max(rectd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) DESC LIMIT ";
 
@@ -41,6 +42,8 @@ public class WR extends Player{
       .addColumnMapping("last_name", "lastName")
       .addColumnMapping("team_name", "team")
       .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
       .executeAndFetch(WR.class);
     }
   }
@@ -54,6 +57,8 @@ public class WR extends Player{
       .addColumnMapping("last_name", "lastName")
       .addColumnMapping("team_name", "team")
       .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
       .executeAndFetchFirst(WR.class);
     }
   }
@@ -67,6 +72,8 @@ public class WR extends Player{
       .addColumnMapping("last_name", "lastName")
       .addColumnMapping("team_name", "team")
       .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
       .executeAndFetch(WR.class);
     }
   }

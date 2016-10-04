@@ -23,7 +23,8 @@ public class App {
   public static void main(String[] args) {
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
-
+    // System.out.println(QB.getBestQb().firstName);
+    // System.out.println(QB.getBestQb().lastName);
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");

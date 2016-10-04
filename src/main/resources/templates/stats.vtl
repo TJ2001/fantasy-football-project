@@ -80,7 +80,7 @@
       #foreach($rb in $rbs)
         <tr>
           <td>Rank</td>
-          <td>$rb.getFirstName() $rb.getLastName()</td>
+          <td><a href="/players/$rb.getPlayerId()">$rb.getFirstName() $rb.getLastName()</a></td>
           <td><img class="teamlogo" src="$rb.getTeamImg()"> $rb.getTeam()</td>
           <td>$rb.getRushAttempts()</td>
           <td>$rb.getRushYards()</td>

@@ -1,5 +1,5 @@
 <div class="container">
-  #if($player.getType() == "QB")
+  #if($player.getPosition() == "QB")
   <div class="row">
     <div class="col-md-1">
       image?
@@ -32,9 +32,6 @@
   <table class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
       <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>Team</th>
         <th>Comp</th>
         <th>Att</th>
         <th>Comp%</th>
@@ -55,9 +52,6 @@
       </tr>
     </thead>
     <tr>
-      <td>Rank</td>
-      <a href="/players/$player.getPlayerId()"><td>$player.getFirstName() $player.getLastName()</td></a>
-      <td>$player.getTeam()</td>
       <td>$player.getPassCompletions()</td>
       <td>$player.getPassAttempts()</td>
       <td>$player.getPassPct()</td>
@@ -77,4 +71,5 @@
       <td>$player.getGamesPlayed()</td>
     </tr>
   </table>
+  #end
 </div>

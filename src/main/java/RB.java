@@ -13,7 +13,7 @@ public class RB extends Player{
   private int receptions;
   private int rushfumbles;
   private int fumblelost;
-  private static final String columns = " player_id, first_name, last_name, team_name, rushattempts, rushyards, rushyardspergame, rushaverage, rushtd, rectd, recaverage, receptions, fumbles, fumlost, games_played ";
+  private static final String columns = Player.PLAYER_COLUMNS + "rushattempts, rushyards, rushyardspergame, rushaverage, rushtd, rectd, recaverage, receptions, fumbles, fumlost, games_played, position ";
 
 
   public int getRushAttempts() {
@@ -69,6 +69,8 @@ public class RB extends Player{
         .addColumnMapping("fumbles", "rushfumbles")
         .addColumnMapping("fumlost", "fumblelost")
         .addColumnMapping("games_played", "gamesplayed")
+        .addColumnMapping("birth_date", "birthDate")
+        .addColumnMapping("birth_city", "birthCity")
         .executeAndFetch(RB.class);
     }
   }
@@ -87,6 +89,8 @@ public class RB extends Player{
       .addColumnMapping("fumbles", "rushfumbles")
       .addColumnMapping("fumlost", "fumblelost")
       .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
       .executeAndFetchFirst(RB.class);
   }
 }
@@ -116,6 +120,8 @@ public class RB extends Player{
         .addColumnMapping("fumbles", "rushfumbles")
         .addColumnMapping("fumlost", "fumblelost")
         .addColumnMapping("games_played", "gamesplayed")
+        .addColumnMapping("birth_date", "birthDate")
+        .addColumnMapping("birth_city", "birthCity")
         .executeAndFetchFirst(RB.class);
     }
   }

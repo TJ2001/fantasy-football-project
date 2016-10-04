@@ -6,7 +6,7 @@ public class QB {
   int passcompletions;
   int passattempts;
   double passpct;
-  int passyads;
+  int passyards;
   double passyardspergame;
   int passtd;
   int passint;
@@ -14,30 +14,58 @@ public class QB {
   int sackYds;
   double qbrating;
   int rushattempts;
-  int rushyads;
+  int rushyards;
   double rushyardspergame;
   int rushtd;
-  int fumble;
+  int fumbles;
   int fumlost;
   int gamesplayed;
+  private static final String columns = " player_id, first_name, last_name, team_name, passcompletions, passattempts, passpct, passyards, passyardspergame, passtd, passint, sacks, sackYds, qbrating, rushattempts, rushyards, rushyardspergame, rushtd, fumbles, fumlost, games_played ";
 
-aggregate functions are not allowed in WHERE
-    return con.createQuery(sql)
-      .addColumnMapping("first_name", "firstName")
-      .addColumnMapping("last_name", "lastName")
-      .addColumnMapping("location_id", "locationId")
-      .addColumnMapping("passnumeric", "passint")
-      .addColumnMapping("passsacks", "sackYds")
-      .addColumnMapping("games_played", "gamesplayed")
-      .executeAndFetch(QB.class);
+  public static List<QB> all() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT" + columns + "FROM stats WHERE position = 'QB';";
+      return con.createQuery(sql)
+        .addColumnMapping("player_id", "playerId")
+        .addColumnMapping("first_name", "firstName")
+        .addColumnMapping("last_name", "lastName")
+        .addColumnMapping("team_name", "team")
+        .addColumnMapping("location_id", "locationId")
+        .addColumnMapping("passnumeric", "passint")
+        .addColumnMapping("passsacks", "sackYds")
+        .addColumnMapping("games_played", "gamesplayed")
+        .executeAndFetch(QB.class);
+    }
   }
 
-  public int getBestQb(){
-    int cumulativeScore = ((10*(passpct/69.8)) + (10*(passyards/36) + (10*(rushyardspergame/11)) + (20*((passtd + rushtd)/47)) + (10 * (gamesplayed/16))) - ((20*(interceptions/18)) + (10 * (fumbles / 13)) + (10 * (fumlost / 10 )) + (10 * (passsacks / 51)) + (10 * (passacky / 422)));
-    return cumulativeScore;
+  public static QB getBestQb() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT" + columns +
+        "FROM stats
+        WHERE position = 'QB'
+          AND games_played > 10
+        ORDER BY 10*(passpct/(SELECT max(passpct) FROM stats WHERE games_played > 10))
+          + 10*(passyards/(SELECT max(passyards) FROM stats WHERE games_played > 10))
+          + 10*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10))
+          + 20*(passtd/(SELECT max(passtd) FROM stats WHERE games_played > 10))
+          + 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10))
+          + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10))
+          - 20*(interceptions/(SELECT max(interceptions) FROM stats WHERE games_played > 10))
+          - 10*(fumbles/(SELECT max(fumbles) FROM stats WHERE games_played > 10))
+          - 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10))
+          - 10*(passsacks/(SELECT max(passsacks) FROM stats WHERE games_played > 10))
+          - 10*(passsacky/(SELECT max(passsacky) FROM stats WHERE games_played > 10)) DESC
+        LIMIT 1;";
+      return con.createQuery(sql)
+        .addColumnMapping("player_id", "playerId")
+        .addColumnMapping("first_name", "firstName")
+        .addColumnMapping("last_name", "lastName")
+        .addColumnMapping("team_name", "team")
+        .addColumnMapping("location_id", "locationId")
+        .addColumnMapping("passnumeric", "passint")
+        .addColumnMapping("passsacks", "sackYds")
+        .addColumnMapping("games_played", "gamesplayed")
+        .executeAndFetchFirst(QB.class);
+    }
   }
-}
-
-
-
 }

@@ -44,10 +44,10 @@
           <th>Games</th>
         </tr>
       </thead>
-      #foreach($player in $players)
+      #foreach($qb in $qbs)
         <tr>
           <td>Rank</td>
-          <td>$player.getFirstName() $player.getLastName()</td>
+          <a href="/players/$player.getPlayerId()"><td>$player.getFirstName() $player.getLastName()</td></a>
           <td>$player.getTeam()</td>
           <td>$player.getPasscompletions()</td>
           <td>$player.getPassattempts()</td>
@@ -66,6 +66,7 @@
           <td>$player.getFumbles()</td>
           <td>$player.getFumlost()</td>
           <td>$player.getGamesplayed()</td>
+        </tr>
       #end
     </table>
   </div>
@@ -91,7 +92,7 @@
           <th>FUM</th>
         </tr>
       </thead>
-      #foreach($player in $players)
+      #foreach($rb in $rbs)
         <tr>
           <td>Rank</td>
           <td>Name</td>
@@ -133,7 +134,7 @@
           <th>FUM</th>
         </tr>
       </thead>
-      #foreach($player in $players)
+      #foreach($wr in $wrs)
         <tr>
           <td>Rank</td>
           <td>Name</td>
@@ -174,7 +175,7 @@
           <th>FUM</th>
         </tr>
       </thead>
-      #foreach($player in $players)
+      #foreach($te in $tes)
         <tr>
           <td>Rank</td>
           <td>Name</td>

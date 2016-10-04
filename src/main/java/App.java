@@ -21,8 +21,15 @@ public class App {
 
     get("/stats", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("players", QB.all());
+      model.put("qbs", QB.all());
       model.put("template", "templates/stats.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/players/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("player", Player.find(Integer.parseInt(request.params(":id"))));
+      model.put("template", "templates/player.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }

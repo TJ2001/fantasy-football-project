@@ -21,9 +21,9 @@ public class QB extends Player{
   private int fumlost;
 
 
-  private static final String columns = " player_id, first_name, last_name, team_name, passcompletions, passattempts, passpct, passyards, passyardspergame, passtd, passint, sacks, sackYds, qbrating, rushattempts, rushyards, rushyardspergame, rushtd, fumbles, fumlost, games_played ";
+  private static final String columns = " player_id, first_name, last_name, team_name, passcompletions, passattempts, passpct, passyards, passyardspergame, passtd, passint, passsacks, sackYds, qbrating, rushattempts, rushyards, rushyardspergame, rushtd, fumbles, fumlost, games_played ";
 
-  public int getPassComplettions() {
+  public int getPassCompletions() {
     return passcompletions;
   }
 
@@ -96,7 +96,7 @@ public class QB extends Player{
       .addColumnMapping("last_name", "lastName")
       .addColumnMapping("team_name", "team")
       .addColumnMapping("passnumeric", "passint")
-      .addColumnMapping("passsacks", "sackYds")
+      .addColumnMapping("passsacks", "sacks")
       .addColumnMapping("games_played", "gamesplayed")
       .executeAndFetch(QB.class);
     }

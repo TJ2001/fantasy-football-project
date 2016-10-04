@@ -24,4 +24,9 @@ public abstract class Player{
   public int getGamesPlayed() {
     return gamesplayed;
   }
+
+  public String getTeamImg() {
+    return "/images/" + this.team + ".gif";
+  }
+
 }

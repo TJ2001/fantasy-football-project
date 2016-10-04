@@ -41,7 +41,7 @@
         <tr>
           <td>Rank</td>
           <td><a href="/players/$qb.getPlayerId()">$qb.getFirstName() $qb.getLastName()</a></td>
-          <td>$qb.getTeam()</td>
+          <td><img class="teamlogo" src="$qb.getTeamImg()"> $qb.getTeam()</td>
           <td>$qb.getPassCompletions()</td>
           <td>$qb.getPassAttempts()</td>
           <td>$qb.getPassYards()</td>
@@ -80,19 +80,19 @@
       #foreach($rb in $rbs)
         <tr>
           <td>Rank</td>
-          <td>rb.getFirstName() rb.getLastName()</td>
-          <td>rb.getTeam()</td>
-          <td>rb.getRushAttempts()</td>
-          <td>rb.getRushYards()</td>
-          <td>rb.getRushYardsPerGame()</td>
-          <td>rb.getRushAverage()</td>
-          <td>rb.getRushTd()</td>
-          <td>rb.getReceptionTd()</td>
-          <td>rb.getAverageReceptionYardage()</td>
-          <td>rb.getReceptions()</td>
-          <td>rb.getRushFumbles()</td>
-          <td>rb.getFumLost()</td>
-          <td>rb.getGamesPlayed()</td>
+          <td>$rb.getFirstName() $rb.getLastName()</td>
+          <td><img class="teamlogo" src="$rb.getTeamImg()"> $rb.getTeam()</td>
+          <td>$rb.getRushAttempts()</td>
+          <td>$rb.getRushYards()</td>
+          <td>$rb.getRushYardsPerGame()</td>
+          <td>$rb.getRushAverage()</td>
+          <td>$rb.getRushTd()</td>
+          <td>$rb.getReceptionTd()</td>
+          <td>$rb.getAverageReceptionYardage()</td>
+          <td>$rb.getReceptions()</td>
+          <td>$rb.getRushFumbles()</td>
+          <td>$rb.getFumbleLost()</td>
+          <td>$rb.getGamesPlayed()</td>
         </tr>
       #end
     </table>

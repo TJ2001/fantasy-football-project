@@ -13,9 +13,48 @@ public class RB extends Player{
   private int receptions;
   private int rushfumbles;
   private int fumblelost;
-
-
   private static final String columns = " player_id, first_name, last_name, team_name, rushattempts, rushyards, rushyardspergame, rushaverage, rushtd, rectd, recaverage, receptions, fumbles, fumlost, games_played ";
+
+
+  public int getRushAttempts() {
+    return rushattempts;
+  }
+
+  public int getRushYards() {
+    return rushyards;
+  }
+
+  public int getRushYardsPerGame() {
+    return rushyardspergame;
+  }
+
+  public double getRushAverage() {
+    return rushaverage;
+  }
+
+  public int getRushTd() {
+    return rushtd;
+  }
+
+  public int getReceptionTd() {
+    return receptiontd;
+  }
+
+  public double getAverageReceptionYardage() {
+    return averagereceptionyardage;
+  }
+
+  public int getReceptions() {
+    return receptions;
+  }
+
+  public int getRushFumbles() {
+    return rushfumbles;
+  }
+
+  public int getFumbleLost() {
+    return fumblelost;
+  }
 
   public static List<RB> all() {
     try(Connection con = DB.sql2o.open()) {

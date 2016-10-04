@@ -31,3 +31,8 @@ nav {
   width: 25px;
   height: auto;
 }
+
+.box {
+  border: 1px solid black;
+  text-align: center;
+}

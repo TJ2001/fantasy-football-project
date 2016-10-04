@@ -77,3 +77,11 @@ $('#te').click(function() {
   $('.table-box').hide();
   $('#te-table-box').show();
 });
+$('#k').click(function() {
+  $('.table-box').hide();
+  $('#k-table-box').show();
+});
+$('#de').click(function() {
+  $('.table-box').hide();
+  $('#de-table-box').show();
+});

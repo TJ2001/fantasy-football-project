@@ -16,7 +16,7 @@ public abstract class Player {
   public int age;
   public String birthCity;
 
-  public static final String PLAYER_COLUMNS = " player_id, first_name, last_name, team_name, jersey, height, weight, birth_date, age, birth_city, ";
+  public static final String PLAYER_COLUMNS = " position, player_id, first_name, last_name, team_name, jersey, height, weight, birth_date, birth_city, age ";
 
   public int getPlayerId(){
     return playerId;
@@ -77,6 +77,10 @@ public abstract class Player {
         return QB.find(id);
       case "RB":
         return RB.find(id);
+      case "WR":
+        return WR.find(id);
+      case "TE":
+        return TE.find(id);
       default:
         return null;
     }

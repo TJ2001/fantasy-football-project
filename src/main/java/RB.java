@@ -13,7 +13,7 @@ public class RB extends Player{
   private int receptions;
   private int rushfumbles;
   private int fumblelost;
-  private static final String columns = Player.PLAYER_COLUMNS + "rushattempts, rushyards, rushyardspergame, rushaverage, rushtd, rectd, recaverage, receptions, fumbles, fumlost, games_played, position ";
+  private static final String columns = Player.PLAYER_COLUMNS + "rushattempts, rushyards, rushyardspergame, rushaverage, rushtd, rectd, recaverage, receptions, fumbles, fumlost, games_played ";
 
 
   public int getRushAttempts() {

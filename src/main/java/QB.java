@@ -21,7 +21,7 @@ public class QB extends Player{
   private int fumlost;
 
 
-  private static final String columns = Player.PLAYER_COLUMNS + "passcompletions, passattempts, passpct, passyards, passyardspergame, passtd, passint, passsacks, sackYds, qbrating, rushattempts, rushyards, rushyardspergame, rushtd, fumbles, fumlost, games_played, position ";
+  private static final String columns = Player.PLAYER_COLUMNS + "passcompletions, passattempts, passpct, passyards, passyardspergame, passtd, passint, passsacks, sackYds, qbrating, rushattempts, rushyards, rushyardspergame, rushtd, fumbles, fumlost, games_played ";
 
   public int getPassCompletions() {
     return passcompletions;

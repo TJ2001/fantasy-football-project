@@ -13,8 +13,13 @@ public class App {
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
 
-    System.out.println(RB.getBestRb().firstName);
-    System.out.println(RB.getBestRb().lastName);
+    System.out.println(RB.getBestRb().getFirstName());
+    System.out.println(RB.getBestRb().getLastName());
+
+    // for (int i = 0 ; i<5 ; i++ ) {
+    //   System.out.println(RB.getBestRb().get(i).getFirstName());
+    //   System.out.println(RB.getBestRb().get(i).getLastName());
+    // }
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();

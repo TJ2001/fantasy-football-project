@@ -1,3 +1,6 @@
+import java.util.List;
+import org.sql2o.*;
+
 public class QB {
   int playerId;
   String firstName;
@@ -41,21 +44,21 @@ public class QB {
   public static QB getBestQb() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT" + columns +
-        "FROM stats
-        WHERE position = 'QB'
-          AND games_played > 10
-        ORDER BY 10*(passpct/(SELECT max(passpct) FROM stats WHERE games_played > 10))
-          + 10*(passyards/(SELECT max(passyards) FROM stats WHERE games_played > 10))
-          + 10*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10))
-          + 20*(passtd/(SELECT max(passtd) FROM stats WHERE games_played > 10))
-          + 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10))
-          + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10))
-          - 20*(interceptions/(SELECT max(interceptions) FROM stats WHERE games_played > 10))
-          - 10*(fumbles/(SELECT max(fumbles) FROM stats WHERE games_played > 10))
-          - 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10))
-          - 10*(passsacks/(SELECT max(passsacks) FROM stats WHERE games_played > 10))
-          - 10*(passsacky/(SELECT max(passsacky) FROM stats WHERE games_played > 10)) DESC
-        LIMIT 1;";
+        "FROM stats" +
+        "WHERE position = 'QB'" +
+          "AND games_played > 10" +
+        "ORDER BY 10*(passpct/(SELECT max(passpct) FROM stats WHERE games_played > 10))" +
+          "+ 10*(passyards/(SELECT max(passyards) FROM stats WHERE games_played > 10))" +
+          "+ 10*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10))" +
+          "+ 20*(passtd/(SELECT max(passtd) FROM stats WHERE games_played > 10))" +
+          "+ 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10))" +
+          "+ 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10))" +
+          "- 20*(interceptions/(SELECT max(interceptions) FROM stats WHERE games_played > 10))" +
+          "- 10*(fumbles/(SELECT max(fumbles) FROM stats WHERE games_played > 10))" +
+          "- 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10))" +
+          "- 10*(passsacks/(SELECT max(passsacks) FROM stats WHERE games_played > 10))" +
+          "- 10*(passsacky/(SELECT max(passsacky) FROM stats WHERE games_played > 10)) DESC" +
+        "LIMIT 1;";
       return con.createQuery(sql)
         .addColumnMapping("player_id", "playerId")
         .addColumnMapping("first_name", "firstName")

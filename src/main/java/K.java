@@ -40,18 +40,20 @@ public class K extends Player{
     return fgblk;
   }
 
-  public static TE getBestTe() {
+  public static K getBestK() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns +
         "FROM stats " +
-        "WHERE position = 'TE' " +
+        "WHERE position = 'K' " +
           "AND games_played > 10 " +
-        "ORDER BY 20*(xpmade/(SELECT max(xpmade) FROM stats WHERE games_played > 10)) " +
-          "+ 12.5*(recyards/(SELECT max(recyards) FROM stats WHERE games_played > 10)) " +
-          "+ 12.5*(recyardspergame/(SELECT max(recyardspergame) FROM stats WHERE games_played > 10)) " +
-          "+ 10*(targets/(SELECT max(targets) FROM stats WHERE games_played > 10)) " +
-          "+ 20*(rectd/(SELECT max(rectd) FROM stats WHERE games_played > 10)) " +
-          "+ 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) DESC " +
+        "ORDER BY 12.5*(xpmade/(SELECT max(xpmade) FROM stats WHERE games_played > 10)) " +
+          "+ 10*(xppct/(SELECT max(xppct) FROM stats WHERE games_played > 10)) " +
+          "+ 20*(fgmade/(SELECT max(fgmade) FROM stats WHERE games_played > 10)) " +
+          "+ 10*(fgpct/(SELECT max(fgpct) FROM stats WHERE games_played > 10)) " +
+          "+ 5*(fg40_49pct/(SELECT max(fg40_49pct) FROM stats WHERE games_played > 10)) " +
+          "+ 5*(fglong/(SELECT max(fglong) FROM stats WHERE games_played > 10)) " +
+          "+ 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) " +
+          "- 10*(fgblk/(SELECT max(fgblk) FROM stats WHERE games_played > 10)) DESC " +
         "LIMIT 1;";
       return con.createQuery(sql)
         .addColumnMapping("player_id", "playerId")

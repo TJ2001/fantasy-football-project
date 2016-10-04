@@ -45,6 +45,22 @@ public static List<TE> all() {
   }
 }
 
+public static TE find(int id) {
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "SELECT " + columns + " FROM stats WHERE player_id = :id;";
+    return con.createQuery(sql)
+      .addParameter("id", id)
+      .addColumnMapping("player_id", "playerId")
+      .addColumnMapping("first_name", "firstName")
+      .addColumnMapping("last_name", "lastName")
+      .addColumnMapping("team_name", "team")
+      .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
+      .executeAndFetchFirst(TE.class);
+  }
+}
+
   public static TE getBestTe() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns +

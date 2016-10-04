@@ -12,6 +12,12 @@ public class App {
   public static void main(String[] args) {
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
+    int i = 1;
+    for(WR player : WR.getTopWr(20) ){
+      System.out.print(i + ": " + player.getFirstName() + ", ");
+      System.out.println(player.getLastName());
+      i++;
+    }
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();

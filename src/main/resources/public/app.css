@@ -7,14 +7,22 @@ tr:nth-child(even) {
 }
 
 tr:nth-child(odd) {
-  background-color: #e6eeff !important;
+  background-color: #f2f2f2 !important;
 }
 
 tr:hover {
-  background-color: #f2f2f2 !important;
+  background-color: #e6eeff !important;
 }
 
 th {
   background-color: #003099 !important;
   color: white !important;
+}
+
+nav {
+  margin: 0 !important;
+}
+
+#header {
+  width: 100%;
 }

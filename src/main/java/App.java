@@ -12,9 +12,13 @@ public class App {
   public static void main(String[] args) {
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
+    int i = 1;
+    for(WR player : WR.getTopWr(20) ){
+      System.out.print(i + ": " + player.getFirstName() + ", ");
+      System.out.println(player.getLastName());
+      i++;
+    }
 
-    System.out.println(TE.getBestTe().getFirstName());
-    System.out.println(TE.getBestTe().getLastName());
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");

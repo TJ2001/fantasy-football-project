@@ -65,4 +65,6 @@ public static List<TE> all() {
         .executeAndFetchFirst(TE.class);
     }
   }
+
+  
 }

@@ -78,15 +78,15 @@ public class RB extends Player{
       String sql = "SELECT " + columns +
         "FROM stats " +
         "WHERE position = 'RB' " +
-          "AND games_played > 10" +
-        "ORDER BY 10*(rushyards/(SELECT max(rushyards) FROM stats WHERE games_played > 10)) " +
-          "+ 5*(rushattempts/(SELECT max(rushattempts) FROM stats WHERE games_played > 10)) " +
-          "+ 10*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10)) " +
-          "+ 10*(recaverage/(SELECT max(recaverage) FROM stats WHERE games_played > 10)) " +
+          "AND games_played > 10 " +
+        "ORDER BY 20*(rushyards/(SELECT max(rushyards) FROM stats WHERE games_played > 10)) " +
+          "+ 7.5*(rushattempts/(SELECT max(rushattempts) FROM stats WHERE games_played > 10)) " +
+          "+ 7.5*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10)) " +
+          "+ 5*(recaverage/(SELECT max(recaverage) FROM stats WHERE games_played > 10)) " +
           "+ 15*(passtd/(SELECT max(passtd) FROM stats WHERE games_played > 10)) " +
-          "+ 40*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) " +
+          "+ 30*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) " +
           "+ 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) " +
-          "- 20*(rushfumbles/(SELECT max(rushfumbles) FROM stats WHERE games_played > 10)) " +
+          "- 15*(rushfumbles/(SELECT max(rushfumbles) FROM stats WHERE games_played > 10)) " +
           "- 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10)) DESC " +
         "LIMIT 1;";
       return con.createQuery(sql)

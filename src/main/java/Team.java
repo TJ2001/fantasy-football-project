@@ -24,7 +24,7 @@ public class Team {
       String sql = "SELECT " + columns +
         "FROM team_stats " +
         "GROUP BY " + columns +
-         "ORDER BY 10*(tackletotal/ (SELECT max(tackletotal))) " +
+         "ORDER BY 10*(tackletotal/ (SELECT max(tackletotal) FROM team_stats)) " +
          "+ 10*(sacks/(SELECT max(sacks) FROM team_stats )) " +
          "+ 15*(sackyds/(SELECT max(sackyds) FROM team_stats  )) " +
          "+ 10*(passesdefended/(SELECT max(passesdefended) FROM team_stats  )) " +
@@ -55,7 +55,7 @@ public class Team {
       String sql = "SELECT " + columns +
         "FROM team_stats " +
         "GROUP BY " + columns +
-        "ORDER BY 10*(tackletotal/ (SELECT max(tackletotal))) " +
+        "ORDER BY 10*(tackletotal/ (SELECT max(tackletotal) FROM team_stats )) " +
        "+ 10*(sacks/(SELECT max(sacks) FROM team_stats )) " +
        "+ 15*(sackyds/(SELECT max(sackyds) FROM team_stats  )) " +
        "+ 10*(passesdefended/(SELECT max(passesdefended) FROM team_stats  )) " +

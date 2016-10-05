@@ -17,7 +17,7 @@ public abstract class Player {
   public String birthCity;
   private double total_score;
 
-  public static final String PLAYER_COLUMNS = " position, player_id, first_name, last_name, team_name, jersey, height, weight, birth_date, birth_city, age, stats.total_score, ";
+  public static final String PLAYER_COLUMNS = " position, player_id, first_name, last_name, team_name, jersey, height, weight, birth_date, birth_city, age, ";
 
   public int getPlayerId(){
     return playerId;

@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.lang.IllegalArgumentException;
 import org.sql2o.*;
 
@@ -26,9 +27,34 @@ public class User {
   }
 
   public void addPlayer(int player_id) {
+    String position = Player.getPlayerType(player_id);
+    //System.out.println(position);
     if (User.playerAlreadySelected(id)) {
       throw new IllegalArgumentException("ERROR: player has already been selected");
     }
+    switch(position){
+      case "QB" :
+        if(countSelectedPlayers("QB") >= 2)
+          throw new IllegalArgumentException("ERROR: you cannot select more than 2 QBs");
+        break;
+      case "WR":
+        if(countSelectedPlayers("WR") >= 5)
+          throw new IllegalArgumentException("ERROR: you cannot select more than 5 WRs");
+        break;
+      case "RB" :
+        if(countSelectedPlayers("RB") >= 3)
+          throw new IllegalArgumentException("ERROR: you cannot select more than 3 RBs");
+        break;
+      case "TE" :
+        if(countSelectedPlayers("TE") >= 3)
+          throw new IllegalArgumentException("ERROR: you cannot select more than 3 TEs");
+        break;
+      case "K" :
+        if(countSelectedPlayers("K") >= 2)
+          throw new IllegalArgumentException("ERROR: you cannot select more than 2 kickers");
+        break;
+    }
+
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO user_selections (user_id, player_id) VALUES (:id, :player_id)";
       con.createQuery(sql)
@@ -36,6 +62,7 @@ public class User {
         .addParameter("player_id", player_id)
         .executeUpdate();
     }
+
   }
 
   public void addPlayerForOtherUser(int id) {
@@ -78,7 +105,12 @@ public class User {
 
   public int countSelectedPlayers(String position) {
     int count = 0;
-    String sql = "SELECT count(user_selections.player_id) FROM user_selections LEFT JOIN stats ON user_selections.player_id = stats.player_id WHERE user_selections.user_id = :id AND stats.position = '" + position + "';";
+    String sql = "";
+    if (position.equals("all")) {
+      sql = "SELECT count(user_selections.player_id) FROM user_selections LEFT JOIN stats ON user_selections.player_id = stats.player_id WHERE user_selections.user_id = :id AND stats.position in ('QB', 'WR', 'TE', 'RB');";
+    } else {
+      sql = "SELECT count(user_selections.player_id) FROM user_selections LEFT JOIN stats ON user_selections.player_id = stats.player_id WHERE user_selections.user_id = :id AND stats.position = '" + position + "';";
+    }
     try(Connection con = DB.sql2o.open()) {
       count = con.createQuery(sql)
         .addParameter("id", id)
@@ -97,7 +129,7 @@ public class User {
         sql = "SELECT player_id FROM stats WHERE player_id NOT IN (SELECT player_id FROM user_selections) AND player_id NOT IN (SELECT player_id FROM other_user_selections) AND (position = 'WR') ORDER BY stats.total_score DESC LIMIT 5";
       } else if(countSelectedPlayers("RB") < 2 || countSelectedPlayers("WR") < 2) {
         sql = "SELECT player_id FROM stats WHERE player_id NOT IN (SELECT player_id FROM user_selections) AND player_id NOT IN (SELECT player_id FROM other_user_selections) AND position in ('WR', 'RB') ORDER BY stats.total_score DESC LIMIT 5";
-      } else if(countSelectedPlayers("RB") < 4 || countSelectedPlayers("WR") < 6 || countSelectedPlayers("QB") < 2 || countSelectedPlayers("TE") < 3) {
+      } else if(countSelectedPlayers("all") < 11 && (countSelectedPlayers("RB") < 4 || countSelectedPlayers("WR") < 6 || countSelectedPlayers("QB") < 2 || countSelectedPlayers("TE") < 3)) {
           String positions = "";
           if (countSelectedPlayers("RB") < 4) {
             positions += "'RB'";
@@ -124,28 +156,32 @@ public class User {
       } else if (countSelectedPlayers("K") < 1) {
         sql = "SELECT player_id FROM stats WHERE player_id NOT IN (SELECT player_id FROM user_selections) AND player_id NOT IN (SELECT player_id FROM other_user_selections) AND (position = 'K') ORDER BY stats.total_score DESC LIMIT 5";
       }
-      List<Integer> playerIds = con.createQuery(sql)
-        .executeAndFetch(Integer.class);
+      if(sql.equals("")){
+        return Collections.<Player>emptyList();
+      } else {
+        List<Integer> playerIds = con.createQuery(sql)
+          .executeAndFetch(Integer.class);
 
         List<Player> foundPlayers = new ArrayList<Player>();
         for(int playerId : playerIds) {
           foundPlayers.add(Player.find(playerId));
         }
         return foundPlayers;
+      }
     }
   }
 
-  public static boolean playerAlreadySelected(int id) {
+  public static boolean playerAlreadySelected(int player_id) {
     int found = 0;
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT count(player_id) FROM user_selections WHERE id = :id";
+      String sql = "SELECT count(player_id) FROM user_selections WHERE player_id = :id";
       found = con.createQuery(sql)
-        .addParameter("id", id)
+        .addParameter("id", player_id)
         .executeScalar(Integer.class);
 
-        sql = "SELECT count(player_id) FROM other_user_selections WHERE id = :id";
+        sql = "SELECT count(player_id) FROM other_user_selections WHERE player_id = :id";
         found += con.createQuery(sql)
-          .addParameter("id", id)
+          .addParameter("id", player_id)
           .executeScalar(Integer.class);
       }
     return found != 0;

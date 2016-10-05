@@ -35,11 +35,11 @@ public class App {
     //   System.out.println(player.getFirstName() + " " + player.getLastName());
     // }
 
-    User user = new User("Bob");
-    user.save();
-    System.out.println(user.getId());
-    Player rb = RB.getBestRb();
-    System.out.println(rb.getPlayerId());
+    // User user = new User("Bob");
+    // user.save();
+    // System.out.println(user.getId());
+    // Player rb = RB.getBestRb();
+    // System.out.println(rb.getPlayerId());
 
 
     get("/", (request, response) -> {

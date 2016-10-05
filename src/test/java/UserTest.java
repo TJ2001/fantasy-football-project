@@ -2,6 +2,7 @@ import java.util.List;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
+import java.lang.IllegalArgumentException;
 
 public class UserTest {
 
@@ -9,7 +10,7 @@ public class UserTest {
   public DatabaseRule database = new DatabaseRule();
 
   @Test
-  public void getPestPlayer_SelectsRBFirst() {
+  public void getBestPlayer_SelectsRBFirst() {
     User user = new User("Bob");
     user.save();
     List<Player> bestPlayers = user.getBestPlayer();
@@ -24,14 +25,63 @@ public class UserTest {
   }
 
   @Test
-  public void getPestPlayer_SelectsWRSecond() {
+  public void getBestPlayer_SelectsWRSecond() {
     User user = new User("Bob");
     user.save();
     Player rb = RB.getBestRb();
-    int player_id = rb.getPlayerId();
-    user.addPlayer(player_id);
+    user.addPlayer(rb.getPlayerId());
     List<Player> bestPlayers = user.getBestPlayer();
     assertEquals("WR", bestPlayers.get(0).getPosition());
+  }
+
+  @Test
+  public void getBestPlayer_SelectsWRorRBThird() {
+    User user = new User("Bob");
+    user.save();
+    user.addPlayer(RB.getBestRb().getPlayerId());
+    user.addPlayer(WR.getBestWr().getPlayerId());
+    List<Player> bestPlayers = user.getBestPlayer();
+    assertTrue(bestPlayers.get(0).getPosition().equals("RB") || bestPlayers.get(0).getPosition().equals("WR"));
+  }
+
+  @Test (expected =  IllegalArgumentException.class)
+  public void notAllowTooManyOfOnePositionQB() {
+    User user = new User("Bob");
+    user.save();
+    for (QB player:QB.getTopQb(3)) {
+      user.addPlayer(player.getPlayerId());
+    }
+  }
+
+  @Test (expected =  IllegalArgumentException.class)
+  public void notAllowTooManyOfOnePositionWR() {
+    User user = new User("Bob");
+    user.save();
+    for (WR player:WR.getTopWr(6)) {
+      user.addPlayer(player.getPlayerId());
+    }
+  }
+
+  @Test
+  public void getBestPlayer_emptyListReturned() {
+    User user = new User("Bob");
+    user.save();
+    for (WR player:WR.getTopWr(5)) {
+      user.addPlayer(player.getPlayerId());
+    }
+    for (QB player:QB.getTopQb(2)) {
+      user.addPlayer(player.getPlayerId());
+    }
+    for (RB player:RB.getTopRb(2)) {
+      user.addPlayer(player.getPlayerId());
+    }
+    for (TE player:TE.getTopTe(2)) {
+      user.addPlayer(player.getPlayerId());
+    }
+    for (K player:K.getTopK(2)) {
+      user.addPlayer(player.getPlayerId());
+    }
+    assertEquals(0,user.getBestPlayer().size());
   }
 
 

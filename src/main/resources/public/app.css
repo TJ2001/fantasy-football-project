@@ -91,7 +91,7 @@ h1, h2, h4, h5, .title {
 }
 
 #myCarousel {
-  border-bottom: solid 30px #ff0000;
+  border-bottom: solid 30px black;
 }
 
 tr:nth-child(even) {

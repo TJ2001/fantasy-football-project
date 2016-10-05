@@ -20,11 +20,11 @@ public class App {
     // for (QB qb : allQBs) {
     //   System.out.println(qb.getFirstName() + " " + qb.getLastName() + " " + qb.getScore());
     // }
-    // int i = 1;
-    // for(Team team : Team.getBestTeams(10)){
-    //   System.out.println(i + ": " + team.teamname);
-    //   i++;
-    // }
+    int i = 1;
+    for(Team team : Team.getBestTeams(10)){
+      System.out.println(i + ": " + team.teamname);
+      i++;
+    }
     //
     // System.out.println(Team.getBestTeam().teamname);
 

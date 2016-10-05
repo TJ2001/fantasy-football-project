@@ -16,15 +16,17 @@ public class App {
     // System.out.println(K.getBestK().getFirstName());
     // System.out.println(K.getBestK().getLastName());
     //
+    // List<QB> allQBs = QB.all();
+    // for (QB qb : allQBs) {
+    //   System.out.println(qb.getFirstName() + " " + qb.getLastName() + " " + qb.getScore());
+    // }
     int i = 1;
     for(WR wr : WR.getTopWr(10)){
       System.out.print(i + ": " + wr.getFirstName()+ " ");
       System.out.println(wr.getLastName());
       i++;
     }
-    //
-    // System.out.println(WR.getBestRb().player_name);
-
+    
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
@@ -37,6 +39,7 @@ public class App {
       model.put("rbs", RB.all());
       model.put("tes", TE.all());
       model.put("wrs", WR.all());
+      //model.put("ks", K.all());
       model.put("template", "templates/stats.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

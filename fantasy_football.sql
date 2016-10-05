@@ -2,12 +2,11 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6rc1
--- Dumped by pg_dump version 9.6rc1
+-- Dumped from database version 9.5.1
+-- Dumped by pg_dump version 9.5.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -30,12 +29,48 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
+--
+-- Name: total_score(); Type: FUNCTION; Schema: public; Owner: Guest
+--
+
+CREATE FUNCTION total_score() RETURNS bigint
+    LANGUAGE plpgsql
+    AS $_$
+BEGIN
+  CASE (SELECT stats.position FROM stats WHERE stats.player_id = $1.player_id)
+    WHEN 'RB' THEN
+      RETURN (SELECT sum(20*(rushyards/(SELECT max(rushyards) FROM stats WHERE games_played > 10)) + 7.5*(rushattempts/(SELECT max(rushattempts) FROM stats WHERE games_played > 10)) + 7.5*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10)) + 5*(recaverage/(SELECT max(recaverage) FROM stats WHERE games_played > 10)) + 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) - 10*(rushfumbles/(SELECT max(rushfumbles) FROM stats WHERE games_played > 10)) - 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10))))::int8
+      FROM stats
+      WHERE stats.player_id = $1.player_id;
+    WHEN 'QB' THEN
+      RETURN (SELECT sum(10*(passpct/(SELECT max(passpct) FROM stats WHERE games_played > 10)) + 10*(passyards/(SELECT max(passyards) FROM stats WHERE games_played > 10)) + 10*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10)) + 20*(passtd/(SELECT max(passtd) FROM stats WHERE games_played > 10)) + 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) - 20*(interceptions/(SELECT max(interceptions) FROM stats WHERE games_played > 10)) - 10*(fumbles/(SELECT max(fumbles) FROM stats WHERE games_played > 10)) - 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10)) - 10*(passsacks/(SELECT max(passsacks) FROM stats WHERE games_played > 10)) - 10*(passsacky/(SELECT max(passsacky) FROM stats WHERE games_played > 10))))::int8
+      FROM stats
+      WHERE stats.player_id = $1.player_id;
+    WHEN 'TE' THEN
+      RETURN (SELECT sum(15*(receptions/(SELECT max(receptions) FROM stats WHERE games_played > 10)) + 12.5*(recyards/(SELECT max(recyards) FROM stats WHERE games_played > 10)) + 12.5*(recyardspergame/(SELECT max(recyardspergame) FROM stats WHERE games_played > 10)) + 10*(targets/(SELECT max(targets) FROM stats WHERE games_played > 10)) + 20*(rectd/(SELECT max(rectd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10))))::int8
+      FROM stats
+      WHERE stats.player_id = $1.player_id;
+    WHEN 'K' THEN
+      RETURN (SELECT sum(12.5*(xpmade/(SELECT max(xpmade) FROM stats WHERE games_played > 10)) + 10*(xppct/(SELECT max(xppct) FROM stats WHERE games_played > 10)) + 20*(fgmade/(SELECT max(fgmade) FROM stats WHERE games_played > 10)) + 10*(fgpct/(SELECT max(fgpct) FROM stats WHERE games_played > 10)) + 5*(fg40_49pct/(SELECT max(fg40_49pct) FROM stats WHERE games_played > 10)) + 5*(fglng/(SELECT max(fglng) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) - 10*(fgblk/(SELECT max(fgblk) FROM stats WHERE games_played > 10))))::int8
+      FROM stats
+      WHERE stats.player_id = $1.player_id;
+    WHEN 'WR' THEN
+      RETURN (SELECT sum(15*(receptions/(SELECT max(receptions) FROM stats WHERE games_played > 10)) + 12.5*(recyards/(SELECT max(recyards) FROM stats WHERE games_played > 10)) + 12.5*(recyardspergame/(SELECT max(recyardspergame) FROM stats WHERE games_played > 10)) + 10*(targets/(SELECT max(targets) FROM stats WHERE games_played > 10)) + 20*(rectd/(SELECT max(rectd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10))))
+      FROM stats
+      WHERE stats.player_id = $1.player_id;
+  END CASE;
+END
+$_$;
+
+
+ALTER FUNCTION public.total_score() OWNER TO "Guest";
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: stats; Type: TABLE; Schema: public; Owner: Yusuf
+-- Name: stats; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE stats (
@@ -197,10 +232,46 @@ CREATE TABLE stats (
 );
 
 
-ALTER TABLE stats OWNER TO "Yusuf";
+ALTER TABLE stats OWNER TO "Guest";
 
 --
--- Name: team_stats; Type: TABLE; Schema: public; Owner: Yusuf
+-- Name: total_score(stats); Type: FUNCTION; Schema: public; Owner: Guest
+--
+
+CREATE FUNCTION total_score(stats) RETURNS numeric
+    LANGUAGE plpgsql
+    AS $_$
+BEGIN
+  CASE (SELECT stats.position FROM stats WHERE stats.player_id = $1.player_id)
+    WHEN 'RB' THEN
+      RETURN ROUND((SELECT sum(20*(rushyards/(SELECT max(rushyards) FROM stats WHERE games_played > 10)) + 7.5*(rushattempts/(SELECT max(rushattempts) FROM stats WHERE games_played > 10)) + 7.5*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10)) + 5*(recaverage/(SELECT max(recaverage) FROM stats WHERE games_played > 10)) + 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) - 10*(rushfumbles/(SELECT max(rushfumbles) FROM stats WHERE games_played > 10)) - 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10))))/54.270042194092827004200, 2) * 100
+      FROM stats
+      WHERE stats.player_id = $1.player_id;
+    WHEN 'QB' THEN
+      RETURN ROUND((SELECT sum(10*(passpct/(SELECT max(passpct) FROM stats WHERE games_played > 10)) + 10*(passyards/(SELECT max(passyards) FROM stats WHERE games_played > 10)) + 10*(rushyardspergame/(SELECT max(rushyardspergame) FROM stats WHERE games_played > 10)) + 20*(passtd/(SELECT max(passtd) FROM stats WHERE games_played > 10)) + 20*(rushtd/(SELECT max(rushtd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) - 20*(interceptions/(SELECT max(interceptions) FROM stats WHERE games_played > 10)) - 10*(fumbles/(SELECT max(fumbles) FROM stats WHERE games_played > 10)) - 10*(fumlost/(SELECT max(fumlost) FROM stats WHERE games_played > 10)) - 10*(passsacks/(SELECT max(passsacks) FROM stats WHERE games_played > 10)) - 10*(passsacky/(SELECT max(passsacky) FROM stats WHERE games_played > 10))))/44.737630759217865, 2) * 100
+      FROM stats
+      WHERE stats.player_id = $1.player_id;
+    WHEN 'TE' THEN
+      RETURN ROUND((SELECT sum(15*(receptions/(SELECT max(receptions) FROM stats WHERE games_played > 10)) + 12.5*(recyards/(SELECT max(recyards) FROM stats WHERE games_played > 10)) + 12.5*(recyardspergame/(SELECT max(recyardspergame) FROM stats WHERE games_played > 10)) + 10*(targets/(SELECT max(targets) FROM stats WHERE games_played > 10)) + 20*(rectd/(SELECT max(rectd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10))))/55.282834761586810688325, 2) * 100
+      FROM stats
+      WHERE stats.player_id = $1.player_id;
+    WHEN 'K' THEN
+      RETURN ROUND((SELECT sum(12.5*(xpmade/(SELECT max(xpmade) FROM stats WHERE games_played > 10)) + 10*(xppct/(SELECT max(xppct) FROM stats WHERE games_played > 10)) + 20*(fgmade/(SELECT max(fgmade) FROM stats WHERE games_played > 10)) + 10*(fgpct/(SELECT max(fgpct) FROM stats WHERE games_played > 10)) + 5*(fg40_49pct/(SELECT max(fg40_49pct) FROM stats WHERE games_played > 10)) + 5*(fglng/(SELECT max(fglng) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10)) - 10*(fgblk/(SELECT max(fgblk) FROM stats WHERE games_played > 10))))/69.752158113551268317525, 2) * 100
+      FROM stats
+      WHERE stats.player_id = $1.player_id;
+    WHEN 'WR' THEN
+      RETURN ROUND((SELECT sum(15*(receptions/(SELECT max(receptions) FROM stats WHERE games_played > 10)) + 12.5*(recyards/(SELECT max(recyards) FROM stats WHERE games_played > 10)) + 12.5*(recyardspergame/(SELECT max(recyardspergame) FROM stats WHERE games_played > 10)) + 10*(targets/(SELECT max(targets) FROM stats WHERE games_played > 10)) + 20*(rectd/(SELECT max(rectd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10))))/73.424258409484238627275, 2) * 100
+      FROM stats
+      WHERE stats.player_id = $1.player_id;
+  END CASE;
+END
+$_$;
+
+
+ALTER FUNCTION public.total_score(stats) OWNER TO "Guest";
+
+--
+-- Name: team_stats; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE team_stats (
@@ -374,10 +445,163 @@ CREATE TABLE team_stats (
 );
 
 
-ALTER TABLE team_stats OWNER TO "Yusuf";
+ALTER TABLE team_stats OWNER TO "Guest";
 
 --
--- Data for Name: stats; Type: TABLE DATA; Schema: public; Owner: Yusuf
+-- Name: total_score(team_stats); Type: FUNCTION; Schema: public; Owner: Guest
+--
+
+CREATE FUNCTION total_score(team_stats) RETURNS numeric
+    LANGUAGE plpgsql
+    AS $_$
+BEGIN
+  RETURN ROUND((SELECT sum(10*(tackletotal/ (SELECT max(tackletotal) FROM team_stats) + 10*(sacks/(SELECT max(sacks) FROM team_stats )) + 10*(passesdefended/(SELECT max(passesdefended) FROM team_stats  )) + 10*(interceptions/(SELECT max(interceptions) FROM team_stats  )) + 10*(intyds/(SELECT max(intyds) FROM team_stats  )) + 10*(inttd)/(SELECT max(inttd) FROM team_stats  )) + 10*(fumforced/(SELECT max(fumforced) FROM team_stats  )) + 10*(fumopprec/(SELECT max(fumopprec) FROM team_stats  )) + 10*(fumtd/(SELECT max(fumtd) FROM team_stats  ))))/508.10989168319169685840, 2) * 100
+  FROM team_stats
+  WHERE team_stats.teamid = $1.teamid;
+END
+$_$;
+
+
+ALTER FUNCTION public.total_score(team_stats) OWNER TO "Guest";
+
+--
+-- Name: other_user_selections; Type: TABLE; Schema: public; Owner: Guest
+--
+
+CREATE TABLE other_user_selections (
+    id integer NOT NULL,
+    player_id integer NOT NULL
+);
+
+
+ALTER TABLE other_user_selections OWNER TO "Guest";
+
+--
+-- Name: other_user_selections_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+--
+
+CREATE SEQUENCE other_user_selections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE other_user_selections_id_seq OWNER TO "Guest";
+
+--
+-- Name: other_user_selections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+--
+
+ALTER SEQUENCE other_user_selections_id_seq OWNED BY other_user_selections.id;
+
+
+--
+-- Name: user_selections; Type: TABLE; Schema: public; Owner: Guest
+--
+
+CREATE TABLE user_selections (
+    id integer NOT NULL,
+    player_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE user_selections OWNER TO "Guest";
+
+--
+-- Name: user_selections_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+--
+
+CREATE SEQUENCE user_selections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE user_selections_id_seq OWNER TO "Guest";
+
+--
+-- Name: user_selections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+--
+
+ALTER SEQUENCE user_selections_id_seq OWNED BY user_selections.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: Guest
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    name character varying NOT NULL
+);
+
+
+ALTER TABLE users OWNER TO "Guest";
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO "Guest";
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY other_user_selections ALTER COLUMN id SET DEFAULT nextval('other_user_selections_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY user_selections ALTER COLUMN id SET DEFAULT nextval('user_selections_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: other_user_selections; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY other_user_selections (id, player_id) FROM stdin;
+\.
+
+
+--
+-- Name: other_user_selections_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+--
+
+SELECT pg_catalog.setval('other_user_selections_id_seq', 1, false);
+
+
+--
+-- Data for Name: stats; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
 COPY stats (lastupdate, player_id, last_name, first_name, jersey, "position", height, weight, birth_date, age, birth_city, birth_country, rookie, team_id, team_abbr, team_city, team_name, games_played, passattempts, passcompletions, passpct, passattemptspergame, passyards, passyardsperatt, passyardspergame, passtd, passtdpct, passint, passintpct, passlng, pass20plus, pass40plus, passsacks, passsacky, qbrating, rushattempts, rushattemptspergame, rushyards, rushaverage, rushyardspergame, rushtd, rushlng, rush1stdowns, rush1stdownspct, rush20plus, rush40plus, rushfumbles, receptions, recyards, recaverage, recyardspergame, rectd, reclng, rec1stdowns, rec20plus, rec40plus, recfumbles, tacklesolo, tackletotal, tackleast, sacks, sackyds, interceptions, inttd, intyds, intaverage, intlng, passesdefended, stuffs, stuffyds, kb, fumbles, fumlost, fumforced, fumownrec, fumopprec, fumrecyds, fumtotalrec, fumtd, krret, kryds, kravg, krlng, krtd, kr20plus, kr40plus, krfc, krfum, prret, pryds, pravg, prlng, prtd, pr20plus, pr40plus, prfc, prfum, fgblk, fgmade, fgatt, fgpct, fgmade1_19, fgatt1_19, fg1_19pct, fgmade20_29, fgatt20_29, fg20_29pct, fgmade30_39, fgatt30_39, fg30_39pct, fgmade40_49, fgatt40_49, fg40_49pct, fgmade50plus, fgatt50plus, fg50pluspct, fglng, xpblk, xpmade, xpatt, xppct, fgandxppts, kickoffs, koyds, kooob, koavg, kotb, kopct, koret, koretyds, koretavgyds, kotd, koos, koosr, punts, puntyds, puntnetyds, puntlng, puntavg, puntnetavg, puntblk, puntoob, puntdown, puntin20, puntin20pct, punttb, punttbpct, puntfc, puntret, puntretyds, puntretavg, gamesstarted, safeties, passavg, targets) FROM stdin;
@@ -2378,7 +2602,7 @@ COPY stats (lastupdate, player_id, last_name, first_name, jersey, "position", he
 
 
 --
--- Data for Name: team_stats; Type: TABLE DATA; Schema: public; Owner: Yusuf
+-- Data for Name: team_stats; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
 COPY team_stats (date, teamid, teamabbr, teamcity, teamname, rank, gamesplayed, passattempts, passcompletions, passpct, passattemptspergame, passgrossyards, passavg, passnetyards, passyardsperatt, passyardspergame, passtd, passtdpct, passint, passintpct, passlng, pass20plus, pass40plus, passsacks, passsacky, qbrating, rushattempts, rushattemptspergame, rushyards, rushaverage, rushyardspergame, rushtd, rushlng, rush1stdowns, rush1stdownspct, rush20plus, rush40plus, rushfumbles, receptions, recyards, recaverage, recyardspergame, rectd, reclng, rec1stdowns, rec20plus, rec40plus, recfumbles, tacklesolo, tackletotal, tackleast, sacks, sackyds, interceptions, inttd, intyds, intaverage, intlng, passesdefended, stuffs, stuffyds, kb, safeties, fumbles, fumlost, fumforced, fumownrec, fumopprec, fumrecyds, fumtotalrec, fumtd, krret, kryds, kravg, krlng, krtd, kr20plus, kr40plus, krfc, krfum, prret, pryds, pravg, prlng, prtd, pr20plus, pr40plus, prfc, prfum, fgblk, fgmade, fgatt, fgpct, fgmade1_19, fgatt1_19, fg1_19pct, fgmade20_29, fgatt20_29, fg20_29pct, fgmade30_39, fgatt30_39, fg30_39pct, fgmade40_49, fgatt40_49, fg40_49pct, fgmade50plus, fgatt50plus, fg50pluspct, fglng, xpblk, xpmade, xpatt, xppct, fgandxppts, kopct, kickoffs, koyds, kooob, koavg, kotb, koret, koretyds, koretavgyds, kotd, koos, koosr, punts, puntyds, puntnetyds, puntlng, puntavg, puntnetavg, puntblk, puntoob, puntdown, puntin20, puntin20pct, punttb, punttbpct, puntfc, puntret, puntretyds, puntretavg, firstdownstotal, firstdownspass, firstdownsrush, firstdownspenalty, thirddowns, thirddownsatt, thirddownspct, fourthdowns, fourthdownsatt, fourthdownspct, penalties, penaltyyds, offenseplays, offenseyds, offenseavgyds, totaltd, wins, losses, otwins, otlosses, winpct, pointsfor, pointsagainst, pointdifferential) FROM stdin;
@@ -2415,6 +2639,94 @@ COPY team_stats (date, teamid, teamabbr, teamcity, teamname, rank, gamesplayed, 
 \N	58	CLE	Cleveland	Browns	31	16	609	371	60.9	38.1	4175	6.9	3775	5.7	235.9	20	3.3	12	2.0	61	52	12	53	400	84.2	379	23.7	1530	4.0	95.6	5	54	82	21.6	8	2	3	371	4175	11.2	260.9	20	61	192	38	12	0	682	1007	325	29	160	11	2	131	11.9	46	52	311	298	0	0	30	17	13	9	10	-27	19	0	40	1063	26.6	53	0	34	3	0	0	27	346	12.8	78	1	5	1	10	0	4	28	32	87.5	0	0	0.0	11	11	100.0	10	10	100.0	7	9	77.8	0	2	0.0	47	0	22	24	91.7	106	0.0	68	4329	0	63.7	27	41	875	21.3	0	0	0	63	3015	2580	67	47.9	41.0	0	0	7	24	38.1	4	6.4	15	35	435	12.4	317	192	82	43	95	227	41.8	10	24	41.7	113	1053	1041	5345	5.1	25	3	13	0	1	0.000	272	433	-161
 \N	67	TEN	Tennessee	Titans	32	16	551	342	62.1	34.4	3896	7.1	3571	5.9	223.2	25	4.5	17	3.1	61	52	6	54	325	85.5	370	23.1	1545	4.2	96.6	10	87	68	18.4	9	2	8	342	3896	11.4	243.5	25	61	196	44	6	0	676	971	295	39	272	11	1	138	12.6	45	55	323	471	1	0	23	16	11	7	8	-39	15	1	31	665	21.4	34	0	18	0	0	0	37	311	8.4	37	0	2	0	17	0	0	14	16	87.5	0	0	0.0	3	3	100.0	3	3	100.0	7	7	100.0	1	3	33.3	51	1	29	31	93.6	71	0.0	62	4094	0	66.0	42	20	604	30.2	0	0	0	77	3673	2939	62	47.7	38.2	0	0	6	29	37.7	1	1.3	23	47	734	15.6	308	196	68	44	64	201	31.8	7	15	46.7	92	788	975	4968	5.1	36	3	13	0	0	0.000	299	423	-124
 \.
+
+
+--
+-- Data for Name: user_selections; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY user_selections (id, player_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Name: user_selections_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+--
+
+SELECT pg_catalog.setval('user_selections_id_seq', 1, true);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY users (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+--
+
+SELECT pg_catalog.setval('users_id_seq', 1, false);
+
+
+--
+-- Name: other_user_selections_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY other_user_selections
+    ADD CONSTRAINT other_user_selections_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: other_user_selections_player_id_key; Type: CONSTRAINT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY other_user_selections
+    ADD CONSTRAINT other_user_selections_player_id_key UNIQUE (player_id);
+
+
+--
+-- Name: user_selections_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY user_selections
+    ADD CONSTRAINT user_selections_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_selections_player_id_key; Type: CONSTRAINT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY user_selections
+    ADD CONSTRAINT user_selections_player_id_key UNIQUE (player_id);
+
+
+--
+-- Name: users_name_key; Type: CONSTRAINT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_name_key UNIQUE (name);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: epicodus
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM epicodus;
+GRANT ALL ON SCHEMA public TO epicodus;
+GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --

@@ -43,6 +43,7 @@
           <th>Rush</th>
           <th>Yards</th>
           <th>RushTD</th>
+          <th>score</th>
         </tr>
       </thead>
       #foreach($qb in $qbs)
@@ -60,6 +61,7 @@
           <td>$qb.getRushAttempts()</td>
           <td>$qb.getRushYards()</td>
           <td>$qb.getRushTd()</td>
+          <td>$qb.getScore()</td>
         </tr>
       #end
     </table>
@@ -171,11 +173,14 @@
           <th>Rank</th>
           <th>Name</th>
           <th>Team</th>
-          <th>Rec</th>
-          <th>Yds</th>
-          <th>Avg</th>
-          <th>Targ</th>
-          <th>TD</th>
+
+          <th>XP</th>
+          <th>XP%</th>
+          <th>FG</th>
+          <th>FG%</th>
+          <th>FG>40%</th>
+          <th>LongFG</th>
+          <th>FG BLK</th>
         </tr>
       </thead>
       #foreach($k in $ks)
@@ -183,11 +188,13 @@
           <td>Rank</td>
           <td><a href="/players/$k.getPlayerId()">$k.getFirstName() $k.getLastName()</a></td>
           <td><img class="teamlogo" src="$k.getTeamImg()"> $k.getTeam()</td>
-          <td>$k.getReceptions()</td>
-          <td>$k.getRecyards()</td>
-          <td>$k.getRecyardspergame()</td>
-          <td>$k.getTargets()</td>
-          <td>$k.getRectd()</td>
+          <td>k.getXpmade()</td>
+          <td>k.getXppct()</td>
+          <td>k.getFgmade()</td>
+          <td>k.getFgpct()</td>
+          <td>k.getFg40_49pct()</td>
+          <td>k.getFglng()</td>
+          <td>k.getFgblk()</td>
         </tr>
       #end
     </table>

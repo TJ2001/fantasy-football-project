@@ -15,8 +15,9 @@ public abstract class Player {
   public Date birthDate;
   public int age;
   public String birthCity;
+  private double total_score;
 
-  public static final String PLAYER_COLUMNS = " position, player_id, first_name, last_name, team_name, jersey, height, weight, birth_date, birth_city, age ";
+  public static final String PLAYER_COLUMNS = " position, player_id, first_name, last_name, team_name, jersey, height, weight, birth_date, birth_city, age, stats.total_score, ";
 
   public int getPlayerId(){
     return playerId;
@@ -70,6 +71,10 @@ public abstract class Player {
     return birthCity;
   }
 
+  public double getScore() {
+    return total_score;
+  }
+
   public static Player find(int id) {
     String type = Player.getPlayerType(id);
     switch (type) {
@@ -81,6 +86,8 @@ public abstract class Player {
         return WR.find(id);
       case "TE":
         return TE.find(id);
+        case "K":
+          return K.find(id);
       default:
         return null;
     }

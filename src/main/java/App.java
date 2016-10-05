@@ -16,13 +16,31 @@ public class App {
     // System.out.println(K.getBestK().getFirstName());
     // System.out.println(K.getBestK().getLastName());
     //
-    int i = 1;
-    for(Team team : Team.getBestTeams(10)){
-      System.out.println(i + ": " + team.teamname);
-      i++;
-    }
+    // List<QB> allQBs = QB.all();
+    // for (QB qb : allQBs) {
+    //   System.out.println(qb.getFirstName() + " " + qb.getLastName() + " " + qb.getScore());
+    // }
+    // int i = 1;
+    // for(Team team : Team.getBestTeams(10)){
+    //   System.out.println(i + ": " + team.teamname);
+    //   i++;
+    // }
+    //
+    // System.out.println(Team.getBestTeam().teamname);
 
-    System.out.println(Team.getBestTeam().teamname);
+    // User user = new User();
+    // user.addPlayer(7466);
+    // List<Player> bestPlayers = user.getBestPlayer();
+    // for(Player player : bestPlayers) {
+    //   System.out.println(player.getFirstName() + " " + player.getLastName());
+    // }
+
+    User user = new User("Bob");
+    user.save();
+    System.out.println(user.getId());
+    Player rb = RB.getBestRb();
+    System.out.println(rb.getPlayerId());
+
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -36,6 +54,7 @@ public class App {
       model.put("rbs", RB.all());
       model.put("tes", TE.all());
       model.put("wrs", WR.all());
+      //model.put("ks", K.all());
       model.put("template", "templates/stats.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

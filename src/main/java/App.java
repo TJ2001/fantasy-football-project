@@ -17,12 +17,13 @@ public class App {
     // System.out.println(K.getBestK().getLastName());
     //
     int i = 1;
-    for(Team team : Team.getBestTeams(10)){
-      System.out.println(i + ": " + team.teamname);
+    for(WR wr : WR.getTopWr(10)){
+      System.out.print(i + ": " + wr.getFirstName()+ " ");
+      System.out.println(wr.getLastName());
       i++;
     }
-
-    System.out.println(Team.getBestTeam().teamname);
+    //
+    // System.out.println(WR.getBestRb().player_name);
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();

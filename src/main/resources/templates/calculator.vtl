@@ -5,13 +5,59 @@
       <div class="col-md-7">
         <div class="row">
           <div class="col-md-3">
-            <img src="/pimages/Adam.jpg" alt="" class="resize"/>
+            <img src="$topPlayer.getPositionImg()" alt="" class="resize"/>
           </div>
           <div class="col-md-9">
-            <h4>$player.getFirstName() $player.getLastName()</h4>
-            <h5>$player.getTeam()</h5>
+            <h4>$topPlayer.getFirstName() $topPlayer.getLastName()</h4>
+            <h5>$topPlayer.getTeam()</h5>
           </div>
         </div>
+
+        #if($topPlayer.getPosition() == "QB")
+        <div class="row">
+          <div class="col-md-3">
+            <div class="box">
+              <h5>YDS</h5>
+              <h5 class="num">100</h5>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box">
+              <h5>TDS</h5>
+              <h5 class="num">25</h5>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box">
+              <h5>QBR</h5>
+              <h5 class="num">50</h5>
+            </div>
+          </div>
+        </div>
+
+        #elseif($topPlayer.getPosition() == "RB")
+        <div class="row">
+          <div class="col-md-3">
+            <div class="box">
+              <h5>TDS</h5>
+              <h5 class="num">100</h5>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box">
+              <h5>YDS</h5>
+              <h5 class="num">25</h5>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box">
+              <h5>Y/C</h5>
+              <h5 class="num">50</h5>
+            </div>
+          </div>
+        </div>
+
+        #elseif($topPlayer.getPosition() == "TE" || $topPlayer.getPosition() == "WR")
         <div class="row">
           <div class="col-md-3">
             <div class="box">
@@ -27,62 +73,79 @@
           </div>
           <div class="col-md-3">
             <div class="box">
-              <h5>AVG</h5>
+              <h5>TDS</h5>
               <h5 class="num">50</h5>
+            </div>
+          </div>
+        </div>
+
+        #elseif($topPlayer.getPosition() == "K")
+        <div class="row">
+          <div class="col-md-3">
+            <div class="box">
+              <h5>FG</h5>
+              <h5 class="num">100</h5>
             </div>
           </div>
           <div class="col-md-3">
             <div class="box">
-              <h5>TDS</h5>
-              <h5 class="num">11</h5>
+              <h5>FGE</h5>
+              <h5 class="num">25</h5>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box">
+              <h5>LFG</h5>
+              <h5 class="num">50</h5>
             </div>
           </div>
         </div>
+        #end
+
         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
           <thead>
             <tr>
               <th>Rank</th>
               <th>Name</th>
               <th>Team</th>
-              <th>Comp</th>
-              <th>Att</th>
-              <th>Yards</th>
-              <th>PassTD</th>
-              <th>Int</th>
-              <!-- <th>Sacks</th>
-              <th>QBR</th>
-              <th>Rush</th>
-              <th>Yards</th>
-              <th>RushTD</th> -->
+              <th>Jersey</th>
+              <th>Pos</th>
+              <th>Height</th>
+              <th>Weight</th>
+              <th>Gm Played</th>
             </tr>
           </thead>
-          #foreach($qb in $qbs)
+          #foreach($bestPlayer in $bestPlayers)
           <tr>
             <td>Rank</td>
-            <td><a href="/players/$qb.getPlayerId()">$qb.getFirstName() $qb.getLastName()</a></td>
-            <td><img class="teamlogo" src="$qb.getTeamImg()"> $qb.getTeam()</td>
-            <td>$qb.getPassCompletions()</td>
-            <td>$qb.getPassAttempts()</td>
-            <td>$qb.getPassYards()</td>
-            <td>$qb.getPassTd()</td>
-            <td>$qb.getPassInt()</td>
-            <!-- <td>$qb.getSacks()</td>
-            <td>$qb.getQbrating()</td>
-            <td>$qb.getRushAttempts()</td>
-            <td>$qb.getRushYards()</td>
-            <td>$qb.getRushTd()</td> -->
+            <td><a href="/players/$bestPlayer.getPlayerId()">$bestPlayer.getFirstName() $bestPlayer.getLastName()</a></td>
+            <td><img class="teamlogo" src="$bestPlayer.getTeamImg()"> $bestPlayer.getTeam()</td>
+            <td>$bestPlayer.getJersey()</td>
+            <td>$bestPlayer.getPosition()</td>
+            <td>$bestPlayer.getHeight()</td>
+            <td>$bestPlayer.getWeight()</td>
+            <td>$bestPlayer.getGamesPlayed()</td>
           </tr>
           #end
         </table>
       </div>
       <div class="col-md-5">
-        <form class="form-inline" action="/" method="post">
-          <div class="form-group">
-            <input type="text" class="form-control">
+        <div class="row">
+          <div class="col-xs-7">
+            <form class="form-inline" action="/calculator" method="post">
+              <div class="form-group">
+                <input type="text" id="playerAdded" name="playerAdded" class="form-control">
+              </div>
+              <span class="glyphicon glyphicon-search"></span>
+              <button class="btn btn-primary" type="submit" name="button">ADD</button>
+            </form>
           </div>
-          <span class="glyphicon glyphicon-search"></span>
-          <button class="btn btn-primary" type="submit" name="button">ADD</button>
-        </form>
+          <div class="col-xs-1 pull right">
+            <form class="form-inline" action="/calculator/clear" method="post">
+              <button name="button" class="btn btn-danger" type="submit">Clear</button>
+            </form>
+          </div>
+        </div>
         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
           <thead>
             <tr>
@@ -91,20 +154,23 @@
               <th>Position</th>
             </tr>
           </thead>
-          #foreach($qb in $qbs)
+          #foreach($selectedPlayer in $selectedPlayers)
           <tr>
-            <td><a href="/players/$qb.getPlayerId()">$qb.getFirstName() $qb.getLastName()</a></td>
-            <td><img class="teamlogo" src="$qb.getTeamImg()"> $qb.getTeam()</td>
-            <td>$qb.getPosition()</td>
+            <td><a href="/players/$selectedPlayer.getPlayerId()">$selectedPlayer.getFirstName() $selectedPlayer.getLastName()</a></td>
+            <td><img class="teamlogo" src="$selectedPlayer.getTeamImg()"> $selectedPlayer.getTeam()</td>
+            <td>$selectedPlayer.getPosition()</td>
           </tr>
           #end
         </table>
-        <form class="form-inline" action="/" method="post">
+        <form class="form-inline" action="/calculator/otheruser" method="post">
           <div class="form-group">
-            <input type="text" class="form-control">
+            <input id="otherSelection" name="otherSelection" type="text" class="form-control">
           </div>
           <span class="glyphicon glyphicon-search"></span>
           <button class="btn btn-primary" type="submit" name="button">ADD</button>
+        </form>
+        <form class="form-inline" action="/calculator/otheruser/clear" method="post">
+          <button name="button" class="btn btn-danger" type="submit">Clear</button>
         </form>
         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
           <thead>
@@ -114,11 +180,11 @@
               <th>Position</th>
             </tr>
           </thead>
-          #foreach($qb in $qbs)
+          #foreach($otherSelectedPlayer in $otherSelectedPlayers)
           <tr>
-            <td><a href="/players/$qb.getPlayerId()">$qb.getFirstName() $qb.getLastName()</a></td>
-            <td><img class="teamlogo" src="$qb.getTeamImg()"> $qb.getTeam()</td>
-            <td>$qb.getPosition()</td>
+            <td><a href="/players/$otherSelectedPlayer.getPlayerId()">$otherSelectedPlayer.getFirstName() $otherSelectedPlayer.getLastName()</a></td>
+            <td><img class="teamlogo" src="$otherSelectedPlayer.getTeamImg()"> $otherSelectedPlayer.getTeam()</td>
+            <td>$otherSelectedPlayer.getPosition()</td>
           </tr>
           #end
         </table>

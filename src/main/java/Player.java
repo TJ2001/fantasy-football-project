@@ -51,6 +51,10 @@ public abstract class Player {
     return jersey;
   };
 
+  public String getPositionImg(){
+    return "/pimages/" + this.position + ".jpg";
+  }
+
   public String getHeight() {
     return height;
   };
@@ -102,4 +106,13 @@ public abstract class Player {
     }
   }
 
+  public static Integer splitName(String firstName, String lastName) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT player_id FROM stats WHERE first_name = :firstName AND last_name = :lastName;";
+      return con.createQuery(sql)
+        .addParameter("firstName", firstName)
+        .addParameter("lastName", lastName)
+        .executeScalar(Integer.class);
+    }
+  }
 }

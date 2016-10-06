@@ -42,7 +42,7 @@ public class K extends Player{
     return fgblk;
   }
 
-  public static QB find(int id) {
+  public static K find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns + " FROM stats WHERE player_id = :id;";
       return con.createQuery(sql)
@@ -54,7 +54,7 @@ public class K extends Player{
         .addColumnMapping("games_played", "gamesplayed")
         .addColumnMapping("birth_date", "birthDate")
         .addColumnMapping("birth_city", "birthCity")
-        .executeAndFetchFirst(QB.class);
+        .executeAndFetchFirst(K.class);
     }
   }
 

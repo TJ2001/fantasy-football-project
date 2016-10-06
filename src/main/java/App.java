@@ -55,6 +55,8 @@ public class App {
       model.put("rbs", RB.all());
       model.put("tes", TE.all());
       model.put("wrs", WR.all());
+      model.put("ks", K.all());
+      model.put("des", Team.all());
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

@@ -64,7 +64,10 @@ li .title {
 .mvp {
   color: white;
   background-image: url("/background/lights.jpg");
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
   font-size: 20px;
 }
 .mvp-image {

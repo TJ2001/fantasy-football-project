@@ -106,7 +106,7 @@ public abstract class Player {
     }
   }
 
-  public static Integer splitName(String firstName, String lastName) {
+  public static Integer findByName(String firstName, String lastName) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT player_id FROM stats WHERE first_name = :firstName AND last_name = :lastName;";
       return con.createQuery(sql)

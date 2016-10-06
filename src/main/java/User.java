@@ -154,7 +154,7 @@ public class User {
           }
         sql = "SELECT player_id FROM stats WHERE player_id NOT IN (SELECT player_id FROM user_selections) AND player_id NOT IN (SELECT player_id FROM other_user_selections) AND position in (" + positions + ") ORDER BY stats.total_score DESC LIMIT 5";
       } else if (countSelectedPlayers("K") < 1) {
-        sql = "SELECT player_id FROM stats WHERE player_id NOT IN (SELECT player_id FROM user_selections) AND player_id NOT IN (SELECT player_id FROM other_user_selections) AND (position = 'K') ORDER BY stats.total_score DESC LIMIT 5";
+        sql = "SELECT player_id FROM stats WHERE player_id NOT IN (SELECT player_id FROM user_selections) AND player_id NOT IN (SELECT player_id FROM other_user_selections) AND (position = 'K') ORDER BY total_score_cached DESC LIMIT 5";
       }
       if(sql.equals("")){
         return Collections.<Player>emptyList();
@@ -168,6 +168,20 @@ public class User {
         }
         return foundPlayers;
       }
+    }
+  }
+
+  public List<Team> getBestDefense() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT teamid FROM team_stats WHERE teamid NOT IN (SELECT teamid FROM user_selections WHERE teamid IS NOT NULL) AND teamid NOT IN (SELECT teamid FROM other_user_selections WHERE teamid IS NOT NULL) ORDER BY total_score_cached DESC LIMIT 5";
+        List<Integer> teamIds = con.createQuery(sql).executeAndFetch(Integer.class);
+
+        List<Team> foundTeam = new ArrayList<Team>();
+        for(int teamId : teamIds) {
+          foundTeam.add(Team.find(teamId));
+        }
+        return foundTeam;
+
     }
   }
 

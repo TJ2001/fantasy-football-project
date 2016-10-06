@@ -28,7 +28,6 @@ public class User {
 
   public void addPlayer(int player_id) {
     String position = Player.getPlayerType(player_id);
-    //System.out.println(position);
     if (User.playerAlreadySelected(id)) {
       throw new IllegalArgumentException("ERROR: player has already been selected");
     }
@@ -65,6 +64,35 @@ public class User {
 
   }
 
+  public void addTeam(int teamid) {
+    if (User.playerAlreadySelected(id)) {
+      throw new IllegalArgumentException("ERROR: team has already been selected");
+    }
+
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO user_selections (user_id, teamid) VALUES (:id, :teamid)";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .addParameter("teamid", teamid)
+        .executeUpdate();
+    }
+  }
+
+  public void addTeamForOtherUser(int teamid) {
+    if (User.playerAlreadySelected(id)) {
+      throw new IllegalArgumentException("ERROR: team has already been selected");
+    }
+
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO other_user_selections (user_id, teamid) VALUES (:id, :teamid)";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .addParameter("teamid", teamid)
+        .executeUpdate();
+    }
+  }
+
+
   public void addPlayerForOtherUser(int id) {
     if (User.playerAlreadySelected(id)) {
       throw new IllegalArgumentException("ERROR: player has already been selected");
@@ -79,7 +107,7 @@ public class User {
 
   public List<Player> getSelectedPlayers() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT player_id FROM user_selections";
+      String sql = "SELECT player_id FROM user_selections WHERE player_id IS NOT NULL;";
       List<Integer> playerIds = con.createQuery(sql).executeAndFetch(Integer.class);
 
       List<Player> foundPlayers = new ArrayList<Player>();
@@ -92,7 +120,7 @@ public class User {
 
   public List<Player> getSelectedPlayersForOtherUsers() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT player_id FROM other_user_selections";
+      String sql = "SELECT player_id FROM other_user_selections WHERE player_id IS NOT NULL;";
       List<Integer> playerIds = con.createQuery(sql).executeAndFetch(Integer.class);
 
       List<Player> foundPlayers = new ArrayList<Player>();
@@ -100,6 +128,32 @@ public class User {
         foundPlayers.add(Player.find(playerId));
       }
       return foundPlayers;
+    }
+  }
+
+  public List<Team> getSelectedTeams() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT teamid FROM user_selections WHERE teamid IS NOT NULL;";
+      List<Integer> teamIds = con.createQuery(sql).executeAndFetch(Integer.class);
+
+      List<Team> foundTeams = new ArrayList<Team>();
+      for(Integer teamId : teamIds) {
+        foundTeams.add(Team.find(teamId));
+      }
+      return foundTeams;
+    }
+  }
+
+  public List<Team> getSelectedTeamsForOtherUsers() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT teamid FROM other_user_selections WHERE teamid IS NOT NULL;";
+      List<Integer> teamIds = con.createQuery(sql).executeAndFetch(Integer.class);
+
+      List<Team> foundTeams = new ArrayList<Team>();
+      for(Integer teamId : teamIds) {
+        foundTeams.add(Team.find(teamId));
+      }
+      return foundTeams;
     }
   }
 
@@ -194,6 +248,22 @@ public class User {
         .executeScalar(Integer.class);
 
         sql = "SELECT count(player_id) FROM other_user_selections WHERE player_id = :id";
+        found += con.createQuery(sql)
+          .addParameter("id", player_id)
+          .executeScalar(Integer.class);
+      }
+    return found != 0;
+  }
+
+  public static boolean teamAlreadySelected(int player_id) {
+    int found = 0;
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT count(teamid) FROM user_selections WHERE teamid = :id";
+      found = con.createQuery(sql)
+        .addParameter("id", player_id)
+        .executeScalar(Integer.class);
+
+        sql = "SELECT count(teamid) FROM other_user_selections WHERE teamid = :id";
         found += con.createQuery(sql)
           .addParameter("id", player_id)
           .executeScalar(Integer.class);

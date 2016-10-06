@@ -154,7 +154,7 @@ public class Team {
 
   public static Integer findByName(String teamName) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT teamid FROM teamstats WHERE teamname = :teamName;";
+      String sql = "SELECT teamid FROM team_stats WHERE teamname = :teamName;";
       return con.createQuery(sql)
         .addParameter("teamName", teamName)
         .executeScalar(Integer.class);

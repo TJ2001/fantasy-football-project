@@ -46,6 +46,8 @@ public class App {
       model.put("topDefense", user.getBestDefense().get(0));
       model.put("selectedPlayers", user.getSelectedPlayers());
       model.put("otherSelectedPlayers", user.getSelectedPlayersForOtherUsers());
+      model.put("selectedTeams", user.getSelectedTeams());
+      model.put("otherSelectedTeams", user.getSelectedTeamsForOtherUsers());
       model.put("bestPlayers", user.getBestPlayer());
       model.put("bestDefenses", user.getBestDefense());
       model.put("template", "templates/calculator.vtl");
@@ -62,12 +64,16 @@ public class App {
     post("/calculator", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String playerAdded = request.queryParams("playerAdded");
-      String[] splited = playerAdded.split("\\s+");
-      Integer player_id = Player.findByName(splited[0], splited[1]);
+      Integer player_id = null;
+      if(playerAdded.contains(" ")) {
+        String[] splited = playerAdded.split("\\s+");
+        player_id = Player.findByName(splited[0], splited[1]);
+      }
+      Integer teamid = Team.findByName(playerAdded);
       if (player_id != null) {
-        response.redirect("/calculator");
-      } else {
         user.addPlayer(player_id);
+      } else if (teamid != null) {
+        user.addTeam(teamid);
       };
       response.redirect("/calculator");
       return new ModelAndView(model, layout);
@@ -83,12 +89,16 @@ public class App {
     post("/calculator/otheruser", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String otherSelection = request.queryParams("otherSelection");
-      String[] splited = otherSelection.split("\\s+");
-      Integer player_id = Player.findByName(splited[0], splited[1]);
-      if (player_id == null) {
-        response.redirect("/calculator");
-      } else {
+      Integer player_id = null;
+      if(otherSelection.contains(" ")) {
+        String[] splited = otherSelection.split("\\s+");
+        player_id = Player.findByName(splited[0], splited[1]);
+      }
+      Integer teamid = Team.findByName(otherSelection);
+      if (player_id != null) {
         user.addPlayerForOtherUser(player_id);
+      } else {
+        user.addTeamForOtherUser(teamid);
       };
       response.redirect("/calculator");
       return new ModelAndView(model, layout);

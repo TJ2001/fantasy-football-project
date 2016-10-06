@@ -109,7 +109,7 @@
           </div>
           <div class="col-md-9">
             <h4>$topDefense.getTeamName()</h4>
-            <h5>$</h5>
+            <h5>Team Defense</h5>
           </div>
         </div>
         <div class="row">
@@ -167,11 +167,11 @@
             <tr>
               <th>Rank</th>
               <th>Team</th>
-              <th>PT Ag</th>
+              <th>PTS</th>
               <th>Sacks</th>
               <th>INT</th>
-              <th>Tackle</th>
-              <th>ForFum</th>
+              <th>Tackles</th>
+              <th>Fumble</th>
             </tr>
           </thead>
           #foreach($bestDefense in $bestDefenses)
@@ -190,7 +190,7 @@
       </div>
       <div class="col-md-5">
         <div class="row">
-          <div class="col-xs-7">
+          <!-- <div class="col-xs-7"> -->
             <form class="form-inline" action="/calculator" method="post">
               <div class="form-group">
                 <input type="text" id="playerAdded" name="playerAdded" class="form-control">
@@ -198,12 +198,12 @@
               <span class="glyphicon glyphicon-search"></span>
               <button class="btn btn-primary" type="submit" name="button">ADD</button>
             </form>
-          </div>
-          <div class="col-xs-1 pull right">
-            <form class="form-inline" action="/calculator/clear" method="post">
+          <!-- </div> -->
+          <!-- <div class="col-xs-1 pull right"> -->
+            <form class="form-inline" action="/calculator/clear" method="post" class="pull-right">
               <button name="button" class="btn btn-danger" type="submit">Clear</button>
             </form>
-          </div>
+          <!-- </div> -->
         </div>
         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
           <thead>
@@ -218,6 +218,13 @@
             <td><a href="/players/$selectedPlayer.getPlayerId()">$selectedPlayer.getFirstName() $selectedPlayer.getLastName()</a></td>
             <td><img class="teamlogo" src="$selectedPlayer.getTeamImg()"> $selectedPlayer.getTeam()</td>
             <td>$selectedPlayer.getPosition()</td>
+          </tr>
+          #end
+          #foreach($selectedTeam in $selectedTeams)
+          <tr>
+            <td>Team Defense</td>
+            <td><img class="teamlogo" src="$selectedTeam.getTeamImg()"> $selectedTeam.getTeamName()</td>
+            <td>DEF</td>
           </tr>
           #end
         </table>
@@ -244,6 +251,13 @@
             <td><a href="/players/$otherSelectedPlayer.getPlayerId()">$otherSelectedPlayer.getFirstName() $otherSelectedPlayer.getLastName()</a></td>
             <td><img class="teamlogo" src="$otherSelectedPlayer.getTeamImg()"> $otherSelectedPlayer.getTeam()</td>
             <td>$otherSelectedPlayer.getPosition()</td>
+          </tr>
+          #end
+          #foreach($otherSelectedTeam in $otherSelectedTeams)
+          <tr>
+            <td>Team Defense</td>
+            <td><img class="teamlogo" src="$selectedTeam.getTeamImg()"> $selectedTeam.getTeamName()</td>
+            <td>DEF</td>
           </tr>
           #end
         </table>

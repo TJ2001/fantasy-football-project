@@ -1,31 +1,30 @@
-<<<<<<< HEAD
 <div class="stats-background">
   <div class="container">
     <div class="form-group">
-        <label class="radio-inline">
-          <input type="radio" name="position" id="qb" checked>
-          Quarterback
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="position" id="rb">
-          Running Back
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="position" id="wr">
-          Wide Receiver
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="position" id="te">
-          Tight End
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="position" id="k">
-          Kicker
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="position" id="de">
-          Defense
-        </label>
+      <label class="radio-inline">
+        <input type="radio" name="position" id="qb" checked>
+        Quarterback
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="position" id="rb">
+        Running Back
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="position" id="wr">
+        Wide Receiver
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="position" id="te">
+        Tight End
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="position" id="k">
+        Kicker
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="position" id="de">
+        Defense
+      </label>
     </div>
     <div class="table-box" id="qb-table-box">
       <h2>Quarterbacks</h2>
@@ -49,22 +48,22 @@
           </tr>
         </thead>
         #foreach($qb in $qbs)
-          <tr>
-            <td>Rank</td>
-            <td><a href="/players/$qb.getPlayerId()">$qb.getFirstName() $qb.getLastName()</a></td>
-            <td><img class="teamlogo" src="$qb.getTeamImg()"> $qb.getTeam()</td>
-            <td>$qb.getPassCompletions()</td>
-            <td>$qb.getPassAttempts()</td>
-            <td>$qb.getPassYards()</td>
-            <td>$qb.getPassTd()</td>
-            <td>$qb.getPassInt()</td>
-            <td>$qb.getSacks()</td>
-            <td>$qb.getQbrating()</td>
-            <td>$qb.getRushAttempts()</td>
-            <td>$qb.getRushYards()</td>
-            <td>$qb.getRushTd()</td>
-            <td>$qb.getScore()</td>
-          </tr>
+        <tr>
+          <td>Rank</td>
+          <td><a href="/players/$qb.getPlayerId()">$qb.getFirstName() $qb.getLastName()</a></td>
+          <td><img class="teamlogo" src="$qb.getTeamImg()"> $qb.getTeam()</td>
+          <td>$qb.getPassCompletions()</td>
+          <td>$qb.getPassAttempts()</td>
+          <td>$qb.getPassYards()</td>
+          <td>$qb.getPassTd()</td>
+          <td>$qb.getPassInt()</td>
+          <td>$qb.getSacks()</td>
+          <td>$qb.getQbrating()</td>
+          <td>$qb.getRushAttempts()</td>
+          <td>$qb.getRushYards()</td>
+          <td>$qb.getRushTd()</td>
+          <td>$qb.getScore()</td>
+        </tr>
         #end
       </table>
     </div>
@@ -90,22 +89,22 @@
           </tr>
         </thead>
         #foreach($rb in $rbs)
-          <tr>
-            <td>Rank</td>
-            <td><a href="/players/$rb.getPlayerId()">$rb.getFirstName() $rb.getLastName()</a></td>
-            <td><img class="teamlogo" src="$rb.getTeamImg()"> $rb.getTeam()</td>
-            <td>$rb.getRushAttempts()</td>
-            <td>$rb.getRushYards()</td>
-            <td>$rb.getRushYardsPerGame()</td>
-            <td>$rb.getRushAverage()</td>
-            <td>$rb.getRushTd()</td>
-            <td>$rb.getReceptionTd()</td>
-            <td>$rb.getAverageReceptionYardage()</td>
-            <td>$rb.getReceptions()</td>
-            <td>$rb.getRushFumbles()</td>
-            <td>$rb.getFumbleLost()</td>
-            <td>$rb.getGamesPlayed()</td>
-          </tr>
+        <tr>
+          <td>Rank</td>
+          <td><a href="/players/$rb.getPlayerId()">$rb.getFirstName() $rb.getLastName()</a></td>
+          <td><img class="teamlogo" src="$rb.getTeamImg()"> $rb.getTeam()</td>
+          <td>$rb.getRushAttempts()</td>
+          <td>$rb.getRushYards()</td>
+          <td>$rb.getRushYardsPerGame()</td>
+          <td>$rb.getRushAverage()</td>
+          <td>$rb.getRushTd()</td>
+          <td>$rb.getReceptionTd()</td>
+          <td>$rb.getAverageReceptionYardage()</td>
+          <td>$rb.getReceptions()</td>
+          <td>$rb.getRushFumbles()</td>
+          <td>$rb.getFumbleLost()</td>
+          <td>$rb.getGamesPlayed()</td>
+        </tr>
         #end
       </table>
     </div>
@@ -125,16 +124,16 @@
           </tr>
         </thead>
         #foreach($wr in $wrs)
-          <tr>
-            <td>Rank</td>
-            <td><a href="/players/$wr.getPlayerId()">$wr.getFirstName() $wr.getLastName()</a></td>
-            <td><img class="teamlogo" src="$wr.getTeamImg()"> $wr.getTeam()</td>
-            <td>$wr.getReceptions()</td>
-            <td>$wr.getRecyards()</td>
-            <td>$wr.getRecyardspergame()</td>
-            <td>$wr.getTargets()</td>
-            <td>$wr.getRectd()</td>
-          </tr>
+        <tr>
+          <td>Rank</td>
+          <td><a href="/players/$wr.getPlayerId()">$wr.getFirstName() $wr.getLastName()</a></td>
+          <td><img class="teamlogo" src="$wr.getTeamImg()"> $wr.getTeam()</td>
+          <td>$wr.getReceptions()</td>
+          <td>$wr.getRecyards()</td>
+          <td>$wr.getRecyardspergame()</td>
+          <td>$wr.getTargets()</td>
+          <td>$wr.getRectd()</td>
+        </tr>
         #end
       </table>
     </div>
@@ -154,16 +153,16 @@
           </tr>
         </thead>
         #foreach($te in $tes)
-          <tr>
-            <td>Rank</td>
-            <td><a href="/players/$te.getPlayerId()">$te.getFirstName() $te.getLastName()</a></td>
-            <td><img class="teamlogo" src="$te.getTeamImg()"> $te.getTeam()</td>
-            <td>$te.getReceptions()</td>
-            <td>$te.getRecyards()</td>
-            <td>$te.getRecyardspergame()</td>
-            <td>$te.getTargets()</td>
-            <td>$te.getRectd()</td>
-          </tr>
+        <tr>
+          <td>Rank</td>
+          <td><a href="/players/$te.getPlayerId()">$te.getFirstName() $te.getLastName()</a></td>
+          <td><img class="teamlogo" src="$te.getTeamImg()"> $te.getTeam()</td>
+          <td>$te.getReceptions()</td>
+          <td>$te.getRecyards()</td>
+          <td>$te.getRecyardspergame()</td>
+          <td>$te.getTargets()</td>
+          <td>$te.getRectd()</td>
+        </tr>
         #end
       </table>
     </div>
@@ -183,16 +182,16 @@
           </tr>
         </thead>
         #foreach($k in $ks)
-          <tr>
-            <td>Rank</td>
-            <td><a href="/players/$k.getPlayerId()">$k.getFirstName() $k.getLastName()</a></td>
-            <td><img class="teamlogo" src="$k.getTeamImg()"> $k.getTeam()</td>
-            <td>$k.getReceptions()</td>
-            <td>$k.getRecyards()</td>
-            <td>$k.getRecyardspergame()</td>
-            <td>$k.getTargets()</td>
-            <td>$k.getRectd()</td>
-          </tr>
+        <tr>
+          <td>Rank</td>
+          <td><a href="/players/$k.getPlayerId()">$k.getFirstName() $k.getLastName()</a></td>
+          <td><img class="teamlogo" src="$k.getTeamImg()"> $k.getTeam()</td>
+          <td>$k.getReceptions()</td>
+          <td>$k.getRecyards()</td>
+          <td>$k.getRecyardspergame()</td>
+          <td>$k.getTargets()</td>
+          <td>$k.getRectd()</td>
+        </tr>
         #end
       </table>
     </div>
@@ -212,235 +211,6 @@
           </tr>
         </thead>
         #foreach($de in $des)
-          <tr>
-            <td>Rank</td>
-            <td><a href="/players/$de.getPlayerId()">$de.getFirstName() $de.getLastName()</a></td>
-            <td><img class="teamlogo" src="$de.getTeamImg()"> $de.getTeam()</td>
-            <td>$de.getReceptions()</td>
-            <td>$de.getRecyards()</td>
-            <td>$de.getRecyardspergame()</td>
-            <td>$de.getTargets()</td>
-            <td>$de.getRectd()</td>
-          </tr>
-        #end
-      </table>
-    </div>
-=======
-<div class="container">
-  <div class="form-group">
-      <label class="radio-inline">
-        <input type="radio" name="position" id="qb" checked>
-        Quarterback
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="position" id="rb">
-        Running Back
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="position" id="wr">
-        Wide Receiver
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="position" id="te">
-        Tight End
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="position" id="k">
-        Kicker
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="position" id="de">
-        Defense
-      </label>
-  </div>
-  <div class="table-box" id="qb-table-box">
-    <h2>Quarterbacks</h2>
-    <table id="qb-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Team</th>
-          <th>Comp</th>
-          <th>Att</th>
-          <th>Yards</th>
-          <th>PassTD</th>
-          <th>Int</th>
-          <th>Sacks</th>
-          <th>QBR</th>
-          <th>Rush</th>
-          <th>Yards</th>
-          <th>RushTD</th>
-        </tr>
-      </thead>
-      #foreach($qb in $qbs)
-        <tr>
-          <td>Rank</td>
-          <td><a href="/players/$qb.getPlayerId()">$qb.getFirstName() $qb.getLastName()</a></td>
-          <td><img class="teamlogo" src="$qb.getTeamImg()"> $qb.getTeam()</td>
-          <td>$qb.getPassCompletions()</td>
-          <td>$qb.getPassAttempts()</td>
-          <td>$qb.getPassYards()</td>
-          <td>$qb.getPassTd()</td>
-          <td>$qb.getPassInt()</td>
-          <td>$qb.getSacks()</td>
-          <td>$qb.getQbrating()</td>
-          <td>$qb.getRushAttempts()</td>
-          <td>$qb.getRushYards()</td>
-          <td>$qb.getRushTd()</td>
-        </tr>
-      #end
-    </table>
-  </div>
-  <div class="table-box" id="rb-table-box">
-    <h2>Running Backs</h2>
-    <table id="rb-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Team</th>
-          <th>Att</th>
-          <th>Yards</th>
-          <th>Yards/Gm</th>
-          <th>Avg</th>
-          <th>RushTD</th>
-          <th>RecTD</th>
-          <th>AvgRecYds</th>
-          <th>Rec</th>
-          <th>Fumbles</th>
-          <th>FumLost</th>
-          <th>Games</th>
-        </tr>
-      </thead>
-      #foreach($rb in $rbs)
-        <tr>
-          <td>Rank</td>
-          <td><a href="/players/$rb.getPlayerId()">$rb.getFirstName() $rb.getLastName()</a></td>
-          <td><img class="teamlogo" src="$rb.getTeamImg()"> $rb.getTeam()</td>
-          <td>$rb.getRushAttempts()</td>
-          <td>$rb.getRushYards()</td>
-          <td>$rb.getRushYardsPerGame()</td>
-          <td>$rb.getRushAverage()</td>
-          <td>$rb.getRushTd()</td>
-          <td>$rb.getReceptionTd()</td>
-          <td>$rb.getAverageReceptionYardage()</td>
-          <td>$rb.getReceptions()</td>
-          <td>$rb.getRushFumbles()</td>
-          <td>$rb.getFumbleLost()</td>
-          <td>$rb.getGamesPlayed()</td>
-        </tr>
-      #end
-    </table>
-  </div>
-  <div class="table-box" id="wr-table-box">
-    <h2>Wide Receivers</h2>
-    <table id="wr-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Team</th>
-          <th>Rec</th>
-          <th>Yds</th>
-          <th>Avg</th>
-          <th>Targ</th>
-          <th>TD</th>
-        </tr>
-      </thead>
-      #foreach($wr in $wrs)
-        <tr>
-          <td>Rank</td>
-          <td><a href="/players/$wr.getPlayerId()">$wr.getFirstName() $wr.getLastName()</a></td>
-          <td><img class="teamlogo" src="$wr.getTeamImg()"> $wr.getTeam()</td>
-          <td>$wr.getReceptions()</td>
-          <td>$wr.getRecyards()</td>
-          <td>$wr.getRecyardspergame()</td>
-          <td>$wr.getTargets()</td>
-          <td>$wr.getRectd()</td>
-        </tr>
-      #end
-    </table>
-  </div>
-  <div  class="table-box" id="te-table-box">
-    <h2>Tight Ends</h2>
-    <table id="te-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Team</th>
-          <th>Rec</th>
-          <th>Yds</th>
-          <th>Avg</th>
-          <th>Targ</th>
-          <th>TD</th>
-        </tr>
-      </thead>
-      #foreach($te in $tes)
-        <tr>
-          <td>Rank</td>
-          <td><a href="/players/$te.getPlayerId()">$te.getFirstName() $te.getLastName()</a></td>
-          <td><img class="teamlogo" src="$te.getTeamImg()"> $te.getTeam()</td>
-          <td>$te.getReceptions()</td>
-          <td>$te.getRecyards()</td>
-          <td>$te.getRecyardspergame()</td>
-          <td>$te.getTargets()</td>
-          <td>$te.getRectd()</td>
-        </tr>
-      #end
-    </table>
-  </div>
-  <div  class="table-box" id="k-table-box">
-    <h2>Kickers</h2>
-    <table id="k-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Team</th>
-
-          <th>XP</th>
-          <th>XP%</th>
-          <th>FG</th>
-          <th>FG%</th>
-          <th>FG>40%</th>
-          <th>LongFG</th>
-          <th>FG BLK</th>
-        </tr>
-      </thead>
-      #foreach($k in $ks)
-        <tr>
-          <td>Rank</td>
-          <td><a href="/players/$k.getPlayerId()">$k.getFirstName() $k.getLastName()</a></td>
-          <td><img class="teamlogo" src="$k.getTeamImg()"> $k.getTeam()</td>
-          <td>k.getXpmade()</td>
-          <td>k.getXppct()</td>
-          <td>k.getFgmade()</td>
-          <td>k.getFgpct()</td>
-          <td>k.getFg40_49pct()</td>
-          <td>k.getFglng()</td>
-          <td>k.getFgblk()</td>
-        </tr>
-      #end
-    </table>
-  </div>
-  <div  class="table-box" id="de-table-box">
-    <h2>Defense</h2>
-    <table id="de-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Team</th>
-          <th>Rec</th>
-          <th>Yds</th>
-          <th>Avg</th>
-          <th>Targ</th>
-          <th>TD</th>
-        </tr>
-      </thead>
-      #foreach($de in $des)
         <tr>
           <td>Rank</td>
           <td><a href="/players/$de.getPlayerId()">$de.getFirstName() $de.getLastName()</a></td>
@@ -451,10 +221,9 @@
           <td>$de.getTargets()</td>
           <td>$de.getRectd()</td>
         </tr>
-      #end
-    </table>
->>>>>>> 85c76a5da1446e13f2a27204d96c2ef9d5322dc4
+        #end
+      </table>
+    </div>
   </div>
   <script src="/datatables.js"></script>
-
 </div>

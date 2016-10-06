@@ -42,7 +42,22 @@ public class K extends Player{
     return fgblk;
   }
 
-  public static QB find(int id) {
+  public static List<K> all() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT " + columns + "FROM stats WHERE position = 'K';";
+      return con.createQuery(sql)
+        .addColumnMapping("player_id", "playerId")
+        .addColumnMapping("first_name", "firstName")
+        .addColumnMapping("last_name", "lastName")
+        .addColumnMapping("team_name", "team")
+        .addColumnMapping("games_played", "gamesplayed")
+        .addColumnMapping("birth_date", "birthDate")
+        .addColumnMapping("birth_city", "birthCity")
+        .executeAndFetch(K.class);
+    }
+  }
+
+  public static K find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns + " FROM stats WHERE player_id = :id;";
       return con.createQuery(sql)
@@ -54,7 +69,7 @@ public class K extends Player{
         .addColumnMapping("games_played", "gamesplayed")
         .addColumnMapping("birth_date", "birthDate")
         .addColumnMapping("birth_city", "birthCity")
-        .executeAndFetchFirst(QB.class);
+        .executeAndFetchFirst(K.class);
     }
   }
 

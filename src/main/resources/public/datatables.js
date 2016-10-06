@@ -58,6 +58,35 @@ tablete.on( 'order.dt search.dt', function () {
     } );
 } ).draw();
 
+var tablek = $('#k-table').DataTable({
+    "columnDefs": [ {
+        "searchable": false,
+        "orderable": false,
+        "targets": 0
+    } ],
+    "order": [[ 1, 'asc' ]]
+} );
+
+tablek.on( 'order.dt search.dt', function () {
+    tablek.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+    } );
+} ).draw();
+
+var tablede = $('#de-table').DataTable({
+    "columnDefs": [ {
+        "searchable": false,
+        "orderable": false,
+        "targets": 0
+    } ],
+    "order": [[ 1, 'asc' ]]
+} );
+
+tablede.on( 'order.dt search.dt', function () {
+    tablede.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+    } );
+} ).draw();
 
 $('#qb-table-box').show();
 

@@ -26,7 +26,7 @@ public class App {
       System.out.println(wr.getLastName());
       i++;
     }
-    
+
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
@@ -39,7 +39,8 @@ public class App {
       model.put("rbs", RB.all());
       model.put("tes", TE.all());
       model.put("wrs", WR.all());
-      //model.put("ks", K.all());
+      model.put("ks", K.all());
+      model.put("des", Team.all());
       model.put("template", "templates/stats.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

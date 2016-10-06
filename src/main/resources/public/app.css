@@ -143,6 +143,14 @@ li .title {
   height: auto;
 }
 
+.calc-forms {
+  margin-bottom: 5px;
+}
+
+.calc-forms input {
+  width: 275px !important;
+}
+
 #myCarousel {
   border-top: solid 55px black;
   border-bottom: solid 60px black;

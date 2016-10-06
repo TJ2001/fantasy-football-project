@@ -25,55 +25,55 @@ public class Team {
     return this.teamname;
   }
 
-  public int gettotaltackles() {
+  public int getTotalTackles() {
     return totaltackles;
   }
 
-  public int getsacks() {
+  public int getSacks() {
     return sacks;
   }
 
-  public int getsackyds() {
+  public int getSackYds() {
     return sackyds;
   }
 
-  public int getpd() {
+  public int getPd() {
     return pd;
   }
 
-  public int getstuffs() {
+  public int getStuffs() {
     return stuffs;
   }
 
-  public int getinterceptions() {
+  public int getInterceptions() {
     return interceptions;
   }
 
-  public int getinterceptionyards() {
+  public int getInterceptionYards() {
     return interceptionyards;
   }
 
-  public int getinterceptiontds() {
+  public int getInterceptionTds() {
     return interceptiontds;
   }
 
-  public int getforcedfumble() {
+  public int getForcedFumble() {
     return forcedfumble;
   }
 
-  public int getrecoveredfumble() {
+  public int getRecoveredFumble() {
     return recoveredfumble;
   }
 
-  public int getstuffyds() {
+  public int getStuffYds() {
     return stuffyds;
   }
 
-  public int gettdfromfumble() {
+  public int getTdFromFumble() {
     return tdfromfumble;
   }
 
-  public int getpointsagainst() {
+  public int getPointsAgainst() {
     return pointsagainst;
   }
 

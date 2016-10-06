@@ -15,9 +15,9 @@ public abstract class Player {
   public Date birthDate;
   public int age;
   public String birthCity;
-  private double total_score;
+  private double total_score_cached;
 
-  public static final String PLAYER_COLUMNS = " position, player_id, first_name, last_name, team_name, jersey, height, weight, birth_date, birth_city, age, ";
+  public static final String PLAYER_COLUMNS = " position, player_id, first_name, last_name, team_name, jersey, height, weight, birth_date, birth_city, age, total_score_cached, ";
 
   public int getPlayerId(){
     return playerId;
@@ -72,7 +72,7 @@ public abstract class Player {
   }
 
   public double getScore() {
-    return total_score;
+    return total_score_cached;
   }
 
   public static Player find(int id) {

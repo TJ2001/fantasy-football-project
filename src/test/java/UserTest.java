@@ -17,6 +17,7 @@ public class UserTest {
     assertEquals("RB", bestPlayers.get(0).getPosition());
   }
 
+
   @Test
   public void save_setsID() {
     User user = new User("Bob");

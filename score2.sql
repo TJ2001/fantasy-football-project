@@ -23,7 +23,8 @@ BEGIN
       RETURN ROUND((SELECT sum(15*(receptions/(SELECT max(receptions) FROM stats WHERE games_played > 10)) + 12.5*(recyards/(SELECT max(recyards) FROM stats WHERE games_played > 10)) + 12.5*(recyardspergame/(SELECT max(recyardspergame) FROM stats WHERE games_played > 10)) + 10*(targets/(SELECT max(targets) FROM stats WHERE games_played > 10)) + 20*(rectd/(SELECT max(rectd) FROM stats WHERE games_played > 10)) + 10*(games_played/(SELECT max(games_played) FROM stats WHERE games_played > 10))))/73.424258409484238627275, 2) * 100
       FROM stats
       WHERE stats.player_id = $1.player_id;
+    ELSE RETURN null;
   END CASE;
 END
 $BODY$
-LANGUAGE 'plpgsql';
+LANGUAGE 'plpgsql' IMMUTABLE;

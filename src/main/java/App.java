@@ -46,6 +46,32 @@ public class App {
 
     get("/calculator", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      if(request.queryParams("notfound") != null) {
+        model.put("notfound", request.queryParams("notfound"));
+      }
+      if(request.queryParams("selected") != null) {
+        Player player = Player.find(Integer.parseInt(request.queryParams("selected")));
+        model.put("selected", player);
+      }
+      if(request.queryParams("tselected") != null) {
+        Team team = Team.find(Integer.parseInt(request.queryParams("tselected")));
+        model.put("tselected", team);
+      }
+      if(request.queryParams("toomany") != null) {
+        model.put("toomany", request.queryParams("toomany"));
+      }
+      if(request.queryParams("onotfound") != null) {
+        model.put("onotfound", request.queryParams("onotfound"));
+      }
+      if(request.queryParams("oselected") != null) {
+        Player player = Player.find(Integer.parseInt(request.queryParams("oselected")));
+        model.put("oselected", player);
+      }
+      if(request.queryParams("otselected") != null) {
+        Team team = Team.find(Integer.parseInt(request.queryParams("otselected")));
+        model.put("otselected", team);
+      }
+
       if (user.getBestPlayer().size() > 0) {
         model.put("topPlayer", user.getBestPlayer().get(0));
       }
@@ -103,7 +129,7 @@ public class App {
           response.redirect("/calculator");
         } catch (IllegalArgumentException e) {
           if(User.teamAlreadySelected(teamid)) {
-            response.redirect("/calculator?selected=" + teamid);
+            response.redirect("/calculator?tselected=" + teamid);
           } else {
             response.redirect("/calculator?toomany=DEF");
           }
@@ -136,9 +162,7 @@ public class App {
           response.redirect("/calculator");
         } catch (IllegalArgumentException e) {
           if(User.playerAlreadySelected(player_id)) {
-            response.redirect("/calculator?selected=" + player_id);
-          } else {
-            response.redirect("/calculator?toomany=" + Player.getPlayerType(player_id));
+            response.redirect("/calculator?oselected=" + player_id);
           }
         }
       } else if (teamid != null) {
@@ -147,9 +171,7 @@ public class App {
           response.redirect("/calculator");
         } catch (IllegalArgumentException e) {
           if(User.teamAlreadySelected(teamid)) {
-            response.redirect("/calculator?oselected=" + teamid);
-          } else {
-            response.redirect("/calculator?otoomany=DEF");
+            response.redirect("/calculator?otselected=" + teamid);
           }
         }
       } else {

@@ -69,6 +69,10 @@ public class App {
     get("/players/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("player", Player.find(Integer.parseInt(request.params(":id"))));
+      String type = Player.getPlayerType(Integer.parseInt(request.params(":id")));
+      if (type.equals("QB")) {
+        model.put("topten", QB.getTopQb(10));
+      }
       model.put("template", "templates/player.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

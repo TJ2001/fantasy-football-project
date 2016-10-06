@@ -44,6 +44,10 @@ public class App {
       model.put("otherSelectedPlayers", user.getSelectedPlayersForOtherUsers());
       model.put("bestPlayers", user.getBestPlayer());
       model.put("template", "templates/calculator.vtl");
+      model.put("qbs", QB.all());
+      model.put("rbs", RB.all());
+      model.put("tes", TE.all());
+      model.put("wrs", WR.all());
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

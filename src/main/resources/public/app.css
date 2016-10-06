@@ -1,7 +1,7 @@
 body {
   margin-top: 100px;
   background-color: black;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Exo 2', sans-serif;
   /*for notes*/
   /*font-family: 'Gloria Hallelujah', cursive; (notes)*/
 }
@@ -61,18 +61,32 @@ li .title {
   background-color: white;
 }
 
+.mvp {
+  color: white;
+  background-image: url("/background/lights.jpg");
+  height: 100vh;
+  font-size: 20px;
+}
+.mvp-image {
+  width: 100%;
+}
+
+.mvp-container {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .calculator-background {
   background-image: url("/background/teams.jpg");
   background-size: contain;
 }
 
 .dataTables_wrapper {
-  font-size: 20px !important;
+  font-size: 18px !important;
 }
 
 .dataTabkes_filter input {
-  height: 20px;
-  font-size: 20px;
+  height: 18px;
+  font-size: 18px;
 }
 
 .table {

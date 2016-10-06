@@ -38,6 +38,12 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/mvp", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/mvp.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     get("/calculator", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       if (user.getBestPlayer().size() > 0) {

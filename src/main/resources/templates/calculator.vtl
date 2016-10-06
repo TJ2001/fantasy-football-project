@@ -265,3 +265,19 @@
     </div>
   </div>
 </div>
+#foreach($qb in $qbs)
+  <div class="hidden-players" style=display:none>$qb.getFirstName() $qb.getLastName()</div>
+#end
+<div class="hidden-players" style=display:none>TEST</div>
+<script>
+  $( function() {
+    var elements = $( ".hidden-players" ).toArray();
+    var availableTags = new Array();
+    for (var i = 0; i < elements.length; i++) {
+      availableTags.push(elements[i].innerHTML);
+    }
+    $( "#playerAdded" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>

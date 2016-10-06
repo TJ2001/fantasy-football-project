@@ -1,5 +1,5 @@
 <div class="stats-background">
-  <div class="container">
+  <div class="container stats">
     <div class="form-group">
       <label class="radio-inline">
         <input type="radio" name="position" id="qb" checked>
@@ -36,15 +36,14 @@
             <th>Team</th>
             <th>Comp</th>
             <th>Att</th>
-            <th>Yards</th>
+            <th>Yds</th>
             <th>PassTD</th>
             <th>Int</th>
             <th>Sacks</th>
             <th>QBR</th>
             <th>Rush</th>
-            <th>Yards</th>
+            <th>Yds</th>
             <th>RushTD</th>
-            <th>Score</th>
           </tr>
         </thead>
         #foreach($qb in $qbs)
@@ -62,7 +61,6 @@
           <td>$qb.getRushAttempts()</td>
           <td>$qb.getRushYards()</td>
           <td>$qb.getRushTd()</td>
-          <td>$qb.getScore()</td>
         </tr>
         #end
       </table>
@@ -76,16 +74,14 @@
             <th>Name</th>
             <th>Team</th>
             <th>Att</th>
-            <th>Yards</th>
-            <th>Yards/Gm</th>
+            <th>Yds</th>
+            <th>Yds/G</th>
             <th>Avg</th>
             <th>RushTD</th>
             <th>RecTD</th>
             <th>AvgRecYds</th>
             <th>Rec</th>
-            <th>Fumbles</th>
-            <th>FumLost</th>
-            <th>Games</th>
+            <th>Fum</th>
           </tr>
         </thead>
         #foreach($rb in $rbs)
@@ -102,8 +98,6 @@
           <td>$rb.getAverageReceptionYardage()</td>
           <td>$rb.getReceptions()</td>
           <td>$rb.getRushFumbles()</td>
-          <td>$rb.getFumbleLost()</td>
-          <td>$rb.getGamesPlayed()</td>
         </tr>
         #end
       </table>
@@ -174,11 +168,13 @@
             <th>Rank</th>
             <th>Name</th>
             <th>Team</th>
-            <th>Rec</th>
-            <th>Yds</th>
-            <th>Avg</th>
-            <th>Targ</th>
-            <th>TD</th>
+            <th>XP</th>
+            <th>XP%</th>
+            <th>FG</th>
+            <th>FG%</th>
+            <th>FG40-49%</th>
+            <th>FGLng</th>
+            <th>FGBlk</th>
           </tr>
         </thead>
         #foreach($k in $ks)
@@ -186,11 +182,13 @@
           <td>Rank</td>
           <td><a href="/players/$k.getPlayerId()">$k.getFirstName() $k.getLastName()</a></td>
           <td><img class="teamlogo" src="$k.getTeamImg()"> $k.getTeam()</td>
-          <td>$k.getReceptions()</td>
-          <td>$k.getRecyards()</td>
-          <td>$k.getRecyardspergame()</td>
-          <td>$k.getTargets()</td>
-          <td>$k.getRectd()</td>
+          <td>$k.getXpmade()</td>
+          <td>$k.getXppct()</td>
+          <td>$k.getFgmade()</td>
+          <td>$k.getFgpct()</td>
+          <td>$k.getFg40_49pct()</td>
+          <td>$k.getFglng()</td>
+          <td>$k.getFgblk()</td>
         </tr>
         #end
       </table>
@@ -201,25 +199,29 @@
         <thead>
           <tr>
             <th>Rank</th>
-            <th>Name</th>
-            <th>Team</th>
-            <th>Rec</th>
-            <th>Yds</th>
-            <th>Avg</th>
-            <th>Targ</th>
-            <th>TD</th>
+            <th>Team Name</th>
+            <th>Tackles</th>
+            <th>Sacks</th>
+            <th>PontDef</th>
+            <th>Stuffs</th>
+            <th>Int</th>
+            <th>ForFum</th>
+            <th>TDFromFum</th>
+            <th>PtsAG</th>
           </tr>
         </thead>
         #foreach($de in $des)
         <tr>
           <td>Rank</td>
-          <td><a href="/players/$de.getPlayerId()">$de.getFirstName() $de.getLastName()</a></td>
-          <td><img class="teamlogo" src="$de.getTeamImg()"> $de.getTeam()</td>
-          <td>$de.getReceptions()</td>
-          <td>$de.getRecyards()</td>
-          <td>$de.getRecyardspergame()</td>
-          <td>$de.getTargets()</td>
-          <td>$de.getRectd()</td>
+          <td><img class="teamlogo" src="$de.getTeamImg()"> $de.getTeamName()</td>
+          <td>$de.getTotalTackles()</td>
+          <td>$de.getSacks()</td>
+          <td>$de.getPd()</td>
+          <td>$de.getStuffs()</td>
+          <td>$de.getInterceptions()</td>
+          <td>$de.getForcedFumble()</td>
+          <td>$de.getTdFromFumble()</td>
+          <td>$de.getPointsAgainst()</td>
         </tr>
         #end
       </table>

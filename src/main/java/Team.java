@@ -74,7 +74,7 @@ public class Team {
   }
 
   public int getpointsagainst() {
-    return pointsagainst;
+    return teamname;
   }
 
   public String getTeamImg() {
@@ -85,6 +85,20 @@ public class Team {
     return "/pimages/Def.jpg";
   }
 
+  public static List<Team> all() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT " + columns + "FROM team_stats;";
+      return con.createQuery(sql)
+      .addColumnMapping("tackletotal", "totaltackles")
+      .addColumnMapping("passesdefended", "pd")
+      .addColumnMapping("intyds", "interceptionyards")
+      .addColumnMapping("inttd", "interceptiontds")
+      .addColumnMapping("fumforced", "forcedfumble")
+      .addColumnMapping("fumopprec", "recoveredfumble")
+      .addColumnMapping("fumtd", "tdfromfumble")
+      .executeAndFetch(Team.class);
+    }
+  }
 
   public static Team getBestTeam() {
     try(Connection con = DB.sql2o.open()) {

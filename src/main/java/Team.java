@@ -74,7 +74,7 @@ public class Team {
   }
 
   public int getpointsagainst() {
-    return teamname;
+    return pointsagainst;
   }
 
   public String getTeamImg() {

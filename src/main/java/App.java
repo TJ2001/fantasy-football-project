@@ -84,7 +84,7 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       String otherSelection = request.queryParams("otherSelection");
       String[] splited = otherSelection.split("\\s+");
-      Integer player_id = Player.splitName(splited[0], splited[1]);
+      Integer player_id = Player.findByName(splited[0], splited[1]);
       if (player_id == null) {
         response.redirect("/calculator");
       } else {

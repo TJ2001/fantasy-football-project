@@ -1,10 +1,11 @@
-<div class="container player">
+<div class="player">
+<div class="container">
   <img class="header" src="/images/$player.getTeam()-Banner.jpg" alt="team banner">
   <div class="row">
-    <div class="col-md-1">
-      image?
+    <div class="col-md-3">
+      <img src="$player.getPositionImg2()" class="img-responsive">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
       <h4>$player.getFirstName() $player.getLastName() #$player.getJersey() $player.getPosition()</h4>
       <h5>$player.getTeam()</h5>
       <h5>Height: $player.getHeight() Weight: $player.getWeight()</h5>
@@ -12,19 +13,19 @@
     #if($player.getPosition() == "QB")
     <div class="col-md-7">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 player-stat">
           <h5>TD</h5>
           <p>$player.getPassTd()</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 player-stat">
           <h5>INT</h5>
           <p>$player.getPassInt()</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 player-stat">
           <h5>YDS</h5>
           <p>$player.getPassYards()</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 player-stat">
           <h5>RTG</h5>
           <p>$player.getQbrating()</p>
         </div>
@@ -85,19 +86,19 @@
   #if($player.getPosition() == "RB")
   <div class="col-md-7">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 player-stat">
         <h5>TD</h5>
         <p>$player.getRushTd()</p>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 player-stat">
         <h5>YDS</h5>
         <p>$player.getRushYards()</p>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 player-stat">
         <h5>YDS/G</h5>
         <p>$player.getRushYardsPerGame()</p>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 player-stat">
         <h5>FUM</h5>
         <p>$player.getRushFumbles()</p>
       </div>
@@ -138,19 +139,19 @@
   #if($player.getPosition() == "WR" || $player.getPosition() == "TE")
   <div class="col-md-7">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 player-stat">
         <h5>REC</h5>
         <p>$player.getReceptions()</p>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 player-stat">
         <h5>YDS</h5>
         <p>$player.getRecyards()</p>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 player-stat">
         <h5>YDS/G</h5>
         <p>$player.getRecyardspergame()</p>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 player-stat">
         <h5>TD</h5>
         <p>$player.getRectd()</p>
       </div>
@@ -176,4 +177,5 @@
   </tr>
 </table>
 #end
+</div>
 </div>

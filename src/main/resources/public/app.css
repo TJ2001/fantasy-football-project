@@ -1,7 +1,7 @@
 body {
   margin-top: 100px;
   background-color: black;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Exo 2', sans-serif;
   /*for notes*/
   /*font-family: 'Gloria Hallelujah', cursive; (notes)*/
 }
@@ -61,18 +61,35 @@ li .title {
   background-color: white;
 }
 
+.mvp {
+  color: white;
+  background-image: url("/background/lights.jpg");
+  height: 100%;
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
+  font-size: 20px;
+}
+.mvp-image {
+  width: 100%;
+}
+
+.mvp-container {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .calculator-background {
   background-image: url("/background/teams.jpg");
   background-size: contain;
 }
 
 .dataTables_wrapper {
-  font-size: 20px !important;
+  font-size: 18px !important;
 }
 
 .dataTabkes_filter input {
-  height: 20px;
-  font-size: 20px;
+  height: 18px;
+  font-size: 18px;
 }
 
 .table {
@@ -143,6 +160,11 @@ li .title {
   height: auto;
 }
 
+.player-stat {
+  text-align: center;
+  font-size: 40px;
+}
+
 .calc-forms {
   margin-bottom: 5px;
 }
@@ -192,4 +214,97 @@ li .title {
     border-top: solid 0px black;
     border-bottom: solid 0px black;
   }
+}
+
+#jquery-script-menu {
+position: fixed;
+height: 90px;
+width: 100%;
+top: 0;
+left: 0;
+border-top: 5px solid #316594;
+background: #fff;
+-moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+-webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+z-index: 999999;
+padding: 10px 0;
+-webkit-box-sizing:content-box;
+-moz-box-sizing:content-box;
+box-sizing:content-box;
+}
+
+.jquery-script-center {
+width: 960px;
+margin: 0 auto;
+}
+.jquery-script-center ul {
+width: 212px;
+float:left;
+line-height:45px;
+margin:0;
+padding:0;
+list-style:none;
+}
+.jquery-script-center a {
+	text-decoration:none;
+}
+.jquery-script-ads {
+width: 728px;
+height:90px;
+float:right;
+}
+.jquery-script-clear {
+clear:both;
+height:0;
+}
+
+.barChart {
+}
+
+.barChart__row {
+    display: block;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+    .barChart__row:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+
+.barChart__label {
+    float: left;
+    padding-right: 10px;
+    width: 50px;
+}
+
+.barChart__value {
+    float: right;
+    padding-left: 10px;
+    width: 30px;
+}
+
+.barChart__bar {
+    display: block;
+    overflow: hidden;
+    background: grey;
+    height: 18px;
+}
+
+.barChart__barFill {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: red;
+}
+
+.barChart__barFill {
+  background-color:#F39C12
+}
+
+.barChart__bar {
+  height: 24px;
 }

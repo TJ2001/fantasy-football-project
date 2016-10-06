@@ -269,6 +269,21 @@
 #foreach($qb in $qbs)
   <div class="hidden-players" style=display:none>$qb.getFirstName() $qb.getLastName()</div>
 #end
+#foreach($te in $tes)
+  <div class="hidden-players" style=display:none>$te.getFirstName() $te.getLastName()</div>
+#end
+#foreach($rb in $rbs)
+  <div class="hidden-players" style=display:none>$rb.getFirstName() $rb.getLastName()</div>
+#end
+#foreach($wr in $wrs)
+  <div class="hidden-players" style=display:none>$wr.getFirstName() $wr.getLastName()</div>
+#end
+#foreach($k in $ks)
+  <div class="hidden-players" style=display:none>$k.getFirstName() $k.getLastName()</div>
+#end
+#foreach($team in $des)
+  <div class="hidden-players" style=display:none>$team.getTeamName()</div>
+#end
 <div class="hidden-players" style=display:none>TEST</div>
 <script>
   $( function() {

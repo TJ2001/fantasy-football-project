@@ -38,6 +38,12 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/mvp", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/mvp.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     get("/calculator", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       if (user.getBestPlayer().size() > 0) {
@@ -55,12 +61,18 @@ public class App {
       model.put("rbs", RB.all());
       model.put("tes", TE.all());
       model.put("wrs", WR.all());
+      model.put("ks", K.all());
+      model.put("des", Team.all());
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
     get("/players/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("player", Player.find(Integer.parseInt(request.params(":id"))));
+      String type = Player.getPlayerType(Integer.parseInt(request.params(":id")));
+      if (type.equals("QB")) {
+        model.put("topten", QB.getTopQb(10));
+      }
       model.put("template", "templates/player.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

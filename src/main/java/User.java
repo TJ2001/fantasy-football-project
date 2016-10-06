@@ -186,4 +186,39 @@ public class User {
       }
     return found != 0;
   }
+
+  public static User find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM users WHERE id = :id;";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(User.class);
+    }
+  }
+
+  public static User find(String name) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM users WHERE name = :name;";
+      return con.createQuery(sql)
+        .addParameter("name", name)
+        .executeAndFetchFirst(User.class);
+    }
+  }
+
+  public void clearTeam() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM user_selections WHERE user_id = :id;";
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+  public void clearTeamForOtherUser() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM other_user_selections *;";
+      con.createQuery(sql)
+        .executeUpdate();
+    }
+  }
 }

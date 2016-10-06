@@ -62,6 +62,10 @@ li .title {
   background-color: white;
 }
 
+.profile {
+  margin-bottom: 20px;
+}
+
 .mvp {
   color: white;
   background-image: url("/background/lights.jpg");

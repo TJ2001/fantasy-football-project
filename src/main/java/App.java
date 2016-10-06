@@ -32,17 +32,22 @@ public class App {
       model.put("rbs", RB.all());
       model.put("tes", TE.all());
       model.put("wrs", WR.all());
-      //model.put("ks", K.all());
+      model.put("ks", K.all());
+      model.put("des", Team.all());
       model.put("template", "templates/stats.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
     get("/calculator", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("topPlayer", user.getBestPlayer().get(0));
+      if (user.getBestPlayer().size() > 0) {
+        model.put("topPlayer", user.getBestPlayer().get(0));
+      }
+      model.put("topDefense", user.getBestDefense().get(0));
       model.put("selectedPlayers", user.getSelectedPlayers());
       model.put("otherSelectedPlayers", user.getSelectedPlayersForOtherUsers());
       model.put("bestPlayers", user.getBestPlayer());
+      model.put("bestDefenses", user.getBestDefense());
       model.put("template", "templates/calculator.vtl");
       model.put("qbs", QB.all());
       model.put("rbs", RB.all());
@@ -62,8 +67,8 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       String playerAdded = request.queryParams("playerAdded");
       String[] splited = playerAdded.split("\\s+");
-      Integer player_id = Player.splitName(splited[0], splited[1]);
-      if (player_id == null) {
+      Integer player_id = Player.findByName(splited[0], splited[1]);
+      if (player_id != null) {
         response.redirect("/calculator");
       } else {
         user.addPlayer(player_id);
@@ -83,7 +88,7 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       String otherSelection = request.queryParams("otherSelection");
       String[] splited = otherSelection.split("\\s+");
-      Integer player_id = Player.splitName(splited[0], splited[1]);
+      Integer player_id = Player.findByName(splited[0], splited[1]);
       if (player_id == null) {
         response.redirect("/calculator");
       } else {

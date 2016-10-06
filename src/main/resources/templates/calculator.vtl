@@ -1,8 +1,9 @@
-<div class="black-background">
-  <div class="container calculator-background">
+<div class="calculator-background">
+  <div class="container black">
     <h1>Fantasy Football Calculator</h1>
     <div class="row">
       <div class="col-md-7">
+      #if($topPlayer)
         <div class="row">
           <div class="col-md-3">
             <img src="$topPlayer.getPositionImg()" alt="" class="resize"/>
@@ -13,121 +14,179 @@
           </div>
         </div>
 
-        #if($topPlayer.getPosition() == "QB")
+          #if($topPlayer.getPosition() == "QB")
+          <div class="row">
+            <div class="col-md-3">
+              <div class="box">
+                <h5>YDS</h5>
+                <h5 class="num">100</h5>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box">
+                <h5>TDS</h5>
+                <h5 class="num">25</h5>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box">
+                <h5>QBR</h5>
+                <h5 class="num">50</h5>
+              </div>
+            </div>
+          </div>
+
+          #elseif($topPlayer.getPosition() == "RB")
+          <div class="row">
+            <div class="col-md-3">
+              <div class="box">
+                <h5>TDS</h5>
+                <h5 class="num">100</h5>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box">
+                <h5>YDS</h5>
+                <h5 class="num">25</h5>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box">
+                <h5>Y/C</h5>
+                <h5 class="num">50</h5>
+              </div>
+            </div>
+          </div>
+
+          #elseif($topPlayer.getPosition() == "TE" || $topPlayer.getPosition() == "WR")
+          <div class="row">
+            <div class="col-md-3">
+              <div class="box">
+                <h5>REC</h5>
+                <h5 class="num">100</h5>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box">
+                <h5>YDS</h5>
+                <h5 class="num">25</h5>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box">
+                <h5>TDS</h5>
+                <h5 class="num">50</h5>
+              </div>
+            </div>
+          </div>
+
+          #elseif($topPlayer.getPosition() == "K")
+          <div class="row">
+            <div class="col-md-3">
+              <div class="box">
+                <h5>FG</h5>
+                <h5 class="num">100</h5>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box">
+                <h5>FGE</h5>
+                <h5 class="num">25</h5>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box">
+                <h5>LFG</h5>
+                <h5 class="num">50</h5>
+              </div>
+            </div>
+          </div>
+          #end
+        #else
         <div class="row">
           <div class="col-md-3">
-            <div class="box">
-              <h5>YDS</h5>
-              <h5 class="num">100</h5>
-            </div>
+            <img src="$topDefense.getPositionImg()" alt="" class="resize"/>
           </div>
-          <div class="col-md-3">
-            <div class="box">
-              <h5>TDS</h5>
-              <h5 class="num">25</h5>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="box">
-              <h5>QBR</h5>
-              <h5 class="num">50</h5>
-            </div>
+          <div class="col-md-9">
+            <h4>$topDefense.getTeamName()</h4>
+            <h5>$</h5>
           </div>
         </div>
-
-        #elseif($topPlayer.getPosition() == "RB")
         <div class="row">
           <div class="col-md-3">
             <div class="box">
-              <h5>TDS</h5>
-              <h5 class="num">100</h5>
+              <h5>PT Ag</h5>
+              <h5 class="num">$topDefense.getpointsagainst()</h5>
             </div>
           </div>
           <div class="col-md-3">
             <div class="box">
-              <h5>YDS</h5>
-              <h5 class="num">25</h5>
+              <h5>Sacks</h5>
+              <h5 class="num">$topDefense.getsacks()</h5>
             </div>
           </div>
           <div class="col-md-3">
             <div class="box">
-              <h5>Y/C</h5>
-              <h5 class="num">50</h5>
-            </div>
-          </div>
-        </div>
-
-        #elseif($topPlayer.getPosition() == "TE" || $topPlayer.getPosition() == "WR")
-        <div class="row">
-          <div class="col-md-3">
-            <div class="box">
-              <h5>REC</h5>
-              <h5 class="num">100</h5>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="box">
-              <h5>YDS</h5>
-              <h5 class="num">25</h5>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="box">
-              <h5>TDS</h5>
-              <h5 class="num">50</h5>
-            </div>
-          </div>
-        </div>
-
-        #elseif($topPlayer.getPosition() == "K")
-        <div class="row">
-          <div class="col-md-3">
-            <div class="box">
-              <h5>FG</h5>
-              <h5 class="num">100</h5>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="box">
-              <h5>FGE</h5>
-              <h5 class="num">25</h5>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="box">
-              <h5>LFG</h5>
-              <h5 class="num">50</h5>
+              <h5>INT</h5>
+              <h5 class="num">$topDefense.getinterceptions()</h5>
             </div>
           </div>
         </div>
         #end
 
+        #if($bestPlayers.size() > 0)
+          <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Team</th>
+                <th>Jersey</th>
+                <th>Pos</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Gm Played</th>
+              </tr>
+            </thead>
+            #foreach($bestPlayer in $bestPlayers)
+            <tr>
+              <td>Rank</td>
+              <td><a href="/players/$bestPlayer.getPlayerId()">$bestPlayer.getFirstName() $bestPlayer.getLastName()</a></td>
+              <td><img class="teamlogo" src="$bestPlayer.getTeamImg()"> $bestPlayer.getTeam()</td>
+              <td>$bestPlayer.getJersey()</td>
+              <td>$bestPlayer.getPosition()</td>
+              <td>$bestPlayer.getHeight()</td>
+              <td>$bestPlayer.getWeight()</td>
+              <td>$bestPlayer.getGamesPlayed()</td>
+            </tr>
+            #end
+          </table>
+        #else
         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
           <thead>
             <tr>
               <th>Rank</th>
-              <th>Name</th>
               <th>Team</th>
-              <th>Jersey</th>
-              <th>Pos</th>
-              <th>Height</th>
-              <th>Weight</th>
-              <th>Gm Played</th>
+              <th>PT Ag</th>
+              <th>Sacks</th>
+              <th>INT</th>
+              <th>Tackle</th>
+              <th>ForFum</th>
             </tr>
           </thead>
-          #foreach($bestPlayer in $bestPlayers)
+          #foreach($bestDefense in $bestDefenses)
           <tr>
             <td>Rank</td>
-            <td><a href="/players/$bestPlayer.getPlayerId()">$bestPlayer.getFirstName() $bestPlayer.getLastName()</a></td>
-            <td><img class="teamlogo" src="$bestPlayer.getTeamImg()"> $bestPlayer.getTeam()</td>
-            <td>$bestPlayer.getJersey()</td>
-            <td>$bestPlayer.getPosition()</td>
-            <td>$bestPlayer.getHeight()</td>
-            <td>$bestPlayer.getWeight()</td>
-            <td>$bestPlayer.getGamesPlayed()</td>
+            <td><img class="teamlogo" src="$bestDefense.getTeamImg()"> $bestDefense.getTeamName()</a></td>
+            <td>$bestDefense.getpointsagainst()</td>
+            <td>$bestDefense.getsacks()</td>
+            <td>$bestDefense.getinterceptions()</td>
+            <td>$bestDefense.gettotaltackles()</td>
+            <td>$bestDefense.getforcedfumble()</td>
           </tr>
           #end
         </table>
+        #end
       </div>
       <div class="col-md-5">
         <div class="row">
@@ -191,7 +250,6 @@
       </div>
     </div>
   </div>
-
 </div>
 #foreach($qb in $qbs)
   <div class="hidden-players" style=display:none>$qb.getFirstName() $qb.getLastName()</div>

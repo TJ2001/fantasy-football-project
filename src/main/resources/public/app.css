@@ -143,6 +143,11 @@ li .title {
   height: auto;
 }
 
+.player-stat {
+  text-align: center;
+  font-size: 40px;
+}
+
 #myCarousel {
   border-top: solid 55px black;
   border-bottom: solid 60px black;

@@ -55,6 +55,10 @@ public abstract class Player {
     return "/pimages/" + this.position + ".jpg";
   }
 
+  public String getPositionImg2(){
+    return "/pimages/" + this.position + "2.jpg";
+  }
+
   public String getHeight() {
     return height;
   };

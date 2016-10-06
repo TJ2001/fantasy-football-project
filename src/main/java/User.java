@@ -65,10 +65,12 @@ public class User {
   }
 
   public void addTeam(int teamid) {
-    if (User.playerAlreadySelected(id)) {
+    if (User.teamAlreadySelected(id)) {
       throw new IllegalArgumentException("ERROR: team has already been selected");
     }
-
+    if (countSelectedTeams() >= 2) {
+      throw new IllegalArgumentException("ERROR: you cannot select more than 2 defenses");
+    }
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO user_selections (user_id, teamid) VALUES (:id, :teamid)";
       con.createQuery(sql)
@@ -79,14 +81,13 @@ public class User {
   }
 
   public void addTeamForOtherUser(int teamid) {
-    if (User.playerAlreadySelected(id)) {
+    if (User.teamAlreadySelected(teamid)) {
       throw new IllegalArgumentException("ERROR: team has already been selected");
     }
 
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO other_user_selections (user_id, teamid) VALUES (:id, :teamid)";
+      String sql = "INSERT INTO other_user_selections (teamid) VALUES (:teamid)";
       con.createQuery(sql)
-        .addParameter("id", this.id)
         .addParameter("teamid", teamid)
         .executeUpdate();
     }
@@ -168,6 +169,16 @@ public class User {
     try(Connection con = DB.sql2o.open()) {
       count = con.createQuery(sql)
         .addParameter("id", id)
+        .executeScalar(Integer.class);
+      }
+    return count;
+  }
+
+  public int countSelectedTeams() {
+    int count = 0;
+    String sql = "SELECT count(user_selections.teamid) FROM user_selections;";
+    try(Connection con = DB.sql2o.open()) {
+      count = con.createQuery(sql)
         .executeScalar(Integer.class);
       }
     return count;
@@ -255,17 +266,17 @@ public class User {
     return found != 0;
   }
 
-  public static boolean teamAlreadySelected(int player_id) {
+  public static boolean teamAlreadySelected(int teamid) {
     int found = 0;
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT count(teamid) FROM user_selections WHERE teamid = :id";
       found = con.createQuery(sql)
-        .addParameter("id", player_id)
+        .addParameter("id", teamid)
         .executeScalar(Integer.class);
 
         sql = "SELECT count(teamid) FROM other_user_selections WHERE teamid = :id";
         found += con.createQuery(sql)
-          .addParameter("id", player_id)
+          .addParameter("id", teamid)
           .executeScalar(Integer.class);
       }
     return found != 0;

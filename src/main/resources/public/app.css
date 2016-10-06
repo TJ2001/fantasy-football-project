@@ -148,13 +148,34 @@ li .title {
 }
 
 .calc-forms input {
-  width: 275px !important;
+  width: 243px !important;
 }
 
 #myCarousel {
   border-top: solid 55px black;
   border-bottom: solid 60px black;
 }
+
+.fixed {
+  height: 13vh;
+}
+
+.num {
+  font-size: 2em;
+  transition: all 0.5s linear;
+  /*margin-bottom: 10vh;*/
+}
+.num:hover {
+  font-size: 4em;
+  /*margin-bottom: 25px;*/
+  height: 100px;
+  /*margin-bottom: -5vh;*/
+}
+
+.belowNum {
+  color: yellow;
+}
+
 
 @media screen and (max-width: 767px) {
   #myCarousel {

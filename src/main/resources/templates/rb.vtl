@@ -1,0 +1,99 @@
+<div class="player">
+  <div class="container">
+    <img class="header" src="/images/$player.getTeam()-Banner.jpg" alt="team banner">
+    <div class="row">
+      <div class="col-md-3">
+        <img src="$player.getPositionImg2()" class="img-responsive">
+      </div>
+      <div class="col-md-2">
+        <h4>$player.getFirstName() $player.getLastName() #$player.getJersey() $player.getPosition()</h4>
+        <h5>$player.getTeam()</h5>
+        <h5>Height: $player.getHeight()</h5>
+        <h5>Weight: $player.getWeight()</h5>
+      </div>
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col-md-3 player-stat">
+            <h5>TD</h5>
+            <p>$player.getRushTd()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>YDS</h5>
+            <p>$player.getRushYards()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>YDS/G</h5>
+            <p>$player.getRushYardsPerGame()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>FUM</h5>
+            <p>$player.getRushFumbles()</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Att</th>
+          <th>Yards</th>
+          <th>Yards/Gm</th>
+          <th>Avg</th>
+          <th>RushTD</th>
+          <th>RecTD</th>
+          <th>AvgRecYds</th>
+          <th>Rec</th>
+          <th>Fumbles</th>
+          <th>FumLost</th>
+          <th>Games</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>$player.getRushAttempts()</td>
+        <td>$player.getRushYards()</td>
+        <td>$player.getRushYardsPerGame()</td>
+        <td>$player.getRushAverage()</td>
+        <td>$player.getRushTd()</td>
+        <td>$player.getReceptionTd()</td>
+        <td>$player.getAverageReceptionYardage()</td>
+        <td>$player.getReceptions()</td>
+        <td>$player.getRushFumbles()</td>
+        <td>$player.getFumbleLost()</td>
+        <td>$player.getGamesPlayed()</td>
+      </tr>
+    </table>
+    <br>
+    <h1>Rushing yards VS top 10</h1>
+    <br>
+    <div class="barChart">
+      <div class="barChart__row" data-value="$player.getRushYards()">
+        <span class="barChart__label">$player.getFirstName()&nbsp;$player.getLastName()</span>
+        <span class="barChart__value">$player.getRushYards()</span>
+        <span class="barChart__bar"><span class="barChart__barFill player-bar"></span></span>
+      </div>
+    </div>
+    <br>
+    <h1>Rushing yards VS top 10</h1>
+    <br>
+    <div class="barChart">
+      #foreach($topplayer in $topten)
+      <div class="barChart__row" data-value="$topplayer.getRushYards()">
+        <span class="barChart__label">$topplayer.getFirstName()&nbsp;$topplayer.getLastName()</span>
+        <span class="barChart__value">$topplayer.getRushYards()</span>
+        <span class="barChart__bar"><span class="barChart__barFill other-players"></span></span>
+      </div>
+      #end
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+</div>
+</div>
+
+<script src="/jquery.barChart.js"></script>
+<script type="text/javascript">
+$('.barChart').barChart({easing: 'easeOutQuart'});
+</script>

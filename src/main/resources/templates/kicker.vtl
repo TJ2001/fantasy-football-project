@@ -1,0 +1,90 @@
+<div class="player">
+  <div class="container">
+    <img class="header" src="/images/$player.getTeam()-Banner.jpg" alt="team banner">
+    <div class="row">
+      <div class="col-md-3">
+        <img src="$player.getPositionImg2()" class="img-responsive">
+      </div>
+      <div class="col-md-2">
+        <h4>$player.getFirstName() $player.getLastName() #$player.getJersey() $player.getPosition()</h4>
+        <h5>$player.getTeam()</h5>
+        <h5>Height: $player.getHeight()</h5>
+        <h5>Weight: $player.getWeight()</h5>
+      </div>
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col-md-3 player-stat">
+            <h5>XP</h5>
+            <p>$player.getXpmade()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>XP%</h5>
+            <p>$player.getXppct()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>FG</h5>
+            <p>$player.getFgmade()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>FG%</h5>
+            <p>$player.getFgpct()</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>XP</th>
+          <th>XP%</th>
+          <th>FG</th>
+          <th>FG%</th>
+          <th>FG40-49%</th>
+          <th>FGLng</th>
+          <th>FGBlk</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>$player.getXpmade()</td>
+        <td>$player.getXppct()</td>
+        <td>$player.getFgmade()</td>
+        <td>$player.getFgpct()</td>
+        <td>$player.getFg40_49pct()</td>
+        <td>$player.getFglng()</td>
+        <td>$player.getFgblk()</td>
+      </tr>
+    </table>
+    <br>
+    <h1>Field Goal % VS top 10</h1>
+    <div class="barChart">
+      <div class="barChart__row" data-value="$player.getFgpct()">
+        <span class="barChart__label">$player.getFirstName()&nbsp;$player.getLastName()</span>
+        <span class="barChart__value">$player.getFgpct()</span>
+        <span class="barChart__bar"><span class="barChart__barFill player-bar"></span></span>
+      </div>
+    </div>
+    <br>
+    <h1>Field Goal % VS top 10</h1>
+    <br>
+    <div class="barChart">
+      #foreach($topplayer in $topten)
+      <div class="barChart__row" data-value="$topplayer.getFgpct()">
+        <span class="barChart__label">$topplayer.getFirstName()&nbsp;$topplayer.getLastName()</span>
+        <span class="barChart__value">$topplayer.getFgpct()</span>
+        <span class="barChart__bar"><span class="barChart__barFill other-players"></span></span>
+      </div>
+      #end
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+</div>
+</div>
+
+<script src="/jquery.barChart.js"></script>
+<script type="text/javascript">
+$('.barChart').barChart({easing: 'easeOutQuart'});
+</script>

@@ -6,7 +6,7 @@ body {
   /*font-family: 'Gloria Hallelujah', cursive; (notes)*/
 }
 
-h1, h2, h4, h5, .title {
+h1, h3, h2, h4, h5, .title {
   font-family: 'Russo One', sans-serif;
 }
 
@@ -54,6 +54,7 @@ li .title {
 }
 
 .stats {
+  margin-top: 125px;
   padding-top: 100px;
 }
 
@@ -256,7 +257,7 @@ height:0;
 
 .barChart__label {
     float: left;
-    padding-right: 10px;
+    padding-right: 150px;
     width: 50px;
 }
 
@@ -280,10 +281,14 @@ height:0;
     background: red;
 }
 
-.barChart__barFill {
-  background-color:#F39C12
+.other-players {
+  background:#003099;
 }
 
 .barChart__bar {
   height: 24px;
+}
+
+.player-bar {
+  background:#990000;
 }

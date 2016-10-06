@@ -88,7 +88,8 @@ tablede.on( 'order.dt search.dt', function () {
     } );
 } ).draw();
 
-$('#qb-table-box').show();
+var position = $("input:radio[name=position]:checked").val();
+$('#' + position + '-table-box').show();
 
 $('#qb').click(function() {
   $('.table-box').hide();

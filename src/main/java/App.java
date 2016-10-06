@@ -72,8 +72,20 @@ public class App {
       String type = Player.getPlayerType(Integer.parseInt(request.params(":id")));
       if (type.equals("QB")) {
         model.put("topten", QB.getTopQb(10));
+        model.put("template", "templates/qb.vtl");
+      }else if (type.equals("RB")){
+        model.put("topten", RB.getTopRb(10));
+        model.put("template", "templates/rb.vtl");
+      }else if (type.equals("WR")){
+        model.put("topten", WR.getTopWr(10));
+        model.put("template", "templates/wr-te.vtl");
+      }else if (type.equals("TE")){
+        model.put("topten", TE.getTopTe(10));
+        model.put("template", "templates/wr-te.vtl");
+      }else{
+        model.put("topten", K.getTopK(10));
+        model.put("template", "templates/kicker.vtl");
       }
-      model.put("template", "templates/player.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

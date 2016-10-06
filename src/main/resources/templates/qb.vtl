@@ -1,0 +1,118 @@
+<div class="player">
+  <div class="container">
+    <img class="header" src="/images/$player.getTeam()-Banner.jpg" alt="team banner">
+    <div class="row">
+      <div class="col-md-3">
+        <img src="$player.getPositionImg2()" class="img-responsive">
+      </div>
+      <div class="col-md-2">
+        <h4>$player.getFirstName() $player.getLastName() #$player.getJersey() $player.getPosition()</h4>
+        <h5>$player.getTeam()</h5>
+        <h5>Height: $player.getHeight()</h5>
+        <h5>Weight: $player.getWeight()</h5>
+      </div>
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col-md-3 player-stat">
+            <h5>TD</h5>
+            <p>$player.getPassTd()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>INT</h5>
+            <p>$player.getPassInt()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>YDS</h5>
+            <p>$player.getPassYards()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>RTG</h5>
+            <p>$player.getQbrating()</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Comp</th>
+          <th>Att</th>
+          <th>Comp%</th>
+          <th>Yards</th>
+          <th>Yards/gm</th>
+          <th>PassTD</th>
+          <th>Int</th>
+          <th>QBR</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>$player.getPassCompletions()</td>
+        <td>$player.getPassAttempts()</td>
+        <td>$player.getPassPct()</td>
+        <td>$player.getPassYards()</td>
+        <td>$player.getPassYardsPerGame()</td>
+        <td>$player.getPassTd()</td>
+        <td>$player.getPassInt()</td>
+        <td>$player.getQbrating()</td>
+      </tr>
+    </table>
+    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Sacks</th>
+          <th>SackYds</th>
+          <th>Rush</th>
+          <th>Yards</th>
+          <th>Yards/gm</th>
+          <th>RushTD</th>
+          <th>Fumbles</th>
+          <th>FumLost</th>
+          <th>Games</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>$player.getSacks()</td>
+        <td>$player.getSackYds()</td>
+        <td>$player.getRushAttempts()</td>
+        <td>$player.getRushYards()</td>
+        <td>$player.getRushYardsPerGame()</td>
+        <td>$player.getRushTd()</td>
+        <td>$player.getFumbles()</td>
+        <td>$player.getFumLost()</td>
+        <td>$player.getGamesPlayed()</td>
+      </tr>
+    </table>
+    <br>
+    <h3>Passing yards</h3>
+    <br>
+    <div class="barChart">
+      <div class="barChart__row" data-value="$player.getPassYards()">
+        <span class="barChart__label">$player.getFirstName()&nbsp;$player.getLastName()</span>
+        <span class="barChart__value">$player.getPassYards()</span>
+        <span class="barChart__bar"><span class="barChart__barFill player-bar"></span></span>
+      </div>
+    </div>
+    <br>
+    <h3>Passing yards VS top 10</h3>
+    <br>
+    <div class="barChart">
+      #foreach($topplayer in $topten)
+        <div class="barChart__row" data-value="$topplayer.getPassYards()">
+          <span class="barChart__label">$topplayer.getFirstName()&nbsp;$topplayer.getLastName()</span>
+          <span class="barChart__value">$topplayer.getPassYards()</span>
+          <span class="barChart__bar"><span class="barChart__barFill other-players"></span></span>
+        </div>
+      #end
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    </div>
+    </div>
+    </div>
+    <script src="/jquery.barChart.js"></script>
+    <script type="text/javascript">
+    $('.barChart').barChart({easing: 'easeOutQuart'});
+    </script>

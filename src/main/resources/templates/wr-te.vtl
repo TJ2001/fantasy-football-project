@@ -1,0 +1,86 @@
+<div class="player">
+  <div class="container">
+    <img class="header" src="/images/$player.getTeam()-Banner.jpg" alt="team banner">
+    <div class="row">
+      <div class="col-md-3">
+        <img src="$player.getPositionImg2()" class="img-responsive">
+      </div>
+      <div class="col-md-2">
+        <h4>$player.getFirstName() $player.getLastName() #$player.getJersey() $player.getPosition()</h4>
+        <h5>$player.getTeam()</h5>
+        <h5>Height: $player.getHeight()</h5>
+        <h5>Weight: $player.getWeight()</h5>
+      </div>
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col-md-3 player-stat">
+            <h5>REC</h5>
+            <p>$player.getReceptions()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>YDS</h5>
+            <p>$player.getRecyards()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>YDS/G</h5>
+            <p>$player.getRecyardspergame()</p>
+          </div>
+          <div class="col-md-3 player-stat">
+            <h5>TD</h5>
+            <p>$player.getRectd()</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Rec</th>
+          <th>Yds</th>
+          <th>Avg</th>
+          <th>Targ</th>
+          <th>TD</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>$player.getReceptions()</td>
+        <td>$player.getRecyards()</td>
+        <td>$player.getRecyardspergame()</td>
+        <td>$player.getTargets()</td>
+        <td>$player.getRectd()</td>
+      </tr>
+    </table>
+    <br>
+    <h1>Receiving yards VS top 10</h1>
+    <br>
+    <div class="barChart">
+      <div class="barChart__row" data-value="$player.getRecyards()">
+        <span class="barChart__label">$player.getFirstName()&nbsp;$player.getLastName()</span>
+        <span class="barChart__value">$player.getRecyards()</span>
+        <span class="barChart__bar"><span class="barChart__barFill player-bar"></span></span>
+      </div>
+    </div>
+    <br>
+    <h1>Receiving yards VS top 10</h1>
+    <div class="barChart">
+      #foreach($topplayer in $topten)
+      <div class="barChart__row" data-value="$topplayer.getRecyards()">
+        <span class="barChart__label">$topplayer.getFirstName()&nbsp;$topplayer.getLastName()</span>
+        <span class="barChart__value">$topplayer.getRecyards()</span>
+        <span class="barChart__bar"><span class="barChart__barFill other-players"></span></span>
+      </div>
+      #end
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+</div>
+</div>
+
+<script src="/jquery.barChart.js"></script>
+<script type="text/javascript">
+$('.barChart').barChart({easing: 'easeOutQuart'});
+</script>

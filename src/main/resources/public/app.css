@@ -33,6 +33,11 @@ li .title {
   padding-right: 20px;
 }
 
+.addmargins {
+  margin-bottom: 5vh;
+  margin-top: 5vh;
+}
+
 .navbar-nav li a {
   line-height: 100px;
   height: 100px;
@@ -73,6 +78,7 @@ li .title {
   background-size: cover;
   font-size: 20px;
 }
+
 .mvp-image {
   width: 100%;
 }
@@ -124,10 +130,6 @@ li .title {
   padding-bottom: 100px;
 }
 
-.num {
-  font-family: 'Wallpoet', cursive;
-}
-
 .csize {
   width: 100%;
   height: auto;
@@ -176,44 +178,24 @@ li .title {
   width: 243px !important;
 }
 
-#myCarousel {
-  border-top: solid 55px black;
-  border-bottom: solid 60px black;
-}
-
 .fixed {
   height: 13vh;
 }
 
 .num {
-  font-size: 2em;
+  font-family: 'Quantico', sans-serif;
+  font-weight: bold;
+  font-size: 3em;
   transition: all 0.5s linear;
 }
+
 .num:hover {
-  font-size: 4em;
+  font-size: 6em;
   height: 100px;
 }
 
 .belowNum {
   color: yellow;
-}
-
-#jquery-script-menu {
-  position: fixed;
-  height: 90px;
-  width: 100%;
-  top: 0;
-  left: 0;
-  border-top: 5px solid #316594;
-  background: #fff;
-  -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-  -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-  z-index: 999999;
-  padding: 10px 0;
-  -webkit-box-sizing:content-box;
-  -moz-box-sizing:content-box;
-  box-sizing:content-box;
 }
 
 .jquery-script-center {
@@ -293,6 +275,33 @@ li .title {
 
 .player-bar {
   background:#990000;
+}
+
+#fontsize {
+  font-size: 60px;
+}
+
+#jquery-script-menu {
+  position: fixed;
+  height: 90px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-top: 5px solid #316594;
+  background: #fff;
+  -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+  -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+  z-index: 999999;
+  padding: 10px 0;
+  -webkit-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  box-sizing:content-box;
+}
+
+#myCarousel {
+  border-top: solid 55px black;
+  border-bottom: solid 60px black;
 }
 
 @media screen and (max-width: 767px) {

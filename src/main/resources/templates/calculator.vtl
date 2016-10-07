@@ -3,7 +3,7 @@
     <h1>Fantasy Football Calculator</h1>
     <div class="row">
       <div class="col-xs-8">
-      #if($topPlayer)
+        #if($topPlayer)
         <div class="row">
           <div class="col-xs-4">
             <img src="$topPlayer.getPositionImg()" alt="" class="resize"/>
@@ -13,316 +13,308 @@
             <h5>$topPlayer.getTeam()</h5>
           </div>
         </div>
-
-          #if($topPlayer.getPosition() == "QB")
-          <div class="row fixed">
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">YDS</h5>
-                <h5 class="num">100</h5>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">TDS</h5>
-                <h5 class="num">25</h5>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">QBR</h5>
-                <h5 class="num">50</h5>
-              </div>
+        #if($topPlayer.getPosition() == "QB")
+        <div class="row fixed">
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">YDS</h5>
+              <h5 class="num">100</h5>
             </div>
           </div>
-
-          #elseif($topPlayer.getPosition() == "RB")
-          <div class="row fixed">
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">TDS</h5>
-                <h5 class="num">100</h5>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">YDS</h5>
-                <h5 class="num">25</h5>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">Y/C</h5>
-                <h5 class="num">50</h5>
-              </div>
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">TDS</h5>
+              <h5 class="num">25</h5>
             </div>
           </div>
-
-          #elseif($topPlayer.getPosition() == "TE" || $topPlayer.getPosition() == "WR")
-          <div class="row fixed">
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">REC</h5>
-                <h5 class="num">100</h5>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">YDS</h5>
-                <h5 class="num">25</h5>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">TDS</h5>
-                <h5 class="num">50</h5>
-              </div>
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">QBR</h5>
+              <h5 class="num">50</h5>
             </div>
           </div>
-
-          #elseif($topPlayer.getPosition() == "K")
-          <div class="row fixed">
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">FG</h5>
-                <h5 class="num">100</h5>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">FGE</h5>
-                <h5 class="num">25</h5>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box">
-                <h5 class="belowNum">LFG</h5>
-                <h5 class="num">50</h5>
-              </div>
+        </div>
+        #elseif($topPlayer.getPosition() == "RB")
+        <div class="row fixed">
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">TDS</h5>
+              <h5 class="num">100</h5>
             </div>
           </div>
-          #end
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">YDS</h5>
+              <h5 class="num">25</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">Y/C</h5>
+              <h5 class="num">50</h5>
+            </div>
+          </div>
+        </div>
+        #elseif($topPlayer.getPosition() == "TE" || $topPlayer.getPosition() == "WR")
+        <div class="row fixed">
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">REC</h5>
+              <h5 class="num">100</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">YDS</h5>
+              <h5 class="num">25</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">TDS</h5>
+              <h5 class="num">50</h5>
+            </div>
+          </div>
+        </div>
+        #elseif($topPlayer.getPosition() == "K")
+        <div class="row fixed">
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">FG</h5>
+              <h5 class="num">100</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">FGE</h5>
+              <h5 class="num">25</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="box">
+              <h5 class="belowNum">LFG</h5>
+              <h5 class="num">50</h5>
+            </div>
+          </div>
+        </div>
+        #end
         #else
         <div class="row">
           <div class="col-md-10">
             <h2>$topDefense.getTeamName()</h4>
-            <h3>Team Defense</h5>
-          </div>
-          <div class="col-md-4">
-            <img src="$topDefense.getPositionImg()" alt="" class="resize"/>
-          </div>
-
-        </div>
-        <div class="row fixed">
-          <div class="col-md-4 number-1">
-            <div class="box">
-              <h5 class="belowNum">PT Ag</h5>
-              <h5 class="num">$topDefense.getPointsAgainst()</h5>
-            </div>
-          </div>
-          <div class="col-md-4 number-2">
-            <div class="box">
-              <h5 class="belowNum">Sacks</h5>
-              <h5 class="num">$topDefense.getSacks()</h5>
-            </div>
-          </div>
-          <div class="col-md-4 number-3">
-            <div class="box">
-              <h5 class="belowNum">INT</h5>
-              <h5 class="num">$topDefense.getInterceptions()</h5>
-            </div>
-          </div>
-        </div>
-        #end
-
-        #if($bestPlayers.size() > 0)
-          <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Team</th>
-                <th>Jersey</th>
-                <th>Pos</th>
-                <th>Height</th>
-                <th>Weight</th>
-                <th>Gm Played</th>
-              </tr>
-            </thead>
-            #foreach($bestPlayer in $bestPlayers)
-            <tr>
-              <td>Rank</td>
-              <td><a href="/players/$bestPlayer.getPlayerId()">$bestPlayer.getFirstName() $bestPlayer.getLastName()</a></td>
-              <td><img class="teamlogo" src="$bestPlayer.getTeamImg()"> $bestPlayer.getTeam()</td>
-              <td>$bestPlayer.getJersey()</td>
-              <td>$bestPlayer.getPosition()</td>
-              <td>$bestPlayer.getHeight()</td>
-              <td>$bestPlayer.getWeight()</td>
-              <td>$bestPlayer.getGamesPlayed()</td>
-            </tr>
-            #end
-          </table>
-        #else
-        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Team</th>
-              <th>PTS</th>
-              <th>Sacks</th>
-              <th>INT</th>
-              <th>Tackles</th>
-              <th>Fumble</th>
-            </tr>
-          </thead>
-          #foreach($bestDefense in $bestDefenses)
-          <tr>
-            <td>Rank</td>
-            <td><img class="teamlogo" src="$bestDefense.getTeamImg()"> $bestDefense.getTeamName()</a></td>
-            <td>$bestDefense.getPointsAgainst()</td>
-            <td>$bestDefense.getSacks()</td>
-            <td>$bestDefense.getInterceptions()</td>
-            <td>$bestDefense.getTotalTackles()</td>
-            <td>$bestDefense.getForcedFumble()</td>
-          </tr>
-          #end
-        </table>
-        #end
-      </div>
-      <div class="col-xs-4">
-        <h2>My Team</h2>
-        <form class="form-inline pull-left calc-forms" action="/calculator" method="post">
-          <div class="form-group">
-            <div class="input-group">
-              <input type="text" id="playerAdded" name="playerAdded" class="form-control">
-              <div class="input-group-btn">
-                <button class="btn btn-primary" type="submit" name="button">ADD</button>
+              <h3>Team Defense</h5>
+              </div>
+              <div class="col-md-4">
+                <img src="$topDefense.getPositionImg()" alt="" class="resize"/>
               </div>
             </div>
-          </div>
-        </form>
-        <form class="form-inline pull-right calc-forms" action="/calculator/clear" method="post">
-          <button name="button" class="btn btn-danger" type="submit">Clear</button>
-        </form>
-        #if($notfound)
-          <p class="error">Error: player/team not found.</p>
-        #end
-        #if($selected)
-          <p class="error">Error: player $selected.getFirstName() $selected.getLastName() already drafted.</p>
-        #end
-        #if($tselected)
-          <p class="error">Error: team $tselected.getTeamName() already drafted.</p>
-        #end
-        #if($toomany)
-          <p class="error">Error: you have selected too many $toomany.</p>
-        #end
-        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Team</th>
-              <th>Position</th>
-            </tr>
-          </thead>
-          #foreach($selectedPlayer in $selectedPlayers)
-          <tr>
-            <td><a href="/players/$selectedPlayer.getPlayerId()">$selectedPlayer.getFirstName() $selectedPlayer.getLastName()</a></td>
-            <td><img class="teamlogo" src="$selectedPlayer.getTeamImg()"> $selectedPlayer.getTeam()</td>
-            <td>$selectedPlayer.getPosition()</td>
-          </tr>
-          #end
-          #foreach($selectedTeam in $selectedTeams)
-          <tr>
-            <td>Team Defense</td>
-            <td><img class="teamlogo" src="$selectedTeam.getTeamImg()"> $selectedTeam.getTeamName()</td>
-            <td>DEF</td>
-          </tr>
-          #end
-        </table>
-        <h2>Their Team</h2>
-
-          <form class="form-inline pull-left calc-forms" action="/calculator/otheruser" method="post">
-            <div class="form-group">
-              <div class="input-group">
-                <input id="otherSelection" name="otherSelection" type="text" class="form-control">
-                <div class="input-group-btn">
-                  <button class="btn btn-primary" type="submit" name="button">ADD</button>
+            <div class="row fixed">
+              <div class="col-md-4 number-1">
+                <div class="box">
+                  <h5 class="belowNum">PT Ag</h5>
+                  <h5 class="num">$topDefense.getPointsAgainst()</h5>
+                </div>
+              </div>
+              <div class="col-md-4 number-2">
+                <div class="box">
+                  <h5 class="belowNum">Sacks</h5>
+                  <h5 class="num">$topDefense.getSacks()</h5>
+                </div>
+              </div>
+              <div class="col-md-4 number-3">
+                <div class="box">
+                  <h5 class="belowNum">INT</h5>
+                  <h5 class="num">$topDefense.getInterceptions()</h5>
                 </div>
               </div>
             </div>
-          </form>
-          <form class="form-inline pull-right calc-forms" action="/calculator/otheruser/clear" method="post">
-            <button name="button" class="btn btn-danger" type="submit">Clear</button>
-          </form>
-          #if($onotfound)
+            #end
+
+            #if($bestPlayers.size() > 0)
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Name</th>
+                  <th>Team</th>
+                  <th>Jersey</th>
+                  <th>Pos</th>
+                  <th>Height</th>
+                  <th>Weight</th>
+                  <th>Gm Played</th>
+                </tr>
+              </thead>
+              #foreach($bestPlayer in $bestPlayers)
+              <tr>
+                <td>Rank</td>
+                <td><a href="/players/$bestPlayer.getPlayerId()">$bestPlayer.getFirstName() $bestPlayer.getLastName()</a></td>
+                <td><img class="teamlogo" src="$bestPlayer.getTeamImg()"> $bestPlayer.getTeam()</td>
+                <td>$bestPlayer.getJersey()</td>
+                <td>$bestPlayer.getPosition()</td>
+                <td>$bestPlayer.getHeight()</td>
+                <td>$bestPlayer.getWeight()</td>
+                <td>$bestPlayer.getGamesPlayed()</td>
+              </tr>
+              #end
+            </table>
+            #else
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Team</th>
+                  <th>PTS</th>
+                  <th>Sacks</th>
+                  <th>INT</th>
+                  <th>Tackles</th>
+                  <th>Fumble</th>
+                </tr>
+              </thead>
+              #foreach($bestDefense in $bestDefenses)
+              <tr>
+                <td>Rank</td>
+                <td><img class="teamlogo" src="$bestDefense.getTeamImg()"> $bestDefense.getTeamName()</a></td>
+                <td>$bestDefense.getPointsAgainst()</td>
+                <td>$bestDefense.getSacks()</td>
+                <td>$bestDefense.getInterceptions()</td>
+                <td>$bestDefense.getTotalTackles()</td>
+                <td>$bestDefense.getForcedFumble()</td>
+              </tr>
+              #end
+            </table>
+            #end
+          </div>
+          <div class="col-xs-4">
+            <h2>My Team</h2>
+            <form class="form-inline pull-left calc-forms" action="/calculator" method="post">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" id="playerAdded" name="playerAdded" class="form-control">
+                  <div class="input-group-btn">
+                    <button class="btn btn-primary" type="submit" name="button">ADD</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <form class="form-inline pull-right calc-forms" action="/calculator/clear" method="post">
+              <button name="button" class="btn btn-danger" type="submit">Clear</button>
+            </form>
+            #if($notfound)
             <p class="error">Error: player/team not found.</p>
-          #end
-          #if($oselected)
+            #end
+            #if($selected)
+            <p class="error">Error: player $selected.getFirstName() $selected.getLastName() already drafted.</p>
+            #end
+            #if($tselected)
+            <p class="error">Error: team $tselected.getTeamName() already drafted.</p>
+            #end
+            #if($toomany)
+            <p class="error">Error: you have selected too many $toomany.</p>
+            #end
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Team</th>
+                  <th>Position</th>
+                </tr>
+              </thead>
+              #foreach($selectedPlayer in $selectedPlayers)
+              <tr>
+                <td><a href="/players/$selectedPlayer.getPlayerId()">$selectedPlayer.getFirstName() $selectedPlayer.getLastName()</a></td>
+                <td><img class="teamlogo" src="$selectedPlayer.getTeamImg()"> $selectedPlayer.getTeam()</td>
+                <td>$selectedPlayer.getPosition()</td>
+              </tr>
+              #end
+              #foreach($selectedTeam in $selectedTeams)
+              <tr>
+                <td>Team Defense</td>
+                <td><img class="teamlogo" src="$selectedTeam.getTeamImg()"> $selectedTeam.getTeamName()</td>
+                <td>DEF</td>
+              </tr>
+              #end
+            </table>
+            <h2>Their Team</h2>
+            <form class="form-inline pull-left calc-forms" action="/calculator/otheruser" method="post">
+              <div class="form-group">
+                <div class="input-group">
+                  <input id="otherSelection" name="otherSelection" type="text" class="form-control">
+                  <div class="input-group-btn">
+                    <button class="btn btn-primary" type="submit" name="button">ADD</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <form class="form-inline pull-right calc-forms" action="/calculator/otheruser/clear" method="post">
+              <button name="button" class="btn btn-danger" type="submit">Clear</button>
+            </form>
+            #if($onotfound)
+            <p class="error">Error: player/team not found.</p>
+            #end
+            #if($oselected)
             <p class="error">Error: player $oselected.getFirstName() $oselected.getLastName() already drafted.</p>
-          #end
-          #if($otselected)
+            #end
+            #if($otselected)
             <p class="error">Error: team $otselected.getTeamName() already drafted.</p>
-          #end
-        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Team</th>
-              <th>Position</th>
-            </tr>
-          </thead>
-          #foreach($otherSelectedPlayer in $otherSelectedPlayers)
-          <tr>
-            <td><a href="/players/$otherSelectedPlayer.getPlayerId()">$otherSelectedPlayer.getFirstName() $otherSelectedPlayer.getLastName()</a></td>
-            <td><img class="teamlogo" src="$otherSelectedPlayer.getTeamImg()"> $otherSelectedPlayer.getTeam()</td>
-            <td>$otherSelectedPlayer.getPosition()</td>
-          </tr>
-          #end
-          #foreach($otherSelectedTeam in $otherSelectedTeams)
-          <tr>
-            <td>Team Defense</td>
-            <td><img class="teamlogo" src="$otherSelectedTeam.getTeamImg()"> $otherSelectedTeam.getTeamName()</td>
-            <td>DEF</td>
-          </tr>
-          #end
-        </table>
+            #end
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Team</th>
+                  <th>Position</th>
+                </tr>
+              </thead>
+              #foreach($otherSelectedPlayer in $otherSelectedPlayers)
+              <tr>
+                <td><a href="/players/$otherSelectedPlayer.getPlayerId()">$otherSelectedPlayer.getFirstName() $otherSelectedPlayer.getLastName()</a></td>
+                <td><img class="teamlogo" src="$otherSelectedPlayer.getTeamImg()"> $otherSelectedPlayer.getTeam()</td>
+                <td>$otherSelectedPlayer.getPosition()</td>
+              </tr>
+              #end
+              #foreach($otherSelectedTeam in $otherSelectedTeams)
+              <tr>
+                <td>Team Defense</td>
+                <td><img class="teamlogo" src="$otherSelectedTeam.getTeamImg()"> $otherSelectedTeam.getTeamName()</td>
+                <td>DEF</td>
+              </tr>
+              #end
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-#foreach($qb in $qbs)
-  <div class="hidden-players" style=display:none>$qb.getFirstName() $qb.getLastName()</div>
-#end
-#foreach($te in $tes)
+    #foreach($qb in $qbs)
+    <div class="hidden-players" style=display:none>$qb.getFirstName() $qb.getLastName()</div>
+  #end
+  #foreach($te in $tes)
   <div class="hidden-players" style=display:none>$te.getFirstName() $te.getLastName()</div>
 #end
 #foreach($rb in $rbs)
-  <div class="hidden-players" style=display:none>$rb.getFirstName() $rb.getLastName()</div>
+<div class="hidden-players" style=display:none>$rb.getFirstName() $rb.getLastName()</div>
 #end
 #foreach($wr in $wrs)
-  <div class="hidden-players" style=display:none>$wr.getFirstName() $wr.getLastName()</div>
+<div class="hidden-players" style=display:none>$wr.getFirstName() $wr.getLastName()</div>
 #end
 #foreach($k in $ks)
-  <div class="hidden-players" style=display:none>$k.getFirstName() $k.getLastName()</div>
+<div class="hidden-players" style=display:none>$k.getFirstName() $k.getLastName()</div>
 #end
 #foreach($team in $des)
-  <div class="hidden-players" style=display:none>$team.getTeamName()</div>
+<div class="hidden-players" style=display:none>$team.getTeamName()</div>
 #end
 <div class="hidden-players" style=display:none>TEST</div>
 <script>
-  $( function() {
-    var elements = $( ".hidden-players" ).toArray();
-    var availableTags = new Array();
-    for (var i = 0; i < elements.length; i++) {
-      availableTags.push(elements[i].innerHTML);
-    }
-    $( "#playerAdded" ).autocomplete({
-      source: availableTags
-    });
-
-    $( "#otherSelection" ).autocomplete({
-      source: availableTags
-    });
-
-  } );
-  </script>
+$( function() {
+  var elements = $( ".hidden-players" ).toArray();
+  var availableTags = new Array();
+  for (var i = 0; i < elements.length; i++) {
+    availableTags.push(elements[i].innerHTML);
+  }
+  $( "#playerAdded" ).autocomplete({
+    source: availableTags
+  });
+  $( "#otherSelection" ).autocomplete({
+    source: availableTags
+  });
+});
+</script>

@@ -96,11 +96,11 @@
     <br>
     <div class="barChart">
       #foreach($topplayer in $topten)
-        <div class="barChart__row" data-value="$topplayer.getPassYards()">
-          <span class="barChart__label">$topplayer.getFirstName()&nbsp;$topplayer.getLastName()</span>
-          <span class="barChart__value">$topplayer.getPassYards()</span>
-          <span class="barChart__bar"><span class="barChart__barFill other-players"></span></span>
-        </div>
+      <div class="barChart__row" data-value="$topplayer.getPassYards()">
+        <span class="barChart__label">$topplayer.getFirstName()&nbsp;$topplayer.getLastName()</span>
+        <span class="barChart__value">$topplayer.getPassYards()</span>
+        <span class="barChart__bar"><span class="barChart__barFill other-players"></span></span>
+      </div>
       #end
     </div>
     <br>
@@ -108,10 +108,10 @@
     <br>
     <br>
     <br>
-    </div>
-    </div>
-    </div>
-    <script src="/jquery.barChart.js"></script>
-    <script type="text/javascript">
-    $('.barChart').barChart({easing: 'easeOutQuart'});
-    </script>
+  </div>
+</div>
+</div>
+<script src="/jquery.barChart.js"></script>
+<script type="text/javascript">
+$('.barChart').barChart({easing: 'easeOutQuart'});
+</script>

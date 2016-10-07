@@ -87,17 +87,17 @@ public abstract class Player {
     String type = Player.getPlayerType(id);
     switch (type) {
       case "QB":
-        return QB.find(id);
+      return QB.find(id);
       case "RB":
-        return RB.find(id);
+      return RB.find(id);
       case "WR":
-        return WR.find(id);
+      return WR.find(id);
       case "TE":
-        return TE.find(id);
-        case "K":
-          return K.find(id);
+      return TE.find(id);
+      case "K":
+      return K.find(id);
       default:
-        return null;
+      return null;
     }
   }
 
@@ -105,8 +105,8 @@ public abstract class Player {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT position FROM stats WHERE player_id = :id;";
       return con.createQuery(sql)
-        .addParameter("id", id)
-        .executeScalar(String.class);
+      .addParameter("id", id)
+      .executeScalar(String.class);
     }
   }
 
@@ -114,9 +114,9 @@ public abstract class Player {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT player_id FROM stats WHERE first_name = :firstName AND last_name = :lastName;";
       return con.createQuery(sql)
-        .addParameter("firstName", firstName)
-        .addParameter("lastName", lastName)
-        .executeScalar(Integer.class);
+      .addParameter("firstName", firstName)
+      .addParameter("lastName", lastName)
+      .executeScalar(Integer.class);
     }
   }
 }

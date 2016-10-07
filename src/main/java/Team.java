@@ -2,6 +2,7 @@ import java.util.List;
 import org.sql2o.*;
 
 public class Team {
+  
   private String teamname;
   private int totaltackles;
   private int sacks;
@@ -103,52 +104,52 @@ public class Team {
   public static Team getBestTeam() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns +
-        "FROM team_stats " +
-        "GROUP BY " + columns +
-         teamMath + "1;";
-         return con.createQuery(sql)
-           .addColumnMapping("tackletotal", "totaltackles")
-           .addColumnMapping("passesdefended", "pd")
-           .addColumnMapping("intyds", "interceptionyards")
-           .addColumnMapping("inttd", "interceptiontds")
-           .addColumnMapping("fumforced", "forcedfumble")
-           .addColumnMapping("fumopprec", "recoveredfumble")
-           .addColumnMapping("fumtd", "tdfromfumble")
-           .executeAndFetchFirst(Team.class);
+      "FROM team_stats " +
+      "GROUP BY " + columns +
+      teamMath + "1;";
+      return con.createQuery(sql)
+      .addColumnMapping("tackletotal", "totaltackles")
+      .addColumnMapping("passesdefended", "pd")
+      .addColumnMapping("intyds", "interceptionyards")
+      .addColumnMapping("inttd", "interceptiontds")
+      .addColumnMapping("fumforced", "forcedfumble")
+      .addColumnMapping("fumopprec", "recoveredfumble")
+      .addColumnMapping("fumtd", "tdfromfumble")
+      .executeAndFetchFirst(Team.class);
     }
   }
 
   public static List<Team> getBestTeams(int n) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns +
-        "FROM team_stats " +
-        "GROUP BY " + columns + teamMath + n + ";";
-         return con.createQuery(sql)
-         .addColumnMapping("tackletotal", "totaltackles")
-         .addColumnMapping("passesdefended", "pd")
-         .addColumnMapping("intyds", "interceptionyards")
-         .addColumnMapping("inttd", "interceptiontds")
-         .addColumnMapping("fumforced", "forcedfumble")
-         .addColumnMapping("fumopprec", "recoveredfumble")
-         .addColumnMapping("fumtd", "tdfromfumble")
-           .executeAndFetch(Team.class);
+      "FROM team_stats " +
+      "GROUP BY " + columns + teamMath + n + ";";
+      return con.createQuery(sql)
+      .addColumnMapping("tackletotal", "totaltackles")
+      .addColumnMapping("passesdefended", "pd")
+      .addColumnMapping("intyds", "interceptionyards")
+      .addColumnMapping("inttd", "interceptiontds")
+      .addColumnMapping("fumforced", "forcedfumble")
+      .addColumnMapping("fumopprec", "recoveredfumble")
+      .addColumnMapping("fumtd", "tdfromfumble")
+      .executeAndFetch(Team.class);
     }
   }
 
   public static Team find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns +
-        "FROM team_stats WHERE teamid = :id;";
+      "FROM team_stats WHERE teamid = :id;";
       return con.createQuery(sql)
-        .addParameter("id", id)
-        .addColumnMapping("tackletotal", "totaltackles")
-        .addColumnMapping("passesdefended", "pd")
-        .addColumnMapping("intyds", "interceptionyards")
-        .addColumnMapping("inttd", "interceptiontds")
-        .addColumnMapping("fumforced", "forcedfumble")
-        .addColumnMapping("fumopprec", "recoveredfumble")
-        .addColumnMapping("fumtd", "tdfromfumble")
-        .executeAndFetchFirst(Team.class);
+      .addParameter("id", id)
+      .addColumnMapping("tackletotal", "totaltackles")
+      .addColumnMapping("passesdefended", "pd")
+      .addColumnMapping("intyds", "interceptionyards")
+      .addColumnMapping("inttd", "interceptiontds")
+      .addColumnMapping("fumforced", "forcedfumble")
+      .addColumnMapping("fumopprec", "recoveredfumble")
+      .addColumnMapping("fumtd", "tdfromfumble")
+      .executeAndFetchFirst(Team.class);
     }
   }
 
@@ -156,9 +157,8 @@ public class Team {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT teamid FROM team_stats WHERE teamname = :teamName;";
       return con.createQuery(sql)
-        .addParameter("teamName", teamName)
-        .executeScalar(Integer.class);
+      .addParameter("teamName", teamName)
+      .executeScalar(Integer.class);
     }
   }
-
 }

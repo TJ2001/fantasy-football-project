@@ -2,6 +2,7 @@ import java.util.List;
 import org.sql2o.*;
 
 public class WR extends Player{
+
   private int receptions;
   private double recyards;
   private double recyardspergame;
@@ -48,10 +49,10 @@ public class WR extends Player{
     }
   }
 
-public static WR find(int id) {
-  try(Connection con = DB.sql2o.open()) {
-    String sql = "SELECT " + columns + " FROM stats WHERE player_id = :id;";
-    return con.createQuery(sql)
+  public static WR find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT " + columns + " FROM stats WHERE player_id = :id;";
+      return con.createQuery(sql)
       .addParameter("id", id)
       .addColumnMapping("player_id", "playerId")
       .addColumnMapping("first_name", "firstName")
@@ -61,8 +62,8 @@ public static WR find(int id) {
       .addColumnMapping("birth_date", "birthDate")
       .addColumnMapping("birth_city", "birthCity")
       .executeAndFetchFirst(WR.class);
+    }
   }
-}
 
   public static WR getBestWr() {
     try(Connection con = DB.sql2o.open()) {

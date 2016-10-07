@@ -2,7 +2,7 @@ import java.util.List;
 import org.sql2o.*;
 
 public class QB extends Player{
-
+  
   private int passcompletions;
   private int passattempts;
   private double passpct;
@@ -27,8 +27,6 @@ public class QB extends Player{
   public int getPassCompletions() {
     return passcompletions;
   }
-
-
 
   public int getPassAttempts() {
     return passattempts;
@@ -94,35 +92,34 @@ public class QB extends Player{
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT" + columns + "FROM stats WHERE position = 'QB';";
       return con.createQuery(sql)
-        .addColumnMapping("player_id", "playerId")
-        .addColumnMapping("first_name", "firstName")
-        .addColumnMapping("last_name", "lastName")
-        .addColumnMapping("team_name", "team")
-        .addColumnMapping("passnumeric", "passint")
-        .addColumnMapping("passsacks", "sacks")
-        .addColumnMapping("games_played", "gamesplayed")
-        .addColumnMapping("birth_date", "birthDate")
-        .addColumnMapping("birth_city", "birthCity")
-        .executeAndFetch(QB.class);
+      .addColumnMapping("player_id", "playerId")
+      .addColumnMapping("first_name", "firstName")
+      .addColumnMapping("last_name", "lastName")
+      .addColumnMapping("team_name", "team")
+      .addColumnMapping("passnumeric", "passint")
+      .addColumnMapping("passsacks", "sacks")
+      .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
+      .executeAndFetch(QB.class);
     }
   }
-
 
   public static QB find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns + " FROM stats WHERE player_id = :id;";
       return con.createQuery(sql)
-        .addParameter("id", id)
-        .addColumnMapping("player_id", "playerId")
-        .addColumnMapping("first_name", "firstName")
-        .addColumnMapping("last_name", "lastName")
-        .addColumnMapping("team_name", "team")
-        .addColumnMapping("passnumeric", "passint")
-        .addColumnMapping("passsacks", "sacks")
-        .addColumnMapping("games_played", "gamesplayed")
-        .addColumnMapping("birth_date", "birthDate")
-        .addColumnMapping("birth_city", "birthCity")
-        .executeAndFetchFirst(QB.class);
+      .addParameter("id", id)
+      .addColumnMapping("player_id", "playerId")
+      .addColumnMapping("first_name", "firstName")
+      .addColumnMapping("last_name", "lastName")
+      .addColumnMapping("team_name", "team")
+      .addColumnMapping("passnumeric", "passint")
+      .addColumnMapping("passsacks", "sacks")
+      .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
+      .executeAndFetchFirst(QB.class);
     }
   }
 
@@ -130,16 +127,16 @@ public class QB extends Player{
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT " + columns + qbMath + "1;";
       return con.createQuery(sql)
-        .addColumnMapping("player_id", "playerId")
-        .addColumnMapping("first_name", "firstName")
-        .addColumnMapping("last_name", "lastName")
-        .addColumnMapping("team_name", "team")
-        .addColumnMapping("passnumeric", "passint")
-        .addColumnMapping("passsacks", "sackYds")
-        .addColumnMapping("games_played", "gamesplayed")
-        .addColumnMapping("birth_date", "birthDate")
-        .addColumnMapping("birth_city", "birthCity")
-        .executeAndFetchFirst(QB.class);
+      .addColumnMapping("player_id", "playerId")
+      .addColumnMapping("first_name", "firstName")
+      .addColumnMapping("last_name", "lastName")
+      .addColumnMapping("team_name", "team")
+      .addColumnMapping("passnumeric", "passint")
+      .addColumnMapping("passsacks", "sackYds")
+      .addColumnMapping("games_played", "gamesplayed")
+      .addColumnMapping("birth_date", "birthDate")
+      .addColumnMapping("birth_city", "birthCity")
+      .executeAndFetchFirst(QB.class);
     }
   }
 

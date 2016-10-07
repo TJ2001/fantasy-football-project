@@ -18,8 +18,8 @@ public class User {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-    String sql = "INSERT INTO users (name) VALUES (:name);";
-    this.id = (int) con.createQuery(sql, true)
+      String sql = "INSERT INTO users (name) VALUES (:name);";
+      this.id = (int) con.createQuery(sql, true)
       .addParameter("name", this.name)
       .executeUpdate()
       .getKey();
@@ -33,33 +33,33 @@ public class User {
     }
     switch(position){
       case "QB" :
-        if(countSelectedPlayers("QB") >= 2)
-          throw new IllegalArgumentException("ERROR: you cannot select more than 2 QBs");
-        break;
+      if(countSelectedPlayers("QB") >= 2)
+      throw new IllegalArgumentException("ERROR: you cannot select more than 2 QBs");
+      break;
       case "WR":
-        if(countSelectedPlayers("WR") >= 5)
-          throw new IllegalArgumentException("ERROR: you cannot select more than 5 WRs");
-        break;
+      if(countSelectedPlayers("WR") >= 5)
+      throw new IllegalArgumentException("ERROR: you cannot select more than 5 WRs");
+      break;
       case "RB" :
-        if(countSelectedPlayers("RB") >= 3)
-          throw new IllegalArgumentException("ERROR: you cannot select more than 3 RBs");
-        break;
+      if(countSelectedPlayers("RB") >= 3)
+      throw new IllegalArgumentException("ERROR: you cannot select more than 3 RBs");
+      break;
       case "TE" :
-        if(countSelectedPlayers("TE") >= 3)
-          throw new IllegalArgumentException("ERROR: you cannot select more than 3 TEs");
-        break;
+      if(countSelectedPlayers("TE") >= 3)
+      throw new IllegalArgumentException("ERROR: you cannot select more than 3 TEs");
+      break;
       case "K" :
-        if(countSelectedPlayers("K") >= 2)
-          throw new IllegalArgumentException("ERROR: you cannot select more than 2 kickers");
-        break;
+      if(countSelectedPlayers("K") >= 2)
+      throw new IllegalArgumentException("ERROR: you cannot select more than 2 kickers");
+      break;
     }
 
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO user_selections (user_id, player_id) VALUES (:id, :player_id)";
       con.createQuery(sql)
-        .addParameter("id", this.id)
-        .addParameter("player_id", player_id)
-        .executeUpdate();
+      .addParameter("id", this.id)
+      .addParameter("player_id", player_id)
+      .executeUpdate();
     }
   }
 
@@ -73,9 +73,9 @@ public class User {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO user_selections (user_id, teamid) VALUES (:id, :teamid)";
       con.createQuery(sql)
-        .addParameter("id", this.id)
-        .addParameter("teamid", teamid)
-        .executeUpdate();
+      .addParameter("id", this.id)
+      .addParameter("teamid", teamid)
+      .executeUpdate();
     }
   }
 
@@ -87,11 +87,10 @@ public class User {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO other_user_selections (teamid) VALUES (:teamid)";
       con.createQuery(sql)
-        .addParameter("teamid", teamid)
-        .executeUpdate();
+      .addParameter("teamid", teamid)
+      .executeUpdate();
     }
   }
-
 
   public void addPlayerForOtherUser(int id) {
     if (User.playerAlreadySelected(id)) {
@@ -100,8 +99,8 @@ public class User {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO other_user_selections (player_id) VALUES (:id)";
       con.createQuery(sql)
-        .addParameter("id", id)
-        .executeUpdate();
+      .addParameter("id", id)
+      .executeUpdate();
     }
   }
 
@@ -167,9 +166,9 @@ public class User {
     }
     try(Connection con = DB.sql2o.open()) {
       count = con.createQuery(sql)
-        .addParameter("id", id)
-        .executeScalar(Integer.class);
-      }
+      .addParameter("id", id)
+      .executeScalar(Integer.class);
+    }
     return count;
   }
 
@@ -178,8 +177,8 @@ public class User {
     String sql = "SELECT count(user_selections.teamid) FROM user_selections;";
     try(Connection con = DB.sql2o.open()) {
       count = con.createQuery(sql)
-        .executeScalar(Integer.class);
-      }
+      .executeScalar(Integer.class);
+    }
     return count;
   }
 
@@ -194,28 +193,28 @@ public class User {
       } else if(countSelectedPlayers("RB") < 2 || countSelectedPlayers("WR") < 2) {
         sql = "SELECT player_id FROM stats WHERE player_id NOT IN (SELECT player_id FROM user_selections WHERE player_id IS NOT NULL) AND player_id NOT IN (SELECT player_id FROM other_user_selections WHERE player_id IS NOT NULL) AND position in ('WR', 'RB') ORDER BY stats.total_score DESC LIMIT 5";
       } else if(countSelectedPlayers("all") < 11 && (countSelectedPlayers("RB") < 4 || countSelectedPlayers("WR") < 6 || countSelectedPlayers("QB") < 2 || countSelectedPlayers("TE") < 3)) {
-          String positions = "";
-          if (countSelectedPlayers("RB") < 4) {
-            positions += "'RB'";
-            if(countSelectedPlayers("WR") < 6 || countSelectedPlayers("QB") < 2 || countSelectedPlayers("TE") < 3) {
-              positions += ", ";
-            }
+        String positions = "";
+        if (countSelectedPlayers("RB") < 4) {
+          positions += "'RB'";
+          if(countSelectedPlayers("WR") < 6 || countSelectedPlayers("QB") < 2 || countSelectedPlayers("TE") < 3) {
+            positions += ", ";
           }
-          if (countSelectedPlayers("WR") < 6) {
-            positions += "'WR'";
-            if(countSelectedPlayers("QB") < 2 || countSelectedPlayers("TE") < 3) {
-              positions += ", ";
-            }
+        }
+        if (countSelectedPlayers("WR") < 6) {
+          positions += "'WR'";
+          if(countSelectedPlayers("QB") < 2 || countSelectedPlayers("TE") < 3) {
+            positions += ", ";
           }
-          if (countSelectedPlayers("QB") < 2) {
-            positions += "'QB'";
-            if(countSelectedPlayers("TE") < 3) {
-              positions += ", ";
-            }
+        }
+        if (countSelectedPlayers("QB") < 2) {
+          positions += "'QB'";
+          if(countSelectedPlayers("TE") < 3) {
+            positions += ", ";
           }
-          if (countSelectedPlayers("TE") < 3) {
-            positions += "'TE'";
-          }
+        }
+        if (countSelectedPlayers("TE") < 3) {
+          positions += "'TE'";
+        }
         sql = "SELECT player_id FROM stats WHERE player_id NOT IN (SELECT player_id FROM user_selections WHERE player_id IS NOT NULL) AND player_id NOT IN (SELECT player_id FROM other_user_selections WHERE player_id IS NOT NULL) AND position in (" + positions + ") ORDER BY stats.total_score DESC LIMIT 5";
       } else if (countSelectedPlayers("K") < 1) {
         sql = "SELECT player_id FROM stats WHERE player_id NOT IN (SELECT player_id FROM user_selections WHERE player_id IS NOT NULL) AND player_id NOT IN (SELECT player_id FROM other_user_selections WHERE player_id IS NOT NULL) AND (position = 'K') ORDER BY total_score_cached DESC LIMIT 5";
@@ -224,7 +223,7 @@ public class User {
         return Collections.<Player>emptyList();
       } else {
         List<Integer> playerIds = con.createQuery(sql)
-          .executeAndFetch(Integer.class);
+        .executeAndFetch(Integer.class);
 
         List<Player> foundPlayers = new ArrayList<Player>();
         for(int playerId : playerIds) {
@@ -238,13 +237,13 @@ public class User {
   public List<Team> getBestDefense() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT teamid FROM team_stats WHERE teamid NOT IN (SELECT teamid FROM user_selections WHERE teamid IS NOT NULL) AND teamid NOT IN (SELECT teamid FROM other_user_selections WHERE teamid IS NOT NULL) ORDER BY total_score_cached DESC LIMIT 5";
-        List<Integer> teamIds = con.createQuery(sql).executeAndFetch(Integer.class);
+      List<Integer> teamIds = con.createQuery(sql).executeAndFetch(Integer.class);
 
-        List<Team> foundTeam = new ArrayList<Team>();
-        for(int teamId : teamIds) {
-          foundTeam.add(Team.find(teamId));
-        }
-        return foundTeam;
+      List<Team> foundTeam = new ArrayList<Team>();
+      for(int teamId : teamIds) {
+        foundTeam.add(Team.find(teamId));
+      }
+      return foundTeam;
 
     }
   }
@@ -254,14 +253,14 @@ public class User {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT count(player_id) FROM user_selections WHERE player_id = :id";
       found = con.createQuery(sql)
-        .addParameter("id", player_id)
-        .executeScalar(Integer.class);
+      .addParameter("id", player_id)
+      .executeScalar(Integer.class);
 
-        sql = "SELECT count(player_id) FROM other_user_selections WHERE player_id = :id";
-        found += con.createQuery(sql)
-          .addParameter("id", player_id)
-          .executeScalar(Integer.class);
-      }
+      sql = "SELECT count(player_id) FROM other_user_selections WHERE player_id = :id";
+      found += con.createQuery(sql)
+      .addParameter("id", player_id)
+      .executeScalar(Integer.class);
+    }
     return found != 0;
   }
 
@@ -270,14 +269,14 @@ public class User {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT count(teamid) FROM user_selections WHERE teamid = :id";
       found = con.createQuery(sql)
-        .addParameter("id", teamid)
-        .executeScalar(Integer.class);
+      .addParameter("id", teamid)
+      .executeScalar(Integer.class);
 
-        sql = "SELECT count(teamid) FROM other_user_selections WHERE teamid = :id";
-        found += con.createQuery(sql)
-          .addParameter("id", teamid)
-          .executeScalar(Integer.class);
-      }
+      sql = "SELECT count(teamid) FROM other_user_selections WHERE teamid = :id";
+      found += con.createQuery(sql)
+      .addParameter("id", teamid)
+      .executeScalar(Integer.class);
+    }
     return found != 0;
   }
 
@@ -285,8 +284,8 @@ public class User {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM users WHERE id = :id;";
       return con.createQuery(sql)
-        .addParameter("id", id)
-        .executeAndFetchFirst(User.class);
+      .addParameter("id", id)
+      .executeAndFetchFirst(User.class);
     }
   }
 
@@ -294,8 +293,8 @@ public class User {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM users WHERE name = :name;";
       return con.createQuery(sql)
-        .addParameter("name", name)
-        .executeAndFetchFirst(User.class);
+      .addParameter("name", name)
+      .executeAndFetchFirst(User.class);
     }
   }
 
@@ -303,8 +302,8 @@ public class User {
     try(Connection con = DB.sql2o.open()) {
       String sql = "DELETE FROM user_selections WHERE user_id = :id;";
       con.createQuery(sql)
-        .addParameter("id", id)
-        .executeUpdate();
+      .addParameter("id", id)
+      .executeUpdate();
     }
   }
 
@@ -312,7 +311,7 @@ public class User {
     try(Connection con = DB.sql2o.open()) {
       String sql = "DELETE FROM other_user_selections *;";
       con.createQuery(sql)
-        .executeUpdate();
+      .executeUpdate();
     }
   }
 }

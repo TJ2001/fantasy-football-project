@@ -602,7 +602,7 @@ COPY other_user_selections (id, player_id, teamid) FROM stdin;
 -- Name: other_user_selections_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('other_user_selections_id_seq', 7, true);
+SELECT pg_catalog.setval('other_user_selections_id_seq', 19, true);
 
 
 --
@@ -2651,19 +2651,6 @@ COPY team_stats (date, teamid, teamabbr, teamcity, teamname, rank, gamesplayed, 
 --
 
 COPY user_selections (id, user_id, teamid, player_id) FROM stdin;
-20	1	\N	7466
-21	1	\N	8109
-22	1	\N	6038
-23	1	\N	6028
-24	1	\N	6294
-25	1	\N	7575
-26	1	\N	8760
-27	1	\N	7843
-28	1	\N	6578
-29	1	\N	7013
-30	1	\N	8469
-31	1	\N	7638
-32	1	74	\N
 \.
 
 
@@ -2671,7 +2658,7 @@ COPY user_selections (id, user_id, teamid, player_id) FROM stdin;
 -- Name: user_selections_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('user_selections_id_seq', 32, true);
+SELECT pg_catalog.setval('user_selections_id_seq', 74, true);
 
 
 --
@@ -2679,7 +2666,6 @@ SELECT pg_catalog.setval('user_selections_id_seq', 32, true);
 --
 
 COPY users (id, name) FROM stdin;
-1	user
 \.
 
 

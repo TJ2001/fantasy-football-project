@@ -134,26 +134,22 @@
             <table class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>Rank</th>
                   <th>Name</th>
                   <th>Team</th>
                   <th>Jersey</th>
                   <th>Pos</th>
                   <th>Height</th>
                   <th>Weight</th>
-                  <th>Gm Played</th>
                 </tr>
               </thead>
               #foreach($bestPlayer in $bestPlayers)
               <tr>
-                <td>Rank</td>
                 <td><a href="/players/$bestPlayer.getPlayerId()">$bestPlayer.getFirstName() $bestPlayer.getLastName()</a></td>
                 <td><img class="teamlogo" src="$bestPlayer.getTeamImg()"> $bestPlayer.getTeam()</td>
                 <td>$bestPlayer.getJersey()</td>
                 <td>$bestPlayer.getPosition()</td>
                 <td>$bestPlayer.getHeight()</td>
                 <td>$bestPlayer.getWeight()</td>
-                <td>$bestPlayer.getGamesPlayed()</td>
               </tr>
               #end
             </table>
@@ -161,7 +157,6 @@
             <table class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>Rank</th>
                   <th>Team</th>
                   <th>PTS</th>
                   <th>Sacks</th>
@@ -172,7 +167,6 @@
               </thead>
               #foreach($bestDefense in $bestDefenses)
               <tr>
-                <td>Rank</td>
                 <td><img class="teamlogo" src="$bestDefense.getTeamImg()"> $bestDefense.getTeamName()</a></td>
                 <td>$bestDefense.getPointsAgainst()</td>
                 <td>$bestDefense.getSacks()</td>
